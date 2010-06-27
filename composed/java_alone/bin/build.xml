@@ -42,7 +42,7 @@
        <include name='edu/umn/cs/melt/ableJ14/composed/java_alone/*.class' />
        <include name='edu/umn/cs/melt/ableJ14/host/*.class' />
        <include name='edu/umn/cs/melt/ableJ14/abstractsyntax/*.class' />
-       <include name='edu/umn/cs/melt/ableJ14/driver/lazy//*.class' />
+       <include name='edu/umn/cs/melt/ableJ14/driver/strict//*.class' />
        <include name='edu/umn/cs/melt/ableJ14/driver/command/*.class' />
        <include name='silver/util/command/*.class' />
        <include name='silver/util/*.class' />
@@ -69,7 +69,7 @@
        <include name='edu/umn/cs/melt/ableJ14/composed/java_alone/*.java' />
        <include name='edu/umn/cs/melt/ableJ14/host/*.java' />
        <include name='edu/umn/cs/melt/ableJ14/abstractsyntax/*.java' />
-       <include name='edu/umn/cs/melt/ableJ14/driver/lazy/*.java' />
+       <include name='edu/umn/cs/melt/ableJ14/driver/strict/*.java' />
        <include name='edu/umn/cs/melt/ableJ14/driver/command/*.java' />
        <include name='silver/util/command/*.java' />
        <include name='silver/util/*.java' />

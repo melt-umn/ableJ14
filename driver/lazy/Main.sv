@@ -1,26 +1,21 @@
 grammar edu:umn:cs:melt:ableJ14:driver:lazy;
-exports edu:umn:cs:melt:ableJ14:driver:lazy;
 
-import core ;
-import edu:umn:cs:melt:ableJ14:concretesyntax hiding parse;
+import core;
+import edu:umn:cs:melt:ableJ14:concretesyntax;
 import edu:umn:cs:melt:ableJ14:abstractsyntax;
-
-import edu:umn:cs:melt:ableJ14:driver:command with parse as commandParse, grammarName as fName;
+import silver:driver;
 
 ----------------------------------------------------------------------
 -- Main driver function
 
-abstract production driver
-top::Main ::= args::String extensionParser::Production (Root_C ::= String) hostParser::Production (Root_C ::= String) {
-
-  production attribute a :: Command;
-  a = commandParse(args);
+function driver
+IO ::= args::String io_in::IO extensionParser::Production (Root_C ::= String) hostParser::Production (Root_C ::= String) {
 
   local attribute commandLineFile :: String ;  
-  commandLineFile = a.fName ;
+  commandLineFile = args;
   
   local attribute classPath :: IOString;
-  classPath = envVar ("JAVA_PATH", top.ioIn);
+  classPath = envVar ("JAVA_PATH", io_in);
 
   local attribute currentDirectory :: IOString;
   currentDirectory = cwd (classPath.io);
@@ -46,15 +41,9 @@ top::Main ::= args::String extensionParser::Production (Root_C ::= String) hostP
           	         then decorate file_io_action (commandLineRoot) with {ioIn = currentDirectory.io ;}.ioOut 
                          else error ("JAVA_PATH is not defined!");
 
-  top.ioOut 
-   = if   ! a.okay
-     then error ("\nUsage: ejc [Options] filename\n" ++ a.flag_usage)
-     else 
+  return
      if   ! (is_jext_file(commandLineFile) || is_java_file (commandLineFile))-- is not a .jext or .java file
      then error ("\nError: - file \"" ++ commandLineFile ++ "\" must have .jext or .java suffix.\n")
-     else 
-     if   a.parseOnly
-     then parse_only(top.ioIn, a.fName, extensionParser, hostParser)
      else compile_action ;
 }
 
@@ -405,11 +394,11 @@ String ::= filename::String {
          else base_file_name ++ ".java" ;
 
  local attribute base_file_name :: String ;
- base_file_name = -- substring (0, indexof (".",filename), filename) ;
+ base_file_name = -- substring (0, indexOf (".",filename), filename) ;
                   basefilename(filename);
 
  local attribute file_name_ext :: String ;
- file_name_ext = substring (indexof(".",filename) + 1, length (filename), filename) ;
+ file_name_ext = substring (indexOf(".",filename) + 1, length (filename), filename) ;
 }
 
 
@@ -513,7 +502,7 @@ function getDirectoriesFromClassPath
 [ String ] ::= classPath::String {
 
   local attribute firstColonPosition :: Integer;
-  firstColonPosition = indexof (":", classPath);
+  firstColonPosition = indexOf (":", classPath);
 
   return if length (classPath) == 0
 		then []

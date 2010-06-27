@@ -392,7 +392,7 @@ e::Stmt_Expr ::= t::TypeName params::Exprs cb::Class_Body typeFQN::FullyQualifie
   cb.type_env = this_typerep.classtyperep.innerTypes ++ e.type_env;
 
   local attribute anon_class_name :: String;
-  anon_class_name = "#AnonymousClass" ++ toString (genint ());
+  anon_class_name = "#AnonymousClass" ++ toString (genInt ());
 
   local attribute fqn :: FullyQualifiedName;
   fqn = getQualifiedFQN (e.qualifiersSoFar, anon_class_name);
@@ -747,7 +747,7 @@ lhs::LHS ::= e1::Expr e2::Expr {
 
   local attribute my_errors :: [ Error ];
   my_errors = case e1.typerep of
-		arrayTypeRep (_, _) -> [ :: Errors] |
+		arrayTypeRep (_, _) -> [ :: Error ] |
 		_ -> [ mkError (-1, "Array access " ++ lhs.pp ++ " requires an array") ]
 	      end;
 }

@@ -59,7 +59,7 @@ top::Expr ::= expr::Expr requiredType::TypeRep lineNo::Integer {
   top.copyWorked = length (copy_dispatches) == 1 || res.isSubType;
 
   production attribute my_errors :: [Error] ; -- ToDo: at "with ++" here?
-  my_errors := if length (copy_dispatches) == 1
+  my_errors = if length (copy_dispatches) == 1
                then [ ]
                else if length (copy_dispatches) > 1 
                then mk_dispatch_internal_errors_Expr (requiredType, expr.typerep, copy_dispatches, lineNo)

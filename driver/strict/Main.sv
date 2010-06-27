@@ -1,31 +1,18 @@
 grammar edu:umn:cs:melt:ableJ14:driver:strict;
-exports edu:umn:cs:melt:ableJ14:driver:strict;
 
 import core ;
-import edu:umn:cs:melt:ableJ14:concretesyntax hiding parse;
+import edu:umn:cs:melt:ableJ14:concretesyntax;
 import edu:umn:cs:melt:ableJ14:abstractsyntax;
+import silver:driver;
 
-import edu:umn:cs:melt:ableJ14:driver:command with parse as commandParse, grammarName as fName;
-
-abstract production driver
-top::Main ::= args::String the_parser::Production (Root_C ::= String) {
-
-  production attribute a :: Command;
-  a = commandParse(args);
-
-  local attribute testCommand :: IO ;
-  testCommand = print ("Hello - file name is:" ++ a.fName ++ ":\n" ++
-                       (if a.parseOnly
-                        then "... --parseonly was present ...\n" 
-                        else "... --parseonly was not present ...\n" )
-                      , top.ioIn) ;
-
+function driver
+IO ::= args::String io_in::IO the_parser::Production (Root_C ::= String) {
 
   local attribute commandLineFile :: String ;  
-  commandLineFile = a.fName ;
+  commandLineFile = args ;
 
   local attribute classPath :: IOString;
-  classPath = envVar ("JAVA_PATH", testCommand) ; -- top.ioIn);
+  classPath = envVar ("JAVA_PATH", io_in);
 
   local attribute compileResult :: CompilationResult;
   compileResult = firstCompileFiles (classPath.io, commandLineFile, the_parser, classPath.sValue, globalEnv);
@@ -36,21 +23,13 @@ top::Main ::= args::String the_parser::Production (Root_C ::= String) {
   local attribute fullyQualifiedDefs :: [ EnvItem ];
   fullyQualifiedDefs = convertDefsToFullyQualifiedDefs (compileResult.type_defs);
 
-
   local attribute compile_action :: IO ;
   compile_action = print("compile_action\n\n", if classPath.sValue != ""
 		then compileResult.io 
 		else error ("JAVA_PATH is not defined!"));
    
-  top.ioOut 
-   = if   ! a.okay
-     then error ("\nUsage: ejc [Options] filename\n" ++ a.flag_usage)
-     else 
-     if   a.parseOnly
-     then parse_only(testCommand,a.fName,the_parser)
-     else compile_action ;
+  return compile_action ;
 }
-
 
 function parse_only
 IO ::= parse_io::IO filename::String parserObj::Production(Root_C ::= String)
@@ -277,10 +256,10 @@ String ::= filename::String {
          else base_file_name ++ ".java" ;
 
  local attribute base_file_name :: String ;
- base_file_name = substring (0, indexof (".",filename), filename) ;
+ base_file_name = substring (0, indexOf (".",filename), filename) ;
 
  local attribute file_name_ext :: String ;
- file_name_ext = substring (indexof(".",filename) + 1, length (filename), filename) ;
+ file_name_ext = substring (indexOf(".",filename) + 1, length (filename), filename) ;
 }
 
 ----------------------------------------------------------------------
