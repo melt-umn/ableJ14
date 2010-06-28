@@ -457,8 +457,8 @@ top::ConvertedTypeRep ::= old::TypeRep environment::[ ScopeEnv ] {
 		[ if null (envSearch)
 			then errorTypeRep ([ mkError (-1, "Unknown type in convert_type_rep")]) --error ("Unknown type in convert_type_rep")
 			else (case (head (envSearch)).dclrep of
-				dcl_rep_interface (interface_dcl_rep (_, tr)) -> tr |
-				dcl_rep_class (class_dcl_rep (_, tr)) -> tr |
+				dcl_rep_interface (interface_dcl_rep (_, tr)) -> tr'' |
+				dcl_rep_class (class_dcl_rep (_, tr)) -> tr'' |
 				_ -> error ("Search for " ++ old.eqName ++ " in convert_type_rep returns " ++ (head (envSearch)).dclrep.name)
 			      end) ]
 

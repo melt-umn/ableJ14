@@ -9,7 +9,7 @@ import silver:driver;
 -- Main driver function
 
 function driver
-IO ::= args::String io_in::IO extensionParser::Production (Root_C ::= String) hostParser::Production (Root_C ::= String) {
+IO ::= args::String io_in::IO extensionParser::Function (Root_C ::= String) hostParser::Function (Root_C ::= String) {
 
   local attribute commandLineFile :: String ;  
   commandLineFile = args;
@@ -47,44 +47,12 @@ IO ::= args::String io_in::IO extensionParser::Production (Root_C ::= String) ho
      else compile_action ;
 }
 
-
-----------------------------------------------------------------------
--- A function to parse a file - used only when the --parseonly flag is provided.
-
-function parse_only
-IO ::= parse_io::IO filename::String extensionParser::Production(Root_C ::= String) hostParser::Production (Root_C ::= String) 
-{
-  local attribute isF :: IOBoolean;
-  isF = isFile(filename, parse_io);
-
-  local attribute file :: IOString;
-  file = readFile(filename, isF.io);
-
-  local attribute text :: String;
-  text = if isF.bValue then file.sValue else "" ;
-  
-  local attribute r :: Root_C ;
-  r = if is_jext_file (filename)
-	then extensionParser (text)
-      else if is_java_file (filename)
-	then hostParser (text)
-      else error ("Internal compiler error in parse_only");
-
-  local attribute print_pp :: IO ;
-  print_pp = print ("parsing of \"" ++ filename ++ "\" is:\n" ++
-                    "------------------------------------------------------------\n" ++
-                    r.canparse ++
-                    "\n\n\n", 
-                    file.io );
-  return if isF.bValue then print_pp else error ("File \"" ++ filename ++ "\" not found\n\n" ) ;
-}
-
 ----------------------------------------------------------------------
 
 -- A lazy definition for the list of neededTypes and import-related errors
 
 function getNeededTypes
-[ LFQN_DecoratedRoot_Defs ]::= soFar::[ LFQN ] toDo::[ LFQN ] extensionParser::Production (Root_C ::= String) hostParser::Production (Root_C ::= String) classPathDirectories::[ String ] currentDirectory::String globalEnv::[ ScopeEnv ] {
+[ LFQN_DecoratedRoot_Defs ]::= soFar::[ LFQN ] toDo::[ LFQN ] extensionParser::Function (Root_C ::= String) hostParser::Function (Root_C ::= String) classPathDirectories::[ String ] currentDirectory::String globalEnv::[ ScopeEnv ] {
 
   local attribute firstToDo :: LFQN;
   firstToDo = head (toDo);
@@ -101,7 +69,7 @@ function getNeededTypes
 }
 
 function getNeededTypesStartingWithCommandLine
-[ LFQN_DecoratedRoot_Defs ] ::= commandLineFile::String extensionParser::Production (Root_C ::= String) hostParser::Production (Root_C ::= String) classPathDirectories::[ String ] currentDirectory::String globalEnv::[ ScopeEnv ] {
+[ LFQN_DecoratedRoot_Defs ] ::= commandLineFile::String extensionParser::Function (Root_C ::= String) hostParser::Function (Root_C ::= String) classPathDirectories::[ String ] currentDirectory::String globalEnv::[ ScopeEnv ] {
 
   local attribute commandLineFileResult :: CommandLineLFQNs_DecoratedRoot;
   commandLineFileResult = getNeededTypesForCommandLineFile (commandLineFile, extensionParser, hostParser, classPathDirectories, currentDirectory, globalEnv);
@@ -117,7 +85,7 @@ inherited attribute importErrors :: [ Error ] occurs on Root;
 -- the function reads in the file and gets the list of needed files, errors and type defs, and writes
 -- the list of needed files, the type defs and import-related errors to a .defs file
 function getNeededTypesForOneFile
-LFQNs_DecoratedRoot_Defs ::= T::LFQN extensionParser::Production (Root_C ::= String) hostParser::Production (Root_C ::= String) classPathDirectories::[ String ] currentDirectory::String globalEnv::[ ScopeEnv ] {
+LFQNs_DecoratedRoot_Defs ::= T::LFQN extensionParser::Function (Root_C ::= String) hostParser::Function (Root_C ::= String) classPathDirectories::[ String ] currentDirectory::String globalEnv::[ ScopeEnv ] {
 
   -- first check to see if a .defs file exists and is nonempty, if it does, we get the info from it
 
@@ -125,7 +93,7 @@ LFQNs_DecoratedRoot_Defs ::= T::LFQN extensionParser::Production (Root_C ::= Str
   defsFileName = T.location ++ "/" ++ T.fullyQualifiedName.qualifiedFileName ++ ".defs";
 
   local attribute defsFileExists :: IOBoolean;
-  defsFileExists = isFile (defsFileName, unsafeio);
+  defsFileExists = isFile (defsFileName, unsafeio ());
 
   -- if .defs file exists, the following are forced by the return statement
   local attribute oldDefsFileText :: String;
@@ -244,10 +212,10 @@ LFQNs_DecoratedRoot_Defs ::= T::LFQN extensionParser::Production (Root_C ::= Str
 -- i.e., you can't do ejc ../../T1.java.
 -- I'll fix this when I separate out the different classes into their own files.
 function getNeededTypesForCommandLineFile
-CommandLineLFQNs_DecoratedRoot ::= commandLineFile::String extensionParser::Production (Root_C ::= String) hostParser::Production (Root_C ::= String) classPathDirectories::[ String ] currentDirectory::String globalEnv::[ ScopeEnv ] {
+CommandLineLFQNs_DecoratedRoot ::= commandLineFile::String extensionParser::Function (Root_C ::= String) hostParser::Function (Root_C ::= String) classPathDirectories::[ String ] currentDirectory::String globalEnv::[ ScopeEnv ] {
 
   local attribute javaFileRead :: IOString;
-  javaFileRead = readFile (commandLineFile, unsafeio);
+  javaFileRead = readFile (commandLineFile, unsafeio ());
 
   -- parsing the file and constructing the AST
   local attribute r :: Root;

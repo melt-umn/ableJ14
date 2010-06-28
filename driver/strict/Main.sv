@@ -5,8 +5,11 @@ import edu:umn:cs:melt:ableJ14:concretesyntax;
 import edu:umn:cs:melt:ableJ14:abstractsyntax;
 import silver:driver;
 
+----------------------------------------------------------------------
+-- Main driver function
+
 function driver
-IO ::= args::String io_in::IO the_parser::Production (Root_C ::= String) {
+IO ::= args::String io_in::IO extensionParser::Function (Root_C ::= String) hostParser::Function (Root_C ::= String) {
 
   local attribute commandLineFile :: String ;  
   commandLineFile = args ;
@@ -15,7 +18,7 @@ IO ::= args::String io_in::IO the_parser::Production (Root_C ::= String) {
   classPath = envVar ("JAVA_PATH", io_in);
 
   local attribute compileResult :: CompilationResult;
-  compileResult = firstCompileFiles (classPath.io, commandLineFile, the_parser, classPath.sValue, globalEnv);
+  compileResult = firstCompileFiles (classPath.io, commandLineFile, extensionParser, classPath.sValue, globalEnv);
 
   local attribute globalEnv :: [ ScopeEnv ];
   globalEnv = [ scopeEnv (-1, convertEnvItems (fullyQualifiedDefs, globalEnv)) ];
@@ -31,40 +34,15 @@ IO ::= args::String io_in::IO the_parser::Production (Root_C ::= String) {
   return compile_action ;
 }
 
-function parse_only
-IO ::= parse_io::IO filename::String parserObj::Production(Root_C ::= String)
-{
-  local attribute isF :: IOBoolean;
-  isF = isFile(filename, parse_io);
-
-  local attribute file :: IOString;
-  file = readFile(filename, isF.io);
-
-  local attribute text :: String;
-  text = if isF.bValue then file.sValue else "" ;
-  
-  local attribute r :: Root_C ;
-  r = parserObj(text) ;
-
-  local attribute print_pp :: IO ;
-  print_pp = print ("paring of \"" ++ filename ++ "\" is:\n" ++
-                    "------------------------------------------------------------\n" ++
-                    r.canparse ++
-                    "\n\n\n", 
-                    file.io );
-  return if isF.bValue then print_pp else error ("File \"" ++ filename ++ "\" not found\n\n" ) ;
-}
-
-
 -- driver function: separate function to generate the java translation of the command line argument
 function firstCompileFiles
-CompilationResult ::= io_in::IO commandLineFile::String the_parser::Production (Root_C ::= String) classPath::String globalEnv::[ ScopeEnv ] {
+CompilationResult ::= io_in::IO commandLineFile::String extensionParser::Function (Root_C ::= String) classPath::String globalEnv::[ ScopeEnv ] {
 
  local attribute commandLineFileResult :: FileCompilationResult;
- commandLineFileResult = compileFile (io_in, commandLineFile, the_parser, classPath, globalEnv);
+ commandLineFileResult = compileFile (io_in, commandLineFile, extensionParser, classPath, globalEnv);
 
  local attribute rest :: CompilationResult;
- rest = compileFiles (commandLineFileResult.io, [ commandLineFile ], files_to_compile, the_parser, classPath, 
+ rest = compileFiles (commandLineFileResult.io, [ commandLineFile ], files_to_compile, extensionParser, classPath, 
 			commandLineFileResult.type_defs, globalEnv);
 
  return compilation_result (decorate file_io_action (commandLineFileResult.decoratedRoot) with {ioIn = rest.io;}.ioOut, 
@@ -76,14 +54,14 @@ CompilationResult ::= io_in::IO commandLineFile::String the_parser::Production (
 
 -- main driver function
 function compileFiles
-CompilationResult ::= io_in::IO files_compiled::[String] files_to_compile::[String] the_parser::Production (Root_C ::= String) classPath::String 
+CompilationResult ::= io_in::IO files_compiled::[String] files_to_compile::[String] extensionParser::Function (Root_C ::= String) classPath::String 
 			defs_so_far::[ EnvItem ] globalEnv::[ ScopeEnv ] {
 
  local attribute firstFile :: String;
  firstFile = head (files_to_compile);
 
  local attribute firstFileResult :: FileCompilationResult;
- firstFileResult = compileFile (io_in, firstFile, the_parser, classPath, globalEnv);
+ firstFileResult = compileFile (io_in, firstFile, extensionParser, classPath, globalEnv);
 
  local attribute new_files_to_compile :: [ String ];
  new_files_to_compile = getNewFilesToCompile (files_compiled ++ files_to_compile, removeDupes (firstFileResult.needed_files));
@@ -91,7 +69,7 @@ CompilationResult ::= io_in::IO files_compiled::[String] files_to_compile::[Stri
 -- !!! check for duplication of command line argument file, in the files in its package
  return if null (files_to_compile)
         then compilation_result (io_in, files_compiled, defs_so_far)
-        else compileFiles (firstFileResult.io, files_compiled ++ [ firstFile ], tail (files_to_compile) ++ new_files_to_compile, the_parser, classPath, 
+        else compileFiles (firstFileResult.io, files_compiled ++ [ firstFile ], tail (files_to_compile) ++ new_files_to_compile, extensionParser, classPath, 
 				defs_so_far ++ firstFileResult.type_defs, globalEnv);
 }
 
@@ -108,7 +86,7 @@ function getNewFilesToCompile
 inherited attribute importErrors :: [ Error ] occurs on Root;
 
 function compileFile
-FileCompilationResult ::= io_in::IO fileToCompile::String the_parser::Production (Root_C ::= String) classPath::String globalEnv::[ ScopeEnv ] {
+FileCompilationResult ::= io_in::IO fileToCompile::String extensionParser::Function (Root_C ::= String) classPath::String globalEnv::[ ScopeEnv ] {
 
   -- checking for .defs file
 
@@ -127,7 +105,7 @@ FileCompilationResult ::= io_in::IO fileToCompile::String the_parser::Production
   defsText = defsFileRead.sValue;
 
   local attribute defsInfo :: DefsFileInfo;
-  defsInfo = the_parser ("***" ++ defsFileName ++ "***" ++ defsText).ast_Root.defsFileInfo;
+  defsInfo = extensionParser ("***" ++ defsFileName ++ "***" ++ defsText).ast_Root.defsFileInfo;
 
   -- if .defs file does not exist
   -- write to .defs file file to compile
@@ -160,25 +138,25 @@ FileCompilationResult ::= io_in::IO fileToCompile::String the_parser::Production
 		else r.type_defs;
 
   local attribute r :: Root;
-  r = the_parser (jextText).ast_Root;
+  r = extensionParser (jextText).ast_Root;
   r.file_name = fileToCompile;
 
   r.type_env = [ scopeEnv (-1, convertEnvItems (fileDefs, r.type_env)) ] ++ globalEnv;
 
   local attribute availableSingleTypeErrors :: LFQNs_Errors;
-  availableSingleTypeErrors = getAvailableSingleTypes (r.singleImports, classPath);
+  availableSingleTypeErrors = getAvailableSingleTypes (r.singleImports, [ classPath ]);
   r.availableImportedSingleTypes = availableSingleTypeErrors.fullyQualifiedNames;
 
   local attribute availableCurrentPackageTypeErrors :: LFQNs_Errors;
-  availableCurrentPackageTypeErrors = getAvailableCurrentPackageTypes (r.thisPackage_syn, fileToCompile, classPath);
+  availableCurrentPackageTypeErrors = getAvailableCurrentPackageTypes (r.thisPackage_syn, fileToCompile, [ classPath ]);
   r.availableCurrentPackageTypes = availableCurrentPackageTypeErrors.fullyQualifiedNames;
 
   local attribute availableOnDemandTypeErrors :: LFQNs_Errors;
-  availableOnDemandTypeErrors = getAvailableOnDemandTypes (r.onDemandImports, classPath);
+  availableOnDemandTypeErrors = getAvailableOnDemandTypes (r.onDemandImports, [ classPath ]);
   r.availableImportedOnDemandTypes = availableOnDemandTypeErrors.fullyQualifiedNames;
 
   local attribute availableFullyQualifiedTypeErrors :: LFQNs_Errors;
-  availableFullyQualifiedTypeErrors = getFullyQualifiedTypes (r.neededFullyQualifiedTypes, classPath);
+  availableFullyQualifiedTypeErrors = getFullyQualifiedTypes (r.neededFullyQualifiedTypes, [ classPath ]);
   r.availableFullyQualifiedTypes = availableFullyQualifiedTypeErrors.fullyQualifiedNames;
 
   local attribute neededImportedSingleTypes_ :: [ LFQN ];
@@ -214,10 +192,10 @@ FileCompilationResult ::= io_in::IO fileToCompile::String the_parser::Production
 }
 
 function getPackageFiles
-[ String ] ::= classPath::String neededTypes_::[ FullyQualifiedName ] {
+[ String ] ::= classPath::String neededTypes_::[ LFQN ] {
  return if null (neededTypes_)
 	then []
-	else (classPath ++ "/" ++ (head (neededTypes_)).qualifiedName ++ ".jext") :: getPackageFiles (classPath, tail (neededTypes_));
+	else (classPath ++ "/" ++ (head (neededTypes_)).fullyQualifiedName.qualifiedName ++ ".jext") :: getPackageFiles (classPath, tail (neededTypes_));
 }
 
 

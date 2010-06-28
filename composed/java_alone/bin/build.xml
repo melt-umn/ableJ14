@@ -42,10 +42,16 @@
        <include name='edu/umn/cs/melt/ableJ14/composed/java_alone/*.class' />
        <include name='edu/umn/cs/melt/ableJ14/host/*.class' />
        <include name='edu/umn/cs/melt/ableJ14/abstractsyntax/*.class' />
-       <include name='edu/umn/cs/melt/ableJ14/driver/strict//*.class' />
-       <include name='edu/umn/cs/melt/ableJ14/driver/command/*.class' />
-       <include name='silver/util/command/*.class' />
+       <include name='edu/umn/cs/melt/ableJ14/driver/lazy/*.class' />
+       <include name='silver/driver/*.class' />
+       <include name='silver/definition/core/*.class' />
+       <include name='silver/definition/env/*.class' />
+       <include name='silver/definition/regex/*.class' />
+       <include name='silver/definition/env/parser/*.class' />
+       <include name='silver/definition/type/anytype/*.class' />
+       <include name='silver/definition/type/io/*.class' />
        <include name='silver/util/*.class' />
+       <include name='silver/util/command/*.class' />
        <include name='edu/umn/cs/melt/ableJ14/terminals/*.class' />
        <include name='edu/umn/cs/melt/ableJ14/concretesyntax/*.class' />
        <include name='edu/umn/cs/melt/ableJ14/host/exts/parameterized_expr_block/*.class' />
@@ -69,10 +75,16 @@
        <include name='edu/umn/cs/melt/ableJ14/composed/java_alone/*.java' />
        <include name='edu/umn/cs/melt/ableJ14/host/*.java' />
        <include name='edu/umn/cs/melt/ableJ14/abstractsyntax/*.java' />
-       <include name='edu/umn/cs/melt/ableJ14/driver/strict/*.java' />
-       <include name='edu/umn/cs/melt/ableJ14/driver/command/*.java' />
-       <include name='silver/util/command/*.java' />
+       <include name='edu/umn/cs/melt/ableJ14/driver/lazy/*.java' />
+       <include name='silver/driver/*.java' />
+       <include name='silver/definition/core/*.java' />
+       <include name='silver/definition/env/*.java' />
+       <include name='silver/definition/regex/*.java' />
+       <include name='silver/definition/env/parser/*.java' />
+       <include name='silver/definition/type/anytype/*.java' />
+       <include name='silver/definition/type/io/*.java' />
        <include name='silver/util/*.java' />
+       <include name='silver/util/command/*.java' />
        <include name='edu/umn/cs/melt/ableJ14/terminals/*.java' />
        <include name='edu/umn/cs/melt/ableJ14/concretesyntax/*.java' />
        <include name='edu/umn/cs/melt/ableJ14/host/exts/parameterized_expr_block/*.java' />
@@ -82,7 +94,6 @@
   <target name='copper'>
     <copper fullClassName='edu.umn.cs.melt.ableJ14.composed.java_alone.Parser_edu_umn_cs_melt_ableJ14_composed_java_alone_parse' inputFile='${src}/edu/umn/cs/melt/ableJ14/composed/java_alone/Parser_edu_umn_cs_melt_ableJ14_composed_java_alone_parse.copper' outputFile='${src}/edu/umn/cs/melt/ableJ14/composed/java_alone/Parser_edu_umn_cs_melt_ableJ14_composed_java_alone_parse.java' skin='xml' warnUselessNTs='no'/>
     <copper fullClassName='edu.umn.cs.melt.ableJ14.host.Parser_edu_umn_cs_melt_ableJ14_host_hostParse' inputFile='${src}/edu/umn/cs/melt/ableJ14/host/Parser_edu_umn_cs_melt_ableJ14_host_hostParse.copper' outputFile='${src}/edu/umn/cs/melt/ableJ14/host/Parser_edu_umn_cs_melt_ableJ14_host_hostParse.java' skin='xml' warnUselessNTs='no'/>
-    <copper fullClassName='edu.umn.cs.melt.ableJ14.driver.Parser_edu_umn_cs_melt_ableJ14_driver_commandParse' inputFile='${src}/edu/umn/cs/melt/ableJ14/driver/Parser_edu_umn_cs_melt_ableJ14_driver_commandParse.copper' outputFile='${src}/edu/umn/cs/melt/ableJ14/driver/Parser_edu_umn_cs_melt_ableJ14_driver_commandParse.java' skin='xml' warnUselessNTs='no'/>
   </target>
 
 

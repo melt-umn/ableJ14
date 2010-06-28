@@ -158,8 +158,8 @@ ptn::PackageOrTypeName ::= pn::PackageOrTypeName id::Id_t {
 
  local attribute firstType :: TypeRep;
  firstType = case (head (typeSearchResult)).dclrep of
-                  dcl_rep_class (class_dcl_rep (_, t)) -> t |
-                  dcl_rep_interface (interface_dcl_rep (_, t)) -> t |
+                  dcl_rep_class (class_dcl_rep (_, t)) -> t'' |
+                  dcl_rep_interface (interface_dcl_rep (_, t)) -> t'' |
                   _ -> error ("Internal compiler error 3 production qualified_package_or_type_name " ++ ptn.pp)
               end;
 
@@ -275,8 +275,8 @@ tn::TypeName ::= pn::PackageOrTypeName id::Id_t {
 
  local attribute firstType :: TypeRep;
  firstType = case (head (typeSearchResult)).dclrep of
-                  dcl_rep_class (class_dcl_rep (_, t)) -> t |
-                  dcl_rep_interface (interface_dcl_rep (_, t)) -> t |
+                  dcl_rep_class (class_dcl_rep (_, t)) -> t'' |
+                  dcl_rep_interface (interface_dcl_rep (_, t)) -> t'' |
                   _ -> error ("Internal compiler error 3 production qualified_type_name " ++ tn.pp)
               end;
 
@@ -418,7 +418,7 @@ en::ExprName ::= an::AmbiguousName  id::Id_t {
 
  local attribute firstField :: FieldDclRep;
  firstField = case (head (fieldSearchResult)).dclrep of
-                  dcl_rep_field (fdr) -> fdr |
+                  dcl_rep_field (fdr) -> fdr'' |
                   _ -> error ("Internal compiler error 4 production qualified_expr_name " ++ en.pp)
               end;
 
@@ -748,7 +748,7 @@ andi::AmbiguousName ::= an::AmbiguousName id::Id_t {
 
  local attribute firstField :: FieldDclRep;
  firstField = case (head (fieldSearchResult)).dclrep of
-                  dcl_rep_field (fdr) -> fdr |
+                  dcl_rep_field (fdr) -> fdr'' |
                   _ -> error ("Internal compiler error 4 production qualified_ambiguous_name" ++ andi.pp)
               end;
 
@@ -778,8 +778,8 @@ andi::AmbiguousName ::= an::AmbiguousName id::Id_t {
 
  local attribute firstType :: TypeRep;
  firstType = case (head (typeSearchResult)).dclrep of
-                  dcl_rep_class (class_dcl_rep (_, t)) -> t |
-                  dcl_rep_interface (interface_dcl_rep (_, t)) -> t |
+                  dcl_rep_class (class_dcl_rep (_, t)) -> t'' |
+                  dcl_rep_interface (interface_dcl_rep (_, t)) -> t'' |
                   _ -> error ("Internal compiler error 8 production qualified_ambiguous_name" ++ andi.pp)
               end;
 
@@ -933,7 +933,7 @@ function getMethodDclReps
  return if null (dis)
 	then []
 	else (case head (dis) of
-		dclInfo (_, dcl_rep_method (mdr), _) -> [ mdr ] |
+		dclInfo (_, dcl_rep_method (mdr), _) -> [ mdr'' ] |
 		_ -> error ("Internal compiler error in getMethodDclReps")
 	      end) ++ getMethodDclReps (tail (dis));
 }

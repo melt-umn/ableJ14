@@ -179,7 +179,7 @@ t::Array_Type ::= n::TypeName ds::Integer {
 			_ -> error ("Internal compiler error 1 in production name_array " ++ t.pp)
 	      end;
   t.typerep = arrayTypeRep (case n.disambiguatedName of
-				disambiguated_type_name (tr) -> tr |
+				disambiguated_type_name (tr) -> tr'' |
 				disambiguated_error_name (errs) -> errorTypeRep (errs) |
 				_ -> error ("Internal compiler error 2 in production name_array " ++ t.pp)
 			    end, ds);

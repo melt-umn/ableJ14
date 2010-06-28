@@ -102,7 +102,7 @@ lhs::LHS ::= e1::Expr id::Id_t {
 
  local attribute firstField :: FieldDclRep;
  firstField = case (head (fieldSearchResult)).dclrep of
-                  dcl_rep_field (fdr) ->     (fdr) |
+                  dcl_rep_field (fdr) -> fdr'' |
                   _ -> error ("Internal compiler error 2 production expr_field_access " ++ lhs.pp)
               end;
 
@@ -187,7 +187,7 @@ e::Stmt_Expr ::= obj::Expr id::Id_t params::Exprs {
 
  local attribute firstMethod :: MethodDclRep;
  firstMethod = case (head (methodSearchResult)).dclrep of
-                  dcl_rep_method (mdr) -> mdr |
+                  dcl_rep_method (mdr) -> mdr'' |
                   _ -> error ("Internal compiler error 2 in production method_call " ++ e.pp)
                end;
 
