@@ -66,14 +66,14 @@ attribute isSubType_ConvertBy occurs on TypeRep ;
 -- Used in the implementation to collect lists of possible conversions.
 
 
-synthesized attribute superTypes_ConvertBy :: [ ConvertBy ] with superTypes_ConvertBy_Collect ;
+synthesized attribute superTypes_ConvertBy :: [ ConvertBy ] with ++;--superTypes_ConvertBy_Collect ;
 attribute superTypes_ConvertBy occurs on TypeRep ;
 -- used by TypeReps to specify their super types and means
 -- for converting to that specified super type.
 
-function superTypes_ConvertBy_Collect
-[ConvertBy] ::= l1::[ConvertBy] l2::[ConvertBy]
-{ return l1 ++ l2 ; }
+--function superTypes_ConvertBy_Collect
+--[ConvertBy] ::= l1::[ConvertBy] l2::[ConvertBy]
+--{ return l1 ++ l2 ; }
 
 
 

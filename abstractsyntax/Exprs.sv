@@ -11,7 +11,6 @@ nonterminal Stmt_Expr with enclosingType, env, type_env, errors, pp, pp_indent, 
 -- Identifiers are defined in IdentifierReferences.sv --
 --------------------------------------------------------
 
-
 synthesized attribute count :: Integer;
 
 function getLHS
@@ -951,6 +950,7 @@ e::Expr ::= e1::Expr e2::Expr {
   e.errors := e1.errors ++ e2.errors;
   e.typerep = booleanTypeRep ();
 }
+
 abstract production instanceof
 e::Expr ::= e1::Expr t1::Reference_Type {
   e.pp = "(" ++ e1.pp ++ " instanceof " ++ t1.pp ++ ")";

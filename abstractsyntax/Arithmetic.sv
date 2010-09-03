@@ -2,7 +2,6 @@ grammar edu:umn:cs:melt:ableJ14:abstractsyntax;
 
 import edu:umn:cs:melt:ableJ14:terminals;
 
-
 -- Productions and mechanisms for operator overloading for
 --  "-"  subtraction 
 --  "*"  multiplication
@@ -239,7 +238,6 @@ e::Expr ::= e1::Expr t::Div_t e2::Expr
                      e1.typerep.eqName ++ " and " ++ e2.typerep.eqName ++ ") on division.") ] ) ; 
 }
 
-
 aspect production div
 e::Expr ::= e1::Expr t::Div_t e2::Expr 
 {  dispatches <-      -- int / int --> int
@@ -300,10 +298,6 @@ e::Expr ::= e1::Expr e2::Expr t::TypeRep
  e.neededFullyQualifiedTypes   = e1.neededFullyQualifiedTypes   ++ e2.neededFullyQualifiedTypes ; 
 }
 
-
-
-
-
 --------------------------------------------------------------------------
 ----- MOD
 --------------------------------------------------------------------------
@@ -338,7 +332,6 @@ e::Expr ::= e1::Expr t::Mod_t e2::Expr {
              else erroneous_Expr (e, [ mkError (t.line,  "Incompatible types (" ++ 
                      e1.typerep.eqName ++ " and " ++ e2.typerep.eqName ++ ") on mod (%).") ] ) ; 
 }
-
 
 aspect production mod
 e::Expr ::= e1::Expr t::Mod_t e2::Expr 
@@ -399,6 +392,3 @@ e::Expr ::= e1::Expr e2::Expr t::TypeRep
  e.neededImportedOnDemandTypes = e1.neededImportedOnDemandTypes ++ e2.neededImportedOnDemandTypes ;
  e.neededFullyQualifiedTypes   = e1.neededFullyQualifiedTypes   ++ e2.neededFullyQualifiedTypes ; 
 }
-
-
-
