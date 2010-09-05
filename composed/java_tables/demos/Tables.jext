@@ -1,0 +1,23 @@
+
+
+import java.lang.* ;
+
+public class Tables extends Object {   
+   public static void main(String[] args) {
+      boolean c1 = true;
+      boolean c2 = false;
+      boolean c3 = true;
+      int x = 4;
+      boolean c4 = table (  c1 : T F  ,
+                            c2 : T *  )  ;
+
+      // c4 = (c1 && c2) || (! c1 && true) ;
+
+      String s;
+      if (c4)
+         s = "c4 is true.";
+      else s = "c4 is false.";
+      System.out.println(s);
+   };
+}
+

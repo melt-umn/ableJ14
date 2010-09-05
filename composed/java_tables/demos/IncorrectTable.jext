@@ -1,0 +1,24 @@
+
+
+import java.lang.* ;
+
+public class IncorrectTable extends Object {   
+   public static void main(String[] args) {
+      boolean c1 = true;
+      boolean c2 = false;
+      boolean c3 = true;
+      int x = 4;
+
+      // Table below has incorrect number of entries in rows
+
+      boolean c4 = table (  c1 : T F F ,
+                            c2 : T *  )  ;
+
+      String s;
+      if (c4)
+         s = "c4 is true.";
+      else s = "c4 is false.";
+      System.out.println(s);
+   };
+}
+

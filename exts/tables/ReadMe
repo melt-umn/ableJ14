@@ -1,0 +1,20 @@
+
+We would like a the following boolean valued expression
+to translate to the Java code that follows it.
+
+
+-- Condition Table
+
+  table 
+    c1   T F 
+    c2   F *
+    c3   T T
+  end
+
+
+==>
+  {{ (boolean p1 = c1, boolean p2 = c2, boolean p3 = c3)
+     Stmts;
+     return ddd; }}
+
+==> (new Object() { public int doit(boolean p1, boolean p2, boolean p3){ Stmts; return ddd; } } ).doit(c1,c2,c3);
