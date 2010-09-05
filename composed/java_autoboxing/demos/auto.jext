@@ -1,0 +1,18 @@
+
+import java.lang.*;
+
+public class auto {
+    public static void main(String [] args) {
+	int i = 0;
+	Integer I = new Integer (1);
+	I = fii (i, I);
+	i = fII (i, I);
+	int j = new Integer (1);
+    }
+    static int fii (int i, int j) {
+	return new Integer (1);
+    }
+    static Integer fII (Integer I, Integer J) {
+	return 1;
+    }
+}
