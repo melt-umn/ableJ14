@@ -2,13 +2,13 @@
   <description>Build the grammar edu:umn:cs:melt:ableJ14:composed:java_alone:bin </description>
 
   <property environment='env'/>
-  <property name='jg' location='C:\cygwin\home\lijesh\svn\silver\trunk\generated/'/>
-  <property name='sh' location='C:\cygwin\home\lijesh\svn\silver\trunk\jars/'/>
+  <property name='jg' location='/Users/lijesh/svn/silver/trunk/generated/'/>
+  <property name='sh' location='/Users/lijesh/svn/silver/trunk/jars/'/>
   <property name='bin' location='${jg}/bin'/>
   <property name='src' location='${jg}/src'/>
 
   <path id='lib.classpath'>
-    <fileset dir='${sh}' includes='SilverRuntime.jar CopperRuntime.jar CopperAnt.jar CopperCompiler.jar' />
+    <fileset dir='${sh}' includes='SilverRuntime.jar CopperRuntime.jar CopperCompiler.jar' />
   </path>
 
   <path id='src.classpath'>
@@ -45,8 +45,8 @@
        <include name='edu/umn/cs/melt/ableJ14/driver/lazy/*.class' />
        <include name='silver/driver/*.class' />
        <include name='silver/definition/core/*.class' />
-       <include name='silver/definition/env/*.class' />
        <include name='silver/definition/regex/*.class' />
+       <include name='silver/definition/env/*.class' />
        <include name='silver/definition/env/parser/*.class' />
        <include name='silver/definition/type/anytype/*.class' />
        <include name='silver/definition/type/io/*.class' />
@@ -78,8 +78,8 @@
        <include name='edu/umn/cs/melt/ableJ14/driver/lazy/*.java' />
        <include name='silver/driver/*.java' />
        <include name='silver/definition/core/*.java' />
-       <include name='silver/definition/env/*.java' />
        <include name='silver/definition/regex/*.java' />
+       <include name='silver/definition/env/*.java' />
        <include name='silver/definition/env/parser/*.java' />
        <include name='silver/definition/type/anytype/*.java' />
        <include name='silver/definition/type/io/*.java' />
@@ -92,8 +92,8 @@
   </target>
 
   <target name='copper'>
-    <copper fullClassName='edu.umn.cs.melt.ableJ14.composed.java_alone.Parser_edu_umn_cs_melt_ableJ14_composed_java_alone_parse' inputFile='${src}/edu/umn/cs/melt/ableJ14/composed/java_alone/Parser_edu_umn_cs_melt_ableJ14_composed_java_alone_parse.copper' outputFile='${src}/edu/umn/cs/melt/ableJ14/composed/java_alone/Parser_edu_umn_cs_melt_ableJ14_composed_java_alone_parse.java' skin='xml' warnUselessNTs='no'/>
-    <copper fullClassName='edu.umn.cs.melt.ableJ14.host.Parser_edu_umn_cs_melt_ableJ14_host_hostParse' inputFile='${src}/edu/umn/cs/melt/ableJ14/host/Parser_edu_umn_cs_melt_ableJ14_host_hostParse.copper' outputFile='${src}/edu/umn/cs/melt/ableJ14/host/Parser_edu_umn_cs_melt_ableJ14_host_hostParse.java' skin='xml' warnUselessNTs='no'/>
+    <copper fullClassName='edu.umn.cs.melt.ableJ14.composed.java_alone.Parser_edu_umn_cs_melt_ableJ14_composed_java_alone_parse' inputFile='${src}/edu/umn/cs/melt/ableJ14/composed/java_alone/Parser_edu_umn_cs_melt_ableJ14_composed_java_alone_parse.copper' outputFile='${src}/edu/umn/cs/melt/ableJ14/composed/java_alone/Parser_edu_umn_cs_melt_ableJ14_composed_java_alone_parse.java' skin='xml' warnUselessNTs='no' dump='true' dumpType='html' dumpOnlyOnError='true' dumpFile='Parser_edu_umn_cs_melt_ableJ14_composed_java_alone_parse.copperdump.html'/>
+    <copper fullClassName='edu.umn.cs.melt.ableJ14.host.Parser_edu_umn_cs_melt_ableJ14_host_hostParse' inputFile='${src}/edu/umn/cs/melt/ableJ14/host/Parser_edu_umn_cs_melt_ableJ14_host_hostParse.copper' outputFile='${src}/edu/umn/cs/melt/ableJ14/host/Parser_edu_umn_cs_melt_ableJ14_host_hostParse.java' skin='xml' warnUselessNTs='no' dump='true' dumpType='html' dumpOnlyOnError='true' dumpFile='Parser_edu_umn_cs_melt_ableJ14_host_hostParse.copperdump.html'/>
   </target>
 
 
