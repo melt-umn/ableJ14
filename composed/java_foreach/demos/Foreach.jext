@@ -1,0 +1,28 @@
+import java.util.*;
+
+class Foreach {
+    public static void main (String [] args) {
+	Herd h = new Herd ();
+	for (Cow c : h)
+	    c.milk ();
+
+	int [] is = {1, 2, 3};
+	for (int i: is)
+	    System.out.println (i);
+    }
+}
+
+class Herd extends ArrayList {
+    Herd() {
+	Cow c1 = new Cow ();
+	Cow c2 = new Cow ();
+	add (c1);
+	add (c2);
+    }
+}
+
+class Cow extends Object { 
+    void milk () {
+	System.out.println ("Milking");
+    }
+}
