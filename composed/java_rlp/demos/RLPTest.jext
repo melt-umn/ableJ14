@@ -1,0 +1,29 @@
+
+
+import java.lang.*;
+
+public class RLPTest {
+
+   public static int sample_prim (double x_in, double y_in, double z_in) {
+
+      rlp<double> x = x_in ;
+      rlp<double> y = y_in ;
+      rlp<double> z = z_in ;
+      int r ;
+      r = sign (z - (x * y) ) ;
+      return r ;
+    }
+
+   public static void main (String[] args) {
+
+      double x, y, z ;
+      int sample_primitive ;
+
+      x = 2; y = 3; z = 9;
+
+      sample_primitive = sample_prim(x,y,z) ;
+
+      System.out.println ("value of z - x * y is: " + (z - (x * y)) ) ; 
+      System.out.println ("sign is: " + sample_primitive);
+    }
+}
