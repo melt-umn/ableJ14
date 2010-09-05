@@ -1,0 +1,41 @@
+class List3 {
+    public static void main(String[] args) {
+	List l1 = new Cons (new IntConst (1), new Nil ());
+	List l2 = new Cons (new IntConst (2), new Cons (new Var ('3'), new Nil ()));
+	List l3 = l1.append (l2);
+	System.out.println (l3.toString ());
+    }
+}
+
+algebraic class List {
+    case Nil;
+    case Cons (Expr, List);
+
+    public List append (List ys) {
+	aswitch (this) {
+	case Nil:
+	    return ys;
+	case Cons (x, xs):
+	    return new Cons (x, xs.append (ys));
+	}
+    	return null;
+    }
+
+    public String toString () {
+	aswitch (this) {
+	case Nil:
+	    return "";
+	case Cons (IntConst (i), xs):
+	    return i + xs.toString ();
+	case Cons (Var (c), xs):
+	    return c + xs.toString ();
+	}
+	return "";
+    }
+}
+
+algebraic class Expr {
+    case IntConst (int);
+    case Var (char);
+    case Plus (Expr, Expr);
+}

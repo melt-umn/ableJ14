@@ -1,0 +1,31 @@
+algebraic class List {
+    case Nil;
+    case Cons (char, List);
+
+    public List append (List ys) {
+	aswitch (this) {
+	case Nil:
+	    return ys;
+	case Cons (x, xs):
+	    return new Cons (x, xs.append (ys));
+	}
+    	return null;
+    }
+
+    public String toString () {
+	aswitch (this) {
+	case Nil:
+	    return "";
+	case Cons (x, xs):
+	    return x + xs.toString ();
+	}
+	return "";
+    }
+
+    public static void main(String[] args) {
+	List l1 = new Cons ('a', new Nil ());
+	List l2 = new Cons ('b', new Cons ('c', new Nil ()));
+	List l3 = l1.append (l2);
+	System.out.println (l3.toString ());
+    }
+}
