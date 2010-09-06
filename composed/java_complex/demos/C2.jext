@@ -1,0 +1,18 @@
+public class C2 {
+    public static void main (String[] args) {
+	complex c1, c2, c3, c4, c5;
+
+	c1 = complex(1.0,2.0); 
+	c2 = complex(3.0,4.0);
+
+//	c3 = c1 + c2;
+//	c4 = c1 - c2;
+	//c5 = c1 * c2;
+
+	System.out.println ( c1 ) ; 
+	System.out.println ( c2 ); 
+	System.out.println ( c3 ); 
+	System.out.println ( c4 ); 
+	System.out.println ( c5 );
+    }
+}

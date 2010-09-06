@@ -1,0 +1,24 @@
+public class C1 {
+    
+    static Complex c1 ;
+    static Complex c2 ;
+    static Complex c3 ;
+    static Complex c4 ;
+    static Complex c5 ;
+    
+    public static Complex add() { return c1 + c2 ; }
+    public static Complex minus() { return c1 - c2 ; }
+    public static Complex times() { return c1 * c2 ; }
+    public static void init() { c1 = Complex(1.0,2.0) ; c2 = Complex(3.0,4.0) ; }
+    public static void show() { System.out.println ( c1 ) ; System.out.println ( c2 ); System.out.println ( c3 ); System.out.println ( c4 ); System.out.println ( c5 ); }
+    
+    public static void main (String[] args) {
+	
+	System.out.println ("Hello Complex.");
+	init();
+	c3 = add();
+	c4 = minus();
+	c5 = times();
+	show();
+    }
+}

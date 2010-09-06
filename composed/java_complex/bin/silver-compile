@@ -1,0 +1,5 @@
+#!/bin/bash
+
+java -Xss8M -Xmx2000M \
+     -jar ../../../../../../../../../silver/trunk/jars/RunSilver.jar \
+     --clean edu:umn:cs:melt:ableJ14:composed:java_complex:bin  && ant
