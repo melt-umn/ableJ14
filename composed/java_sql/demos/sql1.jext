@@ -1,0 +1,17 @@
+
+
+class sql1 {
+    int i ;
+    boolean b ;
+    int select ;
+    int foo ( ) { 
+	b = 4 > 3 ;
+	while ( b ) {
+	    i = using c query { select f from t } +
+		using c query { select f from t } ;
+
+	    b = 4 > i ;
+	}
+
+    }
+}

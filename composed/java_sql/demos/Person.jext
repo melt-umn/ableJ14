@@ -1,0 +1,62 @@
+
+import java.io.*;
+
+class Person {
+
+    connection C_Class_Mem "some str"     // forwards to nothing 
+     with table person 
+             [ VARCHAR name ,
+               INTEGER id ] ,
+	  table addrs  [ VARCHAR addr, INTEGER id ] ;
+
+    public static void main(String[] args) {
+
+	String cmd = "cat";
+
+	C_Class_Mem c ;      // Connection c ;
+
+	establish c ;        // Class.forName("org.apache.derby.jdbc.EmbeddedDriver");
+                             // c = DriverManager.getConnection("jdbc:derby:/project/melt/People/evw/Melt/GrammarSpace/edu/umn/cs/melt/java14/demos/derby/db/testdb;create=true");
+
+
+	ResultSet rs = using c query { SELECT * FROM person, addrs  } ;
+    }
+
+    public void q (C_Type c, int limit) {
+	ResultSet rs ;
+        rs = using c query { SELECT * FROM person WHERE 1 } ;
+        rs = using c query { SELECT * FROM person WHERE 1.4 } ;
+        rs = using c query { SELECT * FROM person WHERE "ASD" } ;
+        rs = using c query { SELECT * FROM person WHERE xyz } ;
+
+        rs = using c query { SELECT * FROM person WHERE + 1 } ;
+        rs = using c query { SELECT * FROM person WHERE - 1 } ;
+
+        rs = using c query { SELECT * FROM person WHERE x + y } ;
+        rs = using c query { SELECT * FROM person WHERE x - y } ;
+        rs = using c query { SELECT * FROM person WHERE x * y } ;
+        rs = using c query { SELECT * FROM person WHERE x / y } ;
+
+        rs = using c query { SELECT * FROM person WHERE x AND y } ;
+        rs = using c query { SELECT * FROM person WHERE x OR y } ;
+        rs = using c query { SELECT * FROM person WHERE x < y } ;
+        rs = using c query { SELECT * FROM person WHERE x > y } ;
+        rs = using c query { SELECT * FROM person WHERE x = y } ;
+        rs = using c query { SELECT * FROM person WHERE x <= y } ;
+        rs = using c query { SELECT * FROM person WHERE x >= y } ;
+        rs = using c query { SELECT * FROM person WHERE x <> y } ;
+
+    }
+}
+
+connection C_Type "some str"   // forwards to nothing
+ with table person [ VARCHAR name, INTEGER id ] ,
+      table addrs  [ VARCHAR addr, INTEGER id ] ;
+
+
+
+class Person {
+
+
+
+}

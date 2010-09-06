@@ -1,0 +1,9 @@
+
+
+class pt extends object {
+    int i ;
+    int select ;
+    int foo ( ) { 
+      i = using c query { select from from t } ;
+    }
+}

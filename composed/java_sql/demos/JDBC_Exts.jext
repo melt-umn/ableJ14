@@ -1,0 +1,57 @@
+import java.sql.*;
+
+public class JDBC {
+
+  public static void main(String[] args)   
+    {
+    try {
+       register driver "org.apache.derby.jdbc.EmbeddedDriver";
+       connection C1 "jdbc:derby:../../utils/derby/db/testdb;create=true"
+        with table person    [ INTEGER person_id,
+                               VARCHAR first_name,
+                               VARCHAR last_name ] ,
+             table phonebook [ INTEGER person_id,
+                               VARCHAR phone_number,
+                               VARCHAR address ] ;
+      C1 c; 
+      establish c;
+
+      int limit = 0 ;
+      ResultSet rs ;
+
+
+      rs = using c query {
+             SELECT * 
+             FROM person, phonebook 
+             WHERE person.person_id = phonebook.person_id
+               AND phonebook.person_id >= limit 
+           };
+
+
+      //Print out the results
+      System.out.println("The query returned these entries:\n\n");
+      int cnt = 1;
+
+      //while there is valid informaiton in the result set
+      while(rs.next())  {
+        //get all of the information
+        String first_name = rs.getString("first_name");
+	String last_name = rs.getString("last_name");
+	String address = rs.getString("address");
+	String phone_number = rs.getString("phone_number");
+        int id_num = rs.getInt("person_id");
+	  
+	System.out.println( cnt + ", " + id_num + " ) " + 
+                            last_name + ", " +
+                            first_name + "\n\t" +
+                            address + "\n\t"  + 
+                            phone_number);
+        cnt = cnt + 1;
+      }
+
+
+    } catch(Exception e) {  
+	System.out.println ("SQL Error: be sure to use \"-cp ../../utils/derby/derby.jar\" with \"java\".");
+    }
+  }
+}

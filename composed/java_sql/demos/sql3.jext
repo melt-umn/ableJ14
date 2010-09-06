@@ -1,0 +1,9 @@
+
+
+class sql3 {
+    int i ;
+    int select ;
+    int foo ( ) { 
+	i = using c query { select f from t } ;
+    }
+}
