@@ -1,0 +1,8 @@
+
+class Simple {
+
+    int simple (float v) {
+	return 4  ;
+    }
+
+}

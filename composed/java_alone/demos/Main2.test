@@ -1,0 +1,8 @@
+SILVER silver.copper
+GRAMMAR edu:umn:cs:melt:ableJ14:composed:java_alone:bin
+
+RUNONLY ../bin/ejc
+INPUT Main2.jext
+
+RUN SHOULD FAIL
+OWNER evw@cs.umn.edu, krishnan@cs.umn.edu

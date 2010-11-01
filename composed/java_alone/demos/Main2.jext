@@ -1,0 +1,27 @@
+public class Main {
+    public static void main(String[] args) {
+        MySecurityManager sm = new MySecurityManager();
+
+        System.setSecurityManager(sm);
+        sm.printClassDepth("C");                      // -1
+        sm.printClassDepth("MySecurityManager");      // 0
+        sm.printClassDepth("Main");                   // 1
+
+        C.printClassDepth("C");                       // 1
+        C.printClassDepth("MySecurityManager");       // 0
+        C.printClassDepth("Main");                    // 2
+    }
+}
+
+class MySecurityManager extends SecurityManager {
+    public void printClassDepth(String name) {
+        System.out.println(classDepth(name));
+    }
+}
+
+class C {
+    static void printClassDepth(String name) {
+        ((MySecurityManager) 
+         System.getSecurityManager()).printClassDepth(name);
+    }
+}
