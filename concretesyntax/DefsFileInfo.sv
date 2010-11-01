@@ -1,5 +1,6 @@
 grammar edu:umn:cs:melt:ableJ14:concretesyntax;
 import edu:umn:cs:melt:ableJ14:abstractsyntax;
+import edu:umn:cs:melt:ableJ14:abstractsyntax:packages;
 import edu:umn:cs:melt:ableJ14:terminals;
 
 nonterminal DefsFileInfo_C with abstractDefsFileInfo;

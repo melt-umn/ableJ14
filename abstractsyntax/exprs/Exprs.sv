@@ -1,5 +1,6 @@
-grammar edu:umn:cs:melt:ableJ14:abstractsyntax;
-
+grammar edu:umn:cs:melt:ableJ14:abstractsyntax:exprs;
+import edu:umn:cs:melt:ableJ14:abstractsyntax;
+import edu:umn:cs:melt:ableJ14:abstractsyntax:packages;
 import  edu:umn:cs:melt:ableJ14:terminals;
 
 nonterminal LHS with       enclosingType, env, type_env, errors, pp, pp_indent, basepp, typerep;

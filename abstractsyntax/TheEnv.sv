@@ -1,6 +1,7 @@
 grammar edu:umn:cs:melt:ableJ14:abstractsyntax;
+import edu:umn:cs:melt:ableJ14:abstractsyntax:exprs;
+import edu:umn:cs:melt:ableJ14:abstractsyntax:packages;
 import edu:umn:cs:melt:ableJ14:terminals;
-
 
 -- The environment is a list of the set of declarations for a scope.
 -- The first set of declarations is the innermost scope, the last is

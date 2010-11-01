@@ -1,4 +1,6 @@
 grammar edu:umn:cs:melt:ableJ14:abstractsyntax;
+import edu:umn:cs:melt:ableJ14:abstractsyntax:exprs;
+import edu:umn:cs:melt:ableJ14:abstractsyntax:packages;
 import edu:umn:cs:melt:ableJ14:terminals;
 
 nonterminal Method_Dcl 		with errors, pp, basepp, env, type_env, method_defs, pp_indent, enclosingType;

@@ -1,4 +1,5 @@
 grammar edu:umn:cs:melt:ableJ14:abstractsyntax;
+import edu:umn:cs:melt:ableJ14:abstractsyntax:packages;
 import edu:umn:cs:melt:ableJ14:terminals;
 
 nonterminal Interface_Dcl with              pp, basepp, pp_indent, errors, type_defs, type_env;

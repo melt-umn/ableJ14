@@ -1,6 +1,7 @@
 grammar edu:umn:cs:melt:ableJ14:concretesyntax;
 import  edu:umn:cs:melt:ableJ14:terminals ;
 import edu:umn:cs:melt:ableJ14:abstractsyntax ;
+import edu:umn:cs:melt:ableJ14:abstractsyntax:exprs ;
 
 nonterminal Root_C ;
 nonterminal compilationUnit, packageDefinition, importDefinitions, importDefinition, typeDefinitions, typeDefinition, declaration, type, arrayType, 
