@@ -2,6 +2,7 @@ grammar edu:umn:cs:melt:ableJ14:exts:tables ;
 
 import edu:umn:cs:melt:ableJ14:terminals ;
 import edu:umn:cs:melt:ableJ14:abstractsyntax;
+import edu:umn:cs:melt:ableJ14:abstractsyntax:exprs;
 import edu:umn:cs:melt:ableJ14:concretesyntax hiding parse ;
 
 import edu:umn:cs:melt:ableJ14:host:exts:parameterized_expr_block hiding parse;
