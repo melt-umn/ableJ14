@@ -102,9 +102,11 @@ LFQNs_DecoratedRoot_Defs ::= T::LFQN extensionParser::Function (Root_C ::= Strin
 
   local attribute oldDefsFileInfo :: DefsFileInfo;
   oldDefsFileInfo = if jextFileExists.bValue
-			then extensionParser ("***" ++ defsFileName ++ "***" ++ oldDefsFileText).ast_Root.defsFileInfo
+			then extensionParser (oldDefsFileText).ast_Root.defsFileInfo
+--			then extensionParser ("***" ++ defsFileName ++ "***" ++ oldDefsFileText).ast_Root.defsFileInfo
 		    else if javaFileExists.bValue
-			then hostParser ("***" ++ defsFileName ++ "***" ++ oldDefsFileText).ast_Root.defsFileInfo
+			then hostParser (oldDefsFileText).ast_Root.defsFileInfo
+--			then hostParser ("***" ++ defsFileName ++ "***" ++ oldDefsFileText).ast_Root.defsFileInfo
 		    else error ("Internal compiler error: Neither " ++ jextFileName ++ " nor " ++ javaFileName ++ " exists!");
 
   local attribute defsFileValid :: Boolean;

@@ -99,7 +99,7 @@ terminal fully_qualified_name_qualifiedTerm 'fully_qualified_name_qualified' lex
 
 concrete production root_defs_file_info_c
 top::Root_c ::= dfi::DefsFileInfo_C {
-  top.ast_Root = root_defs_file_infO (dfi.top.abstractDefsFileInfo);
+  top.ast_Root = root_defs_file_info (dfi.top.abstractDefsFileInfo);
 }
 
 concrete production defs_file_info_c
