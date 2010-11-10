@@ -1,5 +1,7 @@
 grammar edu:umn:cs:melt:ableJ14:exts:pizza:algebraic ;
 import edu:umn:cs:melt:ableJ14:abstractsyntax;
+import edu:umn:cs:melt:ableJ14:abstractsyntax:exprs;
+import edu:umn:cs:melt:ableJ14:abstractsyntax:packages;
 import edu:umn:cs:melt:ableJ14:terminals;
 
 attribute availableLocalTypes, availableImportedSingleTypes, availableCurrentPackageTypes, availableImportedOnDemandTypes, thisPackage, qualifiersSoFar occurs on Algebraic_Switch_Block, Algebraic_Switch_Groups, Algebraic_Switch_Group, Pattern, Pattern_List;
