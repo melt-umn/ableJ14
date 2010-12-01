@@ -57,7 +57,7 @@ top::ConvertedTypeRep ::= old::TypeRep environment::[ ScopeEnv ] {
 aspect production doubleTypeRep
 t::TypeRep ::= {
  t.superTypes_ConvertBy <- [ mkConvertBy ("double->complex", convert_double_to_complex, complexTypeRep()) ] ; 
- t.superTypes_ConvertBy <- [ mkConvertBy ("double->Complex", convert_double_to_Complex, reference_complexTypeRep()) ] ; 
+ t.superTypes_ConvertBy <- [ mkConvertBy ("double->Complex", convert_double_to_complex_class, reference_complexTypeRep()) ] ; 
 }
 
 abstract production convert_double_to_complex 
@@ -65,7 +65,7 @@ c::Expr ::= d::Expr {
  forwards to complex_literal (d, double_const ("0.0"));
 }
 
-abstract production convert_double_to_Complex 
+abstract production convert_double_to_complex_class 
 c::Expr ::= d::Expr {
  forwards to reference_complex_literal (d, double_const ("0.0"));
 }
