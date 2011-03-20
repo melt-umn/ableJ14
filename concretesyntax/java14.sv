@@ -4,13 +4,74 @@ import edu:umn:cs:melt:ableJ14:abstractsyntax ;
 import edu:umn:cs:melt:ableJ14:abstractsyntax:exprs ;
 
 nonterminal Root_C ;
-nonterminal compilationUnit, packageDefinition, importDefinitions, importDefinition, typeDefinitions, typeDefinition, declaration, type, arrayType, 
-	declaratorBracketsOpt, declaratorBrackets, referenceType, primitiveType, nameConcrete, simpleNameConcrete, qualifiedNameConcrete, modifiersOpt, modifiers, modifier, classDefinition, superClassClause, 
-	interfaceDefinition, classBlock, interfaceExtends, implementsClause, names, classMemberDefinitions, classMemberDefinition, interfaceBlock, interfaceMemberDefinitions, 
-	interfaceMemberDefinition, explicitConstructorInvocation, expressionListOpt, expressionList, variableDeclarators, variableDeclarator, initializer, initializers, 
-	arrayInitializer, throwsClause, parameterDeclarationList, parameterDeclarations, parameterDeclaration, blockConcrete, blockStatements, blockStatement, statement, 
-	caseGroups, caseGroup, cases, aCase, switchBlock, forInit, forCond, forIter, finallyClause, handlers, handler, expression, declaratorExpressions, 
-	constructorBody, statementExpression, statementExpressionList, methodDeclarator, variableDeclaratorId, primaryExpression, primaryExpressionAndArrayCreation,methodBody;
+nonterminal compilationUnit;
+nonterminal packageDefinition;
+nonterminal importDefinitions;
+nonterminal importDefinition;
+nonterminal typeDefinitions;
+nonterminal typeDefinition;
+nonterminal declaration;
+nonterminal type;
+nonterminal arrayType;
+nonterminal declaratorBracketsOpt;
+nonterminal declaratorBrackets;
+nonterminal referenceType;
+nonterminal primitiveType;
+nonterminal nameConcrete;
+nonterminal simpleNameConcrete;
+nonterminal qualifiedNameConcrete;
+nonterminal modifiersOpt;
+nonterminal modifiers;
+nonterminal modifier;
+nonterminal classDefinition;
+nonterminal superClassClause;
+nonterminal interfaceDefinition;
+nonterminal classBlock;
+nonterminal interfaceExtends;
+nonterminal implementsClause;
+nonterminal names;
+nonterminal classMemberDefinitions;
+nonterminal classMemberDefinition;
+nonterminal interfaceBlock;
+nonterminal interfaceMemberDefinitions;
+nonterminal interfaceMemberDefinition;
+nonterminal explicitConstructorInvocation;
+nonterminal expressionListOpt;
+nonterminal expressionList;
+nonterminal variableDeclarators;
+nonterminal variableDeclarator;
+nonterminal initializer;
+nonterminal initializers;
+nonterminal arrayInitializer;
+nonterminal throwsClause;
+nonterminal parameterDeclarationList;
+nonterminal parameterDeclarations;
+nonterminal parameterDeclaration;
+nonterminal blockConcrete;
+nonterminal blockStatements;
+nonterminal blockStatement;
+nonterminal statement;
+nonterminal caseGroups;
+nonterminal caseGroup;
+nonterminal cases;
+nonterminal aCase;
+nonterminal switchBlock;
+nonterminal forInit;
+nonterminal forCond;
+nonterminal forIter;
+nonterminal finallyClause;
+nonterminal handlers;
+nonterminal handler;
+nonterminal expression;
+nonterminal declaratorExpressions;
+nonterminal constructorBody;
+nonterminal statementExpression;
+nonterminal statementExpressionList;
+nonterminal methodDeclarator;
+nonterminal variableDeclaratorId;
+nonterminal primaryExpression;
+nonterminal primaryExpressionAndArrayCreation;
+nonterminal methodBody;
 
 synthesized attribute ast_Root :: Root;
 synthesized attribute ast_Package_Dcl :: Package_Dcl ;

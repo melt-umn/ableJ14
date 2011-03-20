@@ -174,7 +174,7 @@ t::Array_Type ::= n::TypeName ds::Integer {
   t.pp = n.pp ++ printDims (ds);
   t.basepp = n.basepp ++ printDims (ds);
   t.errors := case n.disambiguatedName of
-			disambiguated_type_name (tr) -> [ :: Error ] |
+			disambiguated_type_name (tr) -> [ ] |
 			disambiguated_error_name (errs) -> errs |
 			_ -> error ("Internal compiler error 1 in production name_array " ++ t.pp)
 	      end;
@@ -202,7 +202,7 @@ ns::TypeNames ::= n::TypeName {
   ns.pp = n.pp;
   ns.basepp = n.basepp;
   ns.errors := case n.disambiguatedName of
-                disambiguated_type_name (tr) -> [ :: Error ] |
+                disambiguated_type_name (tr) -> [ ] |
 		disambiguated_error_name (errs) -> errs |
         	_ -> error ("Internal compiler error in production type_names_one " ++ n.pp)
 	      end;
@@ -213,7 +213,7 @@ ns::TypeNames ::= ns1::TypeNames n::TypeName {
   ns.pp = ns1.pp ++ ", " ++ n.pp;
   ns.basepp = ns1.basepp ++ ", " ++ n.basepp;
   ns.errors := ns1.errors ++  case n.disambiguatedName of
-                		disambiguated_type_name (tr) -> [ :: Error ] |
+                		disambiguated_type_name (tr) -> [ ] |
 				disambiguated_error_name (errs) -> errs |
         			_ -> error ("Internal compiler error in production type_names_one " ++ n.pp)
 			     end;

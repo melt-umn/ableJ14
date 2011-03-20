@@ -23,7 +23,7 @@ s::Stmt ::= c::Id_t
 
  s.errors := if null (idSearchResult) then [ mkError (c.line, c.lexeme ++ " is not bound in the environment") ]
 	     else case firstId.typerep of
-		connectionTypeRep (_, _, _, _, _) -> [ :: Error ] |
+		connectionTypeRep (_, _, _, _, _) -> [ ] |
 		_  -> [ mkError (c.line, c.lexeme ++ " is not a connection") ]
 	     end;
 

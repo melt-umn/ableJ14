@@ -216,7 +216,7 @@ function disjunction Expr ::= es::[Expr]
 
 
 function mapConjunction [Expr] ::= ess::[[Expr]]
-{ return if null(ess)  then [ ::Expr] 
+{ return if null(ess)  then [ ] 
          else cons ( conjunction ( head(ess) ),
                      mapConjunction ( tail(ess) ) ) ;
 }
@@ -229,7 +229,7 @@ function conjunction Expr ::= es::[Expr]
 
 -- map ( disjunction, [[Expr]] ) :: [Expr]  
 function mapOr [Expr] ::= ess::[[Expr]]    -- not used anywhere
-{ return if null(ess)   then [ ::Expr ]
+{ return if null(ess)   then [ ]
          else cons ( disjunction ( head(ess) ), 
                      mapOr ( tail(ess) ) ) ;
 }
@@ -255,7 +255,7 @@ function mapCons_Expr
 [[Expr]] ::= row::[Expr] matrix::[[Expr]]
 {
  return if null(row'')
-         then [ ::[Expr] ]
+         then [ ]
          else cons (
                  cons ( head(row'') , head(matrix'') ) ,
                  mapCons_Expr ( tail(row'') , tail(matrix'') ) ) ;
@@ -266,9 +266,9 @@ function mapWrap_Expr
 [[Expr]] ::= l::[Expr]
 {
  return  if null(l'')
-         then [ :: [Expr] ] 
+         then [ ] 
          else cons (
-                 cons ( head(l''), [ ::Expr ] ),
+                 cons ( head(l''), [ ] ),
                  mapWrap_Expr ( tail(l'') ) ) ;
 }
 

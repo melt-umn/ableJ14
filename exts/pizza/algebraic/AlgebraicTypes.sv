@@ -149,7 +149,7 @@ top::ConvertedTypeRep ::= old::TypeRep environment::[ ScopeEnv ] {
 									fields_, methods_, constructors_, innerTypes_, convertCaseReps (caseReps_, environment), environment)) ] |
 		  _
 		->
-		[ :: TypeRep ]
+		[ ]
 		end;
 
 }

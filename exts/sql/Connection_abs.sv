@@ -4,7 +4,10 @@ import edu:umn:cs:melt:ableJ14:abstractsyntax hiding fieldDcl;
 import edu:umn:cs:melt:ableJ14:terminals;
 
 
-nonterminal TableDcl, TableDcls, FieldDcls, FieldDcl with pp ;
+nonterminal TableDcl with pp;
+nonterminal TableDcls with pp;
+nonterminal FieldDcls with pp;
+nonterminal FieldDcl with pp;
 
 synthesized attribute table_dcls :: [Decorated TableBinding] 
   occurs on ConnectionDclRep, TableDcls, TableDcl;
@@ -127,7 +130,7 @@ top::ConvertedEnvItem ::= old::EnvItem environment::[ ScopeEnv ] {
 		|
 		_
 		->
-		[ :: EnvItem ]
+		[ ]
 	end;
 }
 
@@ -135,7 +138,7 @@ aspect production disambiguated_name_type
 t::Reference_Type ::= n_pp::String n::TypeRep {
   transforms_to <- case n of
 			connectionTypeRep (_, _, _, _, _) -> [ connection_ReferenceType (n_pp, n) ] |
-			_ -> [ :: Reference_Type ]
+			_ -> [ ]
 		   end;
 }
 

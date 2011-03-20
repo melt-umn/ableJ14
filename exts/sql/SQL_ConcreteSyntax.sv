@@ -22,8 +22,13 @@ terminal FROM_t     /(FROM)|(from)/           lexer classes { sql, sql_kwd } ;
 terminal ALL_t      /(ALL)|(all)/             lexer classes { sql, sql_kwd } ;
 terminal DISTINCT_t /(DISTINCT)|(distinct)/   lexer classes { sql, sql_kwd } ;
 
-nonterminal SQL_Stmt_c, Select_Qualifier_c, Select_List_c, Select_SubList_c, Table_List_c, 
-            Where_Clause_c, Order_By_Clause_c ;
+nonterminal SQL_Stmt_c;
+nonterminal Select_Qualifier_c;
+nonterminal Select_List_c;
+nonterminal Select_SubList_c;
+nonterminal Table_List_c;
+nonterminal Where_Clause_c;
+nonterminal Order_By_Clause_c;
 
 synthesized attribute ast_SQL_Stmt :: SQL_Stmt occurs on SQL_Stmt_c ;
 synthesized attribute ast_Select_Qualifier :: Select_Qualifier  occurs on Select_Qualifier_c ;
@@ -128,8 +133,15 @@ terminal Float_Const_t     /((([0-9]+[\.][0-9]*|[\.][0-9]+)([eE][\-\+]?[0-9]+)?|
 --terminal RP ')' ;
 
 
-nonterminal SQL_Expr_c, SQL_Boole_Expr_c, SQL_Boole_Term_c, SQL_Boole_Factor_c, SQL_Rel_Expr_c, 
-            SQL_Arith_Expr_c, SQL_Arith_Term_c, SQL_Arith_Factor_c, SQL_Primary_c ;
+nonterminal SQL_Expr_c;
+nonterminal SQL_Boole_Expr_c;
+nonterminal SQL_Boole_Term_c;
+nonterminal SQL_Boole_Factor_c;
+nonterminal SQL_Rel_Expr_c;
+nonterminal SQL_Arith_Expr_c;
+nonterminal SQL_Arith_Term_c;
+nonterminal SQL_Arith_Factor_c;
+nonterminal SQL_Primary_c;
 
 synthesized attribute ast_SQL_Expr :: SQL_Expr occurs on SQL_Expr_c, SQL_Boole_Expr_c, SQL_Boole_Term_c, SQL_Boole_Factor_c, 
                             SQL_Rel_Expr_c, SQL_Arith_Expr_c, SQL_Arith_Term_c, SQL_Arith_Factor_c, SQL_Primary_c ;

@@ -16,7 +16,10 @@ import edu:umn:cs:melt:ableJ14:abstractsyntax;
 -- The concrete syntax for SQL is found in the SQL grammar "SQL".
 ----------------------------------------------------------------------
 
-nonterminal TableDcl_c, TableDcls_c, FieldDcls_c, FieldDcl_c ;
+nonterminal TableDcl_c;
+nonterminal TableDcls_c;
+nonterminal FieldDcls_c;
+nonterminal FieldDcl_c;
 
 terminal Conn_t      'connection' lexer classes { sql, sql_kwd } , 
                                   dominates { Id_t } ;

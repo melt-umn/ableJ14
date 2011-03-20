@@ -1,5 +1,6 @@
 #!/bin/bash
 
-java -Xss8M -Xmx2000M \
+java -Xss8M -Xmx1000M \
      -jar ../../../../../../../../../silver/trunk/jars/RunSilver.jar \
+     -I ../../../../../../../../../grammars \
      --clean edu:umn:cs:melt:ableJ14:composed:java_rlp:bin  && ant

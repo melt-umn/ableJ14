@@ -440,7 +440,7 @@ en::ExprName ::= an::AmbiguousName  id::Id_t {
 	      classTypeRep (ctr) ->
 		if null (fieldSearchResult)
 		      then (if hasUnknownSupers (t)
-			    then disambiguated_error_name ( [ :: Error ])
+			    then disambiguated_error_name ( [ ])
 			    else disambiguated_error_name ([mkError (id.line, "Class " ++ ctr.name ++ " does not have field " ++ id.lexeme) ]))
 
 		--else if length (fieldSearchResult) > 1
@@ -458,7 +458,7 @@ en::ExprName ::= an::AmbiguousName  id::Id_t {
 	      interfaceTypeRep (itr) ->
 		if null (fieldSearchResult)
 		      then (if hasUnknownSupers (t) -- extends unknown interfaces
-			    then disambiguated_error_name ([ :: Error ])
+			    then disambiguated_error_name ([ ])
 			    else disambiguated_error_name ([mkError (id.line, "Interface " ++ itr.name ++ " does not have field " ++ id.lexeme) ]))
 
 		--else if length (fieldSearchResult) > 1
@@ -477,7 +477,7 @@ en::ExprName ::= an::AmbiguousName  id::Id_t {
    disambiguated_expr_name (l) ->
             case l.typerep of 
 		unknownTypeRep () ->
-                  disambiguated_error_name ([ :: Error ]) |
+                  disambiguated_error_name ([ ]) |
 
 		errorTypeRep (errs) ->
                   disambiguated_error_name (errs) |
@@ -485,7 +485,7 @@ en::ExprName ::= an::AmbiguousName  id::Id_t {
 	        classTypeRep (ctr) ->
 	          if null (fieldSearchResult)
 	             then (if hasUnknownSupers (l.typerep)
-			   then disambiguated_error_name ([ :: Error ])
+			   then disambiguated_error_name ([ ])
 			   else disambiguated_error_name ([mkError (id.line, "Class " ++  ctr.name ++ " does not have field " ++ id.lexeme) ])
 			   )
 	          --else if length (fieldSearchResult) > 1
@@ -500,7 +500,7 @@ en::ExprName ::= an::AmbiguousName  id::Id_t {
 	        interfaceTypeRep (itr) ->
 	          if null (fieldSearchResult)
 	             then (if hasUnknownSupers (l.typerep) -- unknown superinterfaces
-			   then disambiguated_error_name ([ :: Error ])
+			   then disambiguated_error_name ([ ])
 			   else disambiguated_error_name ([mkError (id.line, "Interface " ++  itr.name ++ " does not have field " ++ id.lexeme) ])
 			   )
 	          --else if length (fieldSearchResult) > 1
@@ -801,7 +801,7 @@ andi::AmbiguousName ::= an::AmbiguousName id::Id_t {
  disambiguated_type_name (t) ->
              case t of
 	      unknownTypeRep () ->
-	        disambiguated_error_name ([ :: Error ]) |
+	        disambiguated_error_name ([ ]) |
 
 	      errorTypeRep (errs) ->
 	        disambiguated_error_name (errs) |
@@ -830,7 +830,7 @@ andi::AmbiguousName ::= an::AmbiguousName id::Id_t {
 		        else disambiguated_type_name (firstType))
 
 		else if hasUnknownSupers (t)
-			 then disambiguated_error_name ( [ :: Error ])
+			 then disambiguated_error_name ( [ ])
 
 		else disambiguated_error_name ([mkError (id.line, "Class " ++ ctr.name ++ " does not have member " ++ id.lexeme) ]) |
 
@@ -855,7 +855,7 @@ andi::AmbiguousName ::= an::AmbiguousName id::Id_t {
 		        else disambiguated_type_name (firstType))
 
 		else if hasUnknownSupers (t)
-			 then disambiguated_error_name ( [ :: Error ])
+			 then disambiguated_error_name ( [ ])
 
 		else disambiguated_error_name ([mkError (id.line, "Interface " ++ itr.name ++ " does not have member " ++ id.lexeme) ]) |
 
@@ -866,7 +866,7 @@ andi::AmbiguousName ::= an::AmbiguousName id::Id_t {
  disambiguated_expr_name (l) ->
            case l.typerep of 
 		unknownTypeRep () ->
-                  disambiguated_error_name ([ :: Error ]) |
+                  disambiguated_error_name ([ ]) |
 
 		errorTypeRep (errs) ->
                   disambiguated_error_name (errs) |
@@ -874,7 +874,7 @@ andi::AmbiguousName ::= an::AmbiguousName id::Id_t {
 	        classTypeRep (ctr) ->
 	          if null (fieldSearchResult)
 	             then (if hasUnknownSupers (l.typerep)
-			   then disambiguated_error_name ([ :: Error ])
+			   then disambiguated_error_name ([ ])
 			   else disambiguated_error_name ([mkError (id.line, "Class " ++  ctr.name ++ " does not have field " ++ id.lexeme) ])
 			   )
 	          --else if length (fieldSearchResult) > 1
@@ -889,7 +889,7 @@ andi::AmbiguousName ::= an::AmbiguousName id::Id_t {
 	        interfaceTypeRep (itr) ->
 	          if null (fieldSearchResult)
 	             then (if hasUnknownSupers (l.typerep) -- unknown superinterfaces
-			   then disambiguated_error_name ([ :: Error ])
+			   then disambiguated_error_name ([ ])
 			   else disambiguated_error_name ([mkError (id.line, "Interface " ++  itr.name ++ " does not have field " ++ id.lexeme) ])
 			   )
 	          --else if length (fieldSearchResult) > 1

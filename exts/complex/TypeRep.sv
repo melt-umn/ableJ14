@@ -48,7 +48,7 @@ top::ConvertedTypeRep ::= old::TypeRep environment::[ ScopeEnv ] {
 	|
 	  _
 	->
-	  [ :: TypeRep ]
+	  [ ]
 	end;
 }
 

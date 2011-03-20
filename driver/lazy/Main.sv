@@ -293,7 +293,7 @@ function mkEnv
   return if null (lfqns)
 		then []
 		else (case head (lfqns).L_FQN.fullyQualifiedName of
-			fully_qualified_name_none () -> [ :: EnvItem ] |
+			fully_qualified_name_none () -> [ ] |
 			fqn -> [ envItem (fqn.qualifiedName, fqn, getDclRep (head (lfqns).type_defs, globalEnv)) ]
 		      end)
 			++ mkEnv (tail (lfqns), globalEnv);

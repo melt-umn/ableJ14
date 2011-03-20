@@ -68,7 +68,7 @@ cdcl::Class_Dcl ::= mods::Modifiers cname::Id_t parent::TypeName inters::TypeNam
   local attribute parentErrors :: [ Error ];
   parentErrors =       case parent.disambiguatedName of
                 	disambiguated_type_name (tr) -> case tr of
-								classTypeRep (ctr) -> [ :: Error ] |
+								classTypeRep (ctr) -> [ ] |
 								_ -> [ mkError (cname.line, parent.pp ++ " is not of class type") ] 
 							end |
 	                disambiguated_error_name (errs) -> errs |

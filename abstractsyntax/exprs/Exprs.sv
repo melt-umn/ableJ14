@@ -399,9 +399,9 @@ e::Stmt_Expr ::= t::TypeName params::Exprs cb::Class_Body typeFQN::FullyQualifie
 
   local attribute this_typerepdefs :: TypeRep ;
   this_typerepdefs = case tr'' of
-		      classTypeRep (_) -> classTypeRepDefs (class_type_rep_defs (anon_class_name, fqn.qualifiedName, [ :: Modifier ], typeFQN, [ :: FullyQualifiedName ], 
+		      classTypeRep (_) -> classTypeRepDefs (class_type_rep_defs (anon_class_name, fqn.qualifiedName, [ ], typeFQN, [ ], 
 								cb.field_defs, cb.method_defs,cb.constructor_defs, cb.inner_type_defs)) |
-		      interfaceTypeRep (_) -> classTypeRepDefs (class_type_rep_defs (anon_class_name, fqn.qualifiedName, [ :: Modifier ], 
+		      interfaceTypeRep (_) -> classTypeRepDefs (class_type_rep_defs (anon_class_name, fqn.qualifiedName, [ ], 
 								getQualifiedFQN (getQualifiedFQN (getSimpleFQN ("java"), "lang"), "Object"), [ typeFQN ], 
 								cb.field_defs, cb.method_defs,cb.constructor_defs, cb.inner_type_defs))
 		     end;
@@ -747,7 +747,7 @@ lhs::LHS ::= e1::Expr e2::Expr {
 
   local attribute my_errors :: [ Error ];
   my_errors = case e1.typerep of
-		arrayTypeRep (_, _) -> [ :: Error ] |
+		arrayTypeRep (_, _) -> [ ] |
 		_ -> [ mkError (-1, "Array access " ++ lhs.pp ++ " requires an array") ]
 	      end;
 }

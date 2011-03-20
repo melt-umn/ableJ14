@@ -145,7 +145,7 @@ abstract production algebraic_switch
 switch::Stmt ::= t::aswitchTerm expr::Expr switchblock::Algebraic_Switch_Block {
  switch.pp = "algebraic switch (" ++ expr.pp ++ ") " ++ switchblock.pp;
  switch.errors := (case expr.typerep of
-			classTypeRep (algebraic_class_type_rep (_,_,_,_,_,_,_,_,_,_,_)) -> [ :: Error ] |
+			classTypeRep (algebraic_class_type_rep (_,_,_,_,_,_,_,_,_,_,_)) -> [ ] |
                         _ ->  [ mkError (t.line, expr.pp ++ " is not an algebraic datatype") ]
 		   end) ++ switchblock.errors;
  switch.defs = [];
@@ -273,7 +273,7 @@ p::Pattern ::= n::Id_t pl::Pattern_List {
  local attribute pattern_result :: [CaseRep];
  pattern_result = case p.switched_type of
 			classTypeRep (algebraic_class_type_rep (_,_,_,_,_,_,_,_,_,_,_)) -> lookupPattern (n.lexeme, p.switched_type.classtyperep.caseReps) |
-			_ -> [ :: CaseRep ]
+			_ -> [ ]
 		  end;
 }
 
@@ -324,7 +324,7 @@ p::Pattern ::= n::Id_t {
  local attribute pattern_result :: [CaseRep];
  pattern_result = case p.switched_type of
 			classTypeRep (algebraic_class_type_rep (_,_,_,_,_,_,_,_,_,_,_)) -> lookupPattern (n.lexeme, p.switched_type.classtyperep.caseReps) |
-			_ -> [ :: CaseRep ]
+			_ -> [ ]
 		  end;
 }
 

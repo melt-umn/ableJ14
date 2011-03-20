@@ -424,7 +424,7 @@ top::ConvertedEnvItem ::= old::EnvItem environment::[ ScopeEnv ] {
 
  		  _
 		->
-		[ :: EnvItem ]
+		[ ]
 	       end;
 }
 
@@ -573,7 +573,7 @@ top::ConvertedTypeRep ::= old::TypeRep environment::[ ScopeEnv ] {
 
 		  _ 
 		->
-		[ :: TypeRep ]
+		[ ]
 	      end;
 }
 

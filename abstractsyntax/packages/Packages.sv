@@ -298,12 +298,12 @@ LFQNs_Errors ::= currentPack::FullyQualifiedName classPathDirectories::[ String 
  lfqns = case currentPack'' of
 -- if there is no package, we search in the current directory
 		fully_qualified_name_none () -> currentDirectoryOnlySearch.L_FQNs |
-		fully_qualified_name_unknown () -> [ :: LFQN ] |
+		fully_qualified_name_unknown () -> [ ] |
 		_ -> classPathSearch.L_FQNs
 	end;
 
  local attribute errs::[ Error ];
- errs = [ :: Error ];
+ errs = [ ];
 
  return lfqns_errors (lfqns, errs);
 }
@@ -726,7 +726,7 @@ aspect production simple_package_or_type_name
 ptn::PackageOrTypeName ::= id::Id_t {
  ptn.neededFullyQualifiedTypes = case resolvedType.L_FQN.fullyQualifiedName of
 					fully_qualified_name_unknown () -> [ ptn.fullyQualifiedName ] |
-					_ -> [ :: FullyQualifiedName ]
+					_ -> [ ]
 				 end;
 }
 
@@ -734,7 +734,7 @@ aspect production simple_type_name
 tn::TypeName ::= id::Id_t {
  tn.neededFullyQualifiedTypes = case resolvedType.L_FQN.fullyQualifiedName of
 					fully_qualified_name_unknown () -> [ tn.fullyQualifiedName ] |
-					_ -> [ :: FullyQualifiedName ]
+					_ -> [ ]
 				end;
 }
 
@@ -742,7 +742,7 @@ aspect production simple_ambiguous_name
 an::AmbiguousName ::= id::Id_t {
  an.neededFullyQualifiedTypes = case resolvedType.L_FQN.fullyQualifiedName of
 					fully_qualified_name_unknown () -> [ an.fullyQualifiedName ] |
-					_ -> [ :: FullyQualifiedName ]
+					_ -> [ ]
 				end;
 }
 

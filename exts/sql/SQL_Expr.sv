@@ -4,7 +4,8 @@ import edu:umn:cs:melt:ableJ14:abstractsyntax ;
 import edu:umn:cs:melt:ableJ14:terminals ;
 
 synthesized attribute sqlTypeRep :: Decorated SQLTypeRep;
-nonterminal SQL_Expr, SQL_Expr_List with pp, errors, sqlTypeRep;
+nonterminal SQL_Expr with pp, errors, sqlTypeRep;
+nonterminal SQL_Expr_List with pp, errors, sqlTypeRep;
 
 
 abstract production sql_exprs_one

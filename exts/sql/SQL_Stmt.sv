@@ -7,7 +7,10 @@ import edu:umn:cs:melt:ableJ14:terminals ;
 
 
 
-nonterminal SQL_Stmt,  Select_Qualifier, Table_List, Where_Clause with pp ;
+nonterminal SQL_Stmt with pp;
+nonterminal Select_Qualifier with pp;
+nonterminal Table_List with pp;
+nonterminal Where_Clause with pp ;
 
 
 autocopy attribute tableDefs :: [Decorated TableBinding] ;

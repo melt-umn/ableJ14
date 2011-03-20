@@ -18,7 +18,7 @@ top::Expr ::= c::Id_t s::SQL_Stmt
  local attribute td :: [Decorated TableBinding];
  td = case firstId.typerep of
 	connectionTypeRep (n, fqn, u, td2, tr) -> td2 |
-	_  -> [ ::Decorated TableBinding ]
+	_  -> [ ]
       end;
 
  s.tableDefs = if null (idSearchResult) then [] else td;
@@ -27,7 +27,7 @@ top::Expr ::= c::Id_t s::SQL_Stmt
     (if   null (idSearchResult) 
      then [ mkError (c.line, c.lexeme ++ " is not bound in the environment") ]
      else case firstId.typerep of
-            connectionTypeRep (_, _, _, _, _) -> [ :: Error ] |
+            connectionTypeRep (_, _, _, _, _) -> [ ] |
             _  -> [ mkError (c.line, c.lexeme ++ " is not a Connection") ]
           end
     ) ++
