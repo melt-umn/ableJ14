@@ -2,6 +2,7 @@ grammar edu:umn:cs:melt:ableJ14:exts:rlp;
 
 import edu:umn:cs:melt:ableJ14:terminals;
 import edu:umn:cs:melt:ableJ14:abstractsyntax;
+import edu:umn:cs:melt:ableJ14:abstractsyntax:exprs;
 import edu:umn:cs:melt:ableJ14:concretesyntax;
 
 -- The number of the highest coefficient of e in 

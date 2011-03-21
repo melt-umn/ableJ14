@@ -44,58 +44,58 @@ synthesized attribute abstractModifierList :: [ Modifier ];
 synthesized attribute abstractFullyQualifiedName :: FullyQualifiedName;
 synthesized attribute abstractFullyQualifiedNameList :: [ FullyQualifiedName ];
 
-terminal abstract_modTerm   'abstract_mod'   lexer classes = { defs_kwd } ;
+terminal Abstract_modTerm   'abstract_mod'   lexer classes = { defs_kwd } ;
 
-terminal defs_file_infoTerm 'defs_file_info' lexer classes = { defs_kwd } ;
-terminal envItemTerm        'envItem'        lexer classes = { defs_kwd } ;
-terminal mkErrorTerm        'mkError'        lexer classes = { defs_kwd } ;
+terminal Defs_file_infoTerm 'defs_file_info' lexer classes = { defs_kwd } ;
+terminal EnvItemTerm        'envItem'        lexer classes = { defs_kwd } ;
+terminal MkErrorTerm        'mkError'        lexer classes = { defs_kwd } ;
 terminal Id_tTerm           'Id_t'           lexer classes = { defs_kwd } ;
-terminal terminalTerm       'terminal'       lexer classes = { defs_kwd } ;
+terminal TerminalTerm       'terminal'       lexer classes = { defs_kwd } ;
 
-terminal dcl_rep_errorTerm       'dcl_rep_error'       lexer classes = { defs_kwd } ;
-terminal dcl_rep_packageTerm     'dcl_rep_package'     lexer classes = { defs_kwd } ;
-terminal dcl_rep_classTerm       'dcl_rep_class'       lexer classes = { defs_kwd } ;
-terminal dcl_rep_interfaceTerm   'dcl_rep_interface'   lexer classes = { defs_kwd } ;
-terminal dcl_rep_fieldTerm       'dcl_rep_field'       lexer classes = { defs_kwd } ;
-terminal dcl_repl_methodTerm     'dcl_rep_method'      lexer classes = { defs_kwd } ;
-terminal dcl_rep_constructorTerm 'dcl_rep_constructor' lexer classes = { defs_kwd } ;
-terminal dcl_rep_localTerm       'dcl_rep_local'       lexer classes = { defs_kwd } ;
-terminal dcl_rep_paramTerm       'dcl_rep_param'       lexer classes = { defs_kwd } ;
+terminal Dcl_rep_errorTerm       'dcl_rep_error'       lexer classes = { defs_kwd } ;
+terminal Dcl_rep_packageTerm     'dcl_rep_package'     lexer classes = { defs_kwd } ;
+terminal Dcl_rep_classTerm       'dcl_rep_class'       lexer classes = { defs_kwd } ;
+terminal Dcl_rep_interfaceTerm   'dcl_rep_interface'   lexer classes = { defs_kwd } ;
+terminal Dcl_rep_fieldTerm       'dcl_rep_field'       lexer classes = { defs_kwd } ;
+terminal Dcl_rep_methodTerm      'dcl_rep_method'      lexer classes = { defs_kwd } ;
+terminal Dcl_rep_constructorTerm 'dcl_rep_constructor' lexer classes = { defs_kwd } ;
+terminal Dcl_rep_localTerm       'dcl_rep_local'       lexer classes = { defs_kwd } ;
+terminal Dcl_rep_paramTerm       'dcl_rep_param'       lexer classes = { defs_kwd } ;
 
-terminal error_dcl_repTerm       'error_dcl_rep'       lexer classes = { defs_kwd } ;
-terminal package_dcl_repTerm     'package_dcl_rep'     lexer classes = { defs_kwd } ;
-terminal class_dcl_repTerm       'class_dcl_rep'       lexer classes = { defs_kwd } ;
-terminal interface_dcl_repTerm   'interface_dcl_rep'   lexer classes = { defs_kwd } ;
-terminal field_dcl_repTerm       'field_dcl_rep'       lexer classes = { defs_kwd } ;
-terminal method_dcl_repTerm      'method_dcl_rep'      lexer classes = { defs_kwd } ;
-terminal constructor_dcl_repTerm 'constructor_dcl_rep' lexer classes = { defs_kwd } ;
-terminal local_dcl_repTerm       'local_dcl_rep'       lexer classes = { defs_kwd } ;
-terminal param_dcl_repTerm       'param_dcl_rep'       lexer classes = { defs_kwd } ;
+terminal Error_dcl_repTerm       'error_dcl_rep'       lexer classes = { defs_kwd } ;
+terminal Package_dcl_repTerm     'package_dcl_rep'     lexer classes = { defs_kwd } ;
+terminal Class_dcl_repTerm       'class_dcl_rep'       lexer classes = { defs_kwd } ;
+terminal Interface_dcl_repTerm   'interface_dcl_rep'   lexer classes = { defs_kwd } ;
+terminal Field_dcl_repTerm       'field_dcl_rep'       lexer classes = { defs_kwd } ;
+terminal Method_dcl_repTerm      'method_dcl_rep'      lexer classes = { defs_kwd } ;
+terminal Constructor_dcl_repTerm 'constructor_dcl_rep' lexer classes = { defs_kwd } ;
+terminal Local_dcl_repTerm       'local_dcl_rep'       lexer classes = { defs_kwd } ;
+terminal Param_dcl_repTerm       'param_dcl_rep'       lexer classes = { defs_kwd } ;
 
-terminal charTypeRepTerm               'charTypeRep'               lexer classes = { defs_kwd } ;
-terminal byteTypeRepTerm               'byteTypeRep'               lexer classes = { defs_kwd } ;
-terminal shortTypeRepTerm              'shortTypeRep'              lexer classes = { defs_kwd } ;
-terminal intTypeRepTerm                'intTypeRep'                lexer classes = { defs_kwd } ;
-terminal longTypeRepTerm               'longTypeRep'               lexer classes = { defs_kwd } ;
-terminal floatTypeRepTerm              'floatTypeRep'              lexer classes = { defs_kwd } ;
-terminal doubleTypeRepTerm             'doubleTypeRep'             lexer classes = { defs_kwd } ;
-terminal booleanTypeRepTerm            'booleanTypeRep'            lexer classes = { defs_kwd } ;
-terminal arrayTypeRepTerm              'arrayTypeRep'              lexer classes = { defs_kwd } ;
-terminal voidTypeRepTerm               'voidTypeRep'               lexer classes = { defs_kwd } ;
-terminal classTypeRepDefsTerm          'classTypeRepDefs'          lexer classes = { defs_kwd } ;
-terminal objectClassTypeRepDefsTerm    'objectClassTypeRepDefs'    lexer classes = { defs_kwd } ;
-terminal interfaceTypeRepDefsTerm      'interfaceTypeRepDefs'      lexer classes = { defs_kwd } ;
-terminal unknownTypeRepTerm            'unknownTypeRep'            lexer classes = { defs_kwd } ;
-terminal fullyQualifiedNameTypeRepTerm 'fullyQualifiedNameTypeRep' lexer classes = { defs_kwd } ;
+terminal CharTypeRepTerm               'charTypeRep'               lexer classes = { defs_kwd } ;
+terminal ByteTypeRepTerm               'byteTypeRep'               lexer classes = { defs_kwd } ;
+terminal ShortTypeRepTerm              'shortTypeRep'              lexer classes = { defs_kwd } ;
+terminal IntTypeRepTerm                'intTypeRep'                lexer classes = { defs_kwd } ;
+terminal LongTypeRepTerm               'longTypeRep'               lexer classes = { defs_kwd } ;
+terminal FloatTypeRepTerm              'floatTypeRep'              lexer classes = { defs_kwd } ;
+terminal DoubleTypeRepTerm             'doubleTypeRep'             lexer classes = { defs_kwd } ;
+terminal BooleanTypeRepTerm            'booleanTypeRep'            lexer classes = { defs_kwd } ;
+terminal ArrayTypeRepTerm              'arrayTypeRep'              lexer classes = { defs_kwd } ;
+terminal VoidTypeRepTerm               'voidTypeRep'               lexer classes = { defs_kwd } ;
+terminal ClassTypeRepDefsTerm          'classTypeRepDefs'          lexer classes = { defs_kwd } ;
+terminal ObjectClassTypeRepDefsTerm    'objectClassTypeRepDefs'    lexer classes = { defs_kwd } ;
+terminal InterfaceTypeRepDefsTerm      'interfaceTypeRepDefs'      lexer classes = { defs_kwd } ;
+terminal UnknownTypeRepTerm            'unknownTypeRep'            lexer classes = { defs_kwd } ;
+terminal FullyQualifiedNameTypeRepTerm 'fullyQualifiedNameTypeRep' lexer classes = { defs_kwd } ;
 
-terminal class_type_rep_defsTerm        'class_type_rep_defs'        lexer classes = { defs_kwd } ;
-terminal object_class_type_rep_defsTerm 'object_class_type_rep_defs' lexer classes = { defs_kwd } ;
-terminal interface_type_rep_defsTerm    'interface_type_rep_defs'    lexer classes = { defs_kwd } ;
+terminal Class_type_rep_defsTerm        'class_type_rep_defs'        lexer classes = { defs_kwd } ;
+terminal Object_class_type_rep_defsTerm 'object_class_type_rep_defs' lexer classes = { defs_kwd } ;
+terminal Interface_type_rep_defsTerm    'interface_type_rep_defs'    lexer classes = { defs_kwd } ;
 
-terminal fully_qualified_name_noneTerm      'fully_qualified_name_none'      lexer classes = { defs_kwd } ;
-terminal fully_qualified_name_unknownTerm   'fully_qualified_name_unknown'   lexer classes = { defs_kwd } ;
-terminal fully_qualified_name_simpleTerm    'fully_qualified_name_simple'    lexer classes = { defs_kwd } ;
-terminal fully_qualified_name_qualifiedTerm 'fully_qualified_name_qualified' lexer classes = { defs_kwd } ;
+terminal Fully_qualified_name_noneTerm      'fully_qualified_name_none'      lexer classes = { defs_kwd } ;
+terminal Fully_qualified_name_unknownTerm   'fully_qualified_name_unknown'   lexer classes = { defs_kwd } ;
+terminal Fully_qualified_name_simpleTerm    'fully_qualified_name_simple'    lexer classes = { defs_kwd } ;
+terminal Fully_qualified_name_qualifiedTerm 'fully_qualified_name_qualified' lexer classes = { defs_kwd } ;
 
 concrete production root_defs_file_info_c
 top::Root_c ::= dfi::DefsFileInfo_C {

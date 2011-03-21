@@ -10,7 +10,7 @@ attribute neededImportedSingleTypes, neededCurrentPackageTypes, neededImportedOn
 ------
 
 aspect production algebraic_switch
-switch::Stmt ::= t::aswitchTerm expr::Expr switchblock::Algebraic_Switch_Block {
+switch::Stmt ::= t::AswitchTerm expr::Expr switchblock::Algebraic_Switch_Block {
 -- switch.neededImportedSingleTypes = expr.neededImportedSingleTypes ++ switchblock.neededImportedSingleTypes;
 }
 
@@ -74,7 +74,7 @@ switch::Algebraic_Switch_Group ::= p::Pattern stmts::Stmt {
 ------------
 
 aspect production algebraic_switch
-switch::Stmt ::= t::aswitchTerm expr::Expr switchblock::Algebraic_Switch_Block {
+switch::Stmt ::= t::AswitchTerm expr::Expr switchblock::Algebraic_Switch_Block {
 -- switch.neededImportedOnDemandTypes = expr.neededImportedOnDemandTypes ++ switchblock.neededImportedOnDemandTypes;
 }
 
@@ -106,7 +106,7 @@ switch::Algebraic_Switch_Group ::= p::Pattern stmts::Stmt {
 ------------
 
 aspect production algebraic_switch
-switch::Stmt ::= t::aswitchTerm expr::Expr switchblock::Algebraic_Switch_Block {
+switch::Stmt ::= t::AswitchTerm expr::Expr switchblock::Algebraic_Switch_Block {
  switch.localTypes = [];
 }
 
@@ -138,7 +138,7 @@ switch::Algebraic_Switch_Group ::= p::Pattern stmts::Stmt {
 ------------
 
 aspect production algebraic_switch
-switch::Stmt ::= t::aswitchTerm expr::Expr switchblock::Algebraic_Switch_Block {
+switch::Stmt ::= t::AswitchTerm expr::Expr switchblock::Algebraic_Switch_Block {
 -- switch.neededFullyQualifiedTypes = expr.neededFullyQualifiedTypes ++ switchblock.neededFullyQualifiedTypes;
 }
 

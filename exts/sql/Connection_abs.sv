@@ -1,6 +1,8 @@
 grammar edu:umn:cs:melt:ableJ14:exts:sql ;
 
 import edu:umn:cs:melt:ableJ14:abstractsyntax hiding fieldDcl;
+import edu:umn:cs:melt:ableJ14:abstractsyntax:exprs;
+import edu:umn:cs:melt:ableJ14:abstractsyntax:packages;
 import edu:umn:cs:melt:ableJ14:terminals;
 
 

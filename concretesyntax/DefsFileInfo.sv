@@ -43,59 +43,59 @@ synthesized attribute abstractFullyQualifiedNameList :: [ FullyQualifiedName ];
 synthesized attribute abstractLFQN :: LFQN;
 synthesized attribute abstractLFQNList :: [ LFQN ];
 
-terminal abstract_modTerm   'abstract_mod'   lexer classes { java_kwd } ;
+terminal Abstract_modTerm   'abstract_mod'   lexer classes { java_kwd } ;
 
-terminal defs_file_infoTerm 'defs_file_info' lexer classes { java_kwd } ;
-terminal envItemTerm        'envItem'        lexer classes { java_kwd } ;
-terminal mkErrorTerm        'mkError'        lexer classes { java_kwd } ;
+terminal Defs_file_infoTerm 'defs_file_info' lexer classes { java_kwd } ;
+terminal EnvItemTerm        'envItem'        lexer classes { java_kwd } ;
+terminal MkErrorTerm        'mkError'        lexer classes { java_kwd } ;
 terminal Id_tTerm           'Id_t'           lexer classes { java_kwd } ;
-terminal terminalTerm       'terminal'       lexer classes { java_kwd } ;
+terminal TerminalTerm       'terminal'       lexer classes { java_kwd } ;
 
-terminal dcl_rep_errorTerm       'dcl_rep_error'       lexer classes { java_kwd } ;
-terminal dcl_rep_packageTerm     'dcl_rep_package'     lexer classes { java_kwd } ;
-terminal dcl_rep_classTerm       'dcl_rep_class'       lexer classes { java_kwd } ;
-terminal dcl_rep_interfaceTerm   'dcl_rep_interface'   lexer classes { java_kwd } ;
-terminal dcl_rep_fieldTerm       'dcl_rep_field'       lexer classes { java_kwd } ;
-terminal dcl_repl_methodTerm     'dcl_rep_method'      lexer classes { java_kwd } ;
-terminal dcl_rep_constructorTerm 'dcl_rep_constructor' lexer classes { java_kwd } ;
-terminal dcl_rep_localTerm       'dcl_rep_local'       lexer classes { java_kwd } ;
-terminal dcl_rep_paramTerm       'dcl_rep_param'       lexer classes { java_kwd } ;
+terminal Dcl_rep_errorTerm       'dcl_rep_error'       lexer classes { java_kwd } ;
+terminal Dcl_rep_packageTerm     'dcl_rep_package'     lexer classes { java_kwd } ;
+terminal Dcl_rep_classTerm       'dcl_rep_class'       lexer classes { java_kwd } ;
+terminal Dcl_rep_interfaceTerm   'dcl_rep_interface'   lexer classes { java_kwd } ;
+terminal Dcl_rep_fieldTerm       'dcl_rep_field'       lexer classes { java_kwd } ;
+terminal Dcl_repl_methodTerm     'dcl_rep_method'      lexer classes { java_kwd } ;
+terminal Dcl_rep_constructorTerm 'dcl_rep_constructor' lexer classes { java_kwd } ;
+terminal Dcl_rep_localTerm       'dcl_rep_local'       lexer classes { java_kwd } ;
+terminal Dcl_rep_paramTerm       'dcl_rep_param'       lexer classes { java_kwd } ;
 
-terminal error_dcl_repTerm       'error_dcl_rep'       lexer classes { java_kwd } ;
-terminal package_dcl_repTerm     'package_dcl_rep'     lexer classes { java_kwd } ;
-terminal class_dcl_repTerm       'class_dcl_rep'       lexer classes { java_kwd } ;
-terminal interface_dcl_repTerm   'interface_dcl_rep'   lexer classes { java_kwd } ;
-terminal field_dcl_repTerm       'field_dcl_rep'       lexer classes { java_kwd } ;
-terminal method_dcl_repTerm      'method_dcl_rep'      lexer classes { java_kwd } ;
-terminal constructor_dcl_repTerm 'constructor_dcl_rep' lexer classes { java_kwd } ;
-terminal local_dcl_repTerm       'local_dcl_rep'       lexer classes { java_kwd } ;
-terminal param_dcl_repTerm       'param_dcl_rep'       lexer classes { java_kwd } ;
+terminal Error_dcl_repTerm       'error_dcl_rep'       lexer classes { java_kwd } ;
+terminal Package_dcl_repTerm     'package_dcl_rep'     lexer classes { java_kwd } ;
+terminal Class_dcl_repTerm       'class_dcl_rep'       lexer classes { java_kwd } ;
+terminal Interface_dcl_repTerm   'interface_dcl_rep'   lexer classes { java_kwd } ;
+terminal Field_dcl_repTerm       'field_dcl_rep'       lexer classes { java_kwd } ;
+terminal Method_dcl_repTerm      'method_dcl_rep'      lexer classes { java_kwd } ;
+terminal Constructor_dcl_repTerm 'constructor_dcl_rep' lexer classes { java_kwd } ;
+terminal Local_dcl_repTerm       'local_dcl_rep'       lexer classes { java_kwd } ;
+terminal Param_dcl_repTerm       'param_dcl_rep'       lexer classes { java_kwd } ;
 
-terminal charTypeRepTerm               'charTypeRep'               lexer classes { java_kwd } ;
-terminal byteTypeRepTerm               'byteTypeRep'               lexer classes { java_kwd } ;
-terminal shortTypeRepTerm              'shortTypeRep'              lexer classes { java_kwd } ;
-terminal intTypeRepTerm                'intTypeRep'                lexer classes { java_kwd } ;
-terminal longTypeRepTerm               'longTypeRep'               lexer classes { java_kwd } ;
-terminal floatTypeRepTerm              'floatTypeRep'              lexer classes { java_kwd } ;
-terminal doubleTypeRepTerm             'doubleTypeRep'             lexer classes { java_kwd } ;
-terminal booleanTypeRepTerm            'booleanTypeRep'            lexer classes { java_kwd } ;
-terminal arrayTypeRepTerm              'arrayTypeRep'              lexer classes { java_kwd } ;
-terminal voidTypeRepTerm               'voidTypeRep'               lexer classes { java_kwd } ;
-terminal classTypeRepDefsTerm          'classTypeRepDefs'          lexer classes { java_kwd } ;
-terminal objectClassTypeRepDefsTerm    'objectClassTypeRepDefs'    lexer classes { java_kwd } ;
-terminal interfaceTypeRepDefsTerm      'interfaceTypeRepDefs'      lexer classes { java_kwd } ;
-terminal unknownTypeRepTerm            'unknownTypeRep'            lexer classes { java_kwd } ;
-terminal fullyQualifiedNameTypeRepTerm 'fullyQualifiedNameTypeRep' lexer classes { java_kwd } ;
+terminal CharTypeRepTerm               'charTypeRep'               lexer classes { java_kwd } ;
+terminal ByteTypeRepTerm               'byteTypeRep'               lexer classes { java_kwd } ;
+terminal ShortTypeRepTerm              'shortTypeRep'              lexer classes { java_kwd } ;
+terminal IntTypeRepTerm                'intTypeRep'                lexer classes { java_kwd } ;
+terminal LongTypeRepTerm               'longTypeRep'               lexer classes { java_kwd } ;
+terminal FloatTypeRepTerm              'floatTypeRep'              lexer classes { java_kwd } ;
+terminal DoubleTypeRepTerm             'doubleTypeRep'             lexer classes { java_kwd } ;
+terminal BooleanTypeRepTerm            'booleanTypeRep'            lexer classes { java_kwd } ;
+terminal ArrayTypeRepTerm              'arrayTypeRep'              lexer classes { java_kwd } ;
+terminal VoidTypeRepTerm               'voidTypeRep'               lexer classes { java_kwd } ;
+terminal ClassTypeRepDefsTerm          'classTypeRepDefs'          lexer classes { java_kwd } ;
+terminal ObjectClassTypeRepDefsTerm    'objectClassTypeRepDefs'    lexer classes { java_kwd } ;
+terminal InterfaceTypeRepDefsTerm      'interfaceTypeRepDefs'      lexer classes { java_kwd } ;
+terminal UnknownTypeRepTerm            'unknownTypeRep'            lexer classes { java_kwd } ;
+terminal FullyQualifiedNameTypeRepTerm 'fullyQualifiedNameTypeRep' lexer classes { java_kwd } ;
 
-terminal class_type_rep_defsTerm        'class_type_rep_defs'        lexer classes { java_kwd } ;
-terminal object_class_type_rep_defsTerm 'object_class_type_rep_defs' lexer classes { java_kwd } ;
-terminal interface_type_rep_defsTerm    'interface_type_rep_defs'    lexer classes { java_kwd } ;
+terminal Class_type_rep_defsTerm        'class_type_rep_defs'        lexer classes { java_kwd } ;
+terminal Object_class_type_rep_defsTerm 'object_class_type_rep_defs' lexer classes { java_kwd } ;
+terminal Interface_type_rep_defsTerm    'interface_type_rep_defs'    lexer classes { java_kwd } ;
 
-terminal fully_qualified_name_noneTerm      'fully_qualified_name_none'      lexer classes { java_kwd } ;
-terminal fully_qualified_name_unknownTerm   'fully_qualified_name_unknown'   lexer classes { java_kwd } ;
-terminal fully_qualified_name_simpleTerm    'fully_qualified_name_simple'    lexer classes { java_kwd } ;
-terminal fully_qualified_name_qualifiedTerm 'fully_qualified_name_qualified' lexer classes { java_kwd } ;
-terminal lfqnTerm                           'lfqn'                           lexer classes { java_kwd } ;
+terminal Fully_qualified_name_noneTerm      'fully_qualified_name_none'      lexer classes { java_kwd } ;
+terminal Fully_qualified_name_unknownTerm   'fully_qualified_name_unknown'   lexer classes { java_kwd } ;
+terminal Fully_qualified_name_simpleTerm    'fully_qualified_name_simple'    lexer classes { java_kwd } ;
+terminal Fully_qualified_name_qualifiedTerm 'fully_qualified_name_qualified' lexer classes { java_kwd } ;
+terminal LfqnTerm                           'lfqn'                           lexer classes { java_kwd } ;
 
 concrete production root_defs_file_info_c
 top::Root_C ::= dfi::DefsFileInfo_C {

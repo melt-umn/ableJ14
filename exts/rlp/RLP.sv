@@ -2,6 +2,7 @@ grammar edu:umn:cs:melt:ableJ14:exts:rlp;
 
 import edu:umn:cs:melt:ableJ14:terminals;
 import edu:umn:cs:melt:ableJ14:abstractsyntax;
+import edu:umn:cs:melt:ableJ14:abstractsyntax:exprs;
 import edu:umn:cs:melt:ableJ14:concretesyntax;
 
 
@@ -72,7 +73,7 @@ import edu:umn:cs:melt:ableJ14:concretesyntax;
 terminal RLP_t 'rlp' dominates {Id_t};
 
 concrete production rlp_local_var_dcl_c
-s::blockStatement ::= 'rlp' '<' pt::type '>' dcl::variableDeclarator ';' {
+s::BlockStatement ::= 'rlp' '<' pt::Type_NT '>' dcl::VariableDeclarator ';' {
  s.ast_Stmt = rlp_local_var_dcl (pt.ast_Type, dcl.ast_Var_Declarator);
 }
 
@@ -123,7 +124,7 @@ s::Stmt ::= pt::Type  dcl::Var_Declarator
 --------------------------------------------------
 terminal Sign_t 'sign' dominates {Id_t} ;
 concrete production sign_c
-s::blockStatement ::= lhs::expression '=' s_kwd::Sign_t '(' expr::expression ')' ';' {
+s::BlockStatement ::= lhs::Expression '=' s_kwd::Sign_t '(' expr::Expression ')' ';' {
   s.ast_Stmt = case lhs.ast_Expr of
 		expr_lhs (l) -> signRLP ( l, expr.ast_Expr ) |
 		_ -> error ("Syntax error " ++ toString(s_kwd.line) ++  ": sign assignment to non-LHS expression.")

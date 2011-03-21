@@ -2,8 +2,8 @@
   <description>Build the grammar edu:umn:cs:melt:ableJ14:composed:java_rlp:bin </description>
 
   <property environment='env'/>
-  <property name='jg' location='/Users/lijesh/svn/silver/trunk/generated/'/>
-  <property name='sh' location='/Users/lijesh/svn/silver/trunk/jars/'/>
+  <property name='jg' location='C:\cygwin\home\lijesh\svn\silver\trunk\generated/'/>
+  <property name='sh' location='C:\cygwin\home\lijesh\svn\silver\trunk\jars/'/>
   <property name='bin' location='${jg}/bin'/>
   <property name='src' location='${jg}/src'/>
 
@@ -44,14 +44,21 @@
        <include name='edu/umn/cs/melt/ableJ14/terminals/*.class' />
        <include name='edu/umn/cs/melt/ableJ14/concretesyntax/*.class' />
        <include name='edu/umn/cs/melt/ableJ14/abstractsyntax/*.class' />
+       <include name='edu/umn/cs/melt/ableJ14/abstractsyntax/exprs/*.class' />
+       <include name='edu/umn/cs/melt/ableJ14/abstractsyntax/packages/*.class' />
        <include name='edu/umn/cs/melt/ableJ14/host/*.class' />
+       <include name='edu/umn/cs/melt/ableJ14/abstractsyntax/aspects/*.class' />
        <include name='edu/umn/cs/melt/ableJ14/driver/lazy/*.class' />
        <include name='silver/driver/*.class' />
        <include name='silver/definition/core/*.class' />
+       <include name='silver/definition/type/syntax/*.class' />
+       <include name='silver/definition/type/gatherfreevars/*.class' />
+       <include name='silver/definition/type/*.class' />
        <include name='silver/definition/regex/*.class' />
+       <include name='silver/analysis/typechecking/core/*.class' />
+       <include name='silver/analysis/typechecking/*.class' />
        <include name='silver/definition/env/*.class' />
        <include name='silver/definition/env/parser/*.class' />
-       <include name='silver/definition/type/anytype/*.class' />
        <include name='silver/definition/type/io/*.class' />
        <include name='silver/util/*.class' />
        <include name='silver/util/command/*.class' />
@@ -70,7 +77,7 @@
   </target>
 
   <target name='grammars' depends='init, copper'>
-      <javac debug='on' source='1.5' classpathref='compile.classpath' srcdir='${src}' destdir='${bin}'>
+      <javac debug='on' source='1.5' classpathref='compile.classpath' srcdir='${src}' destdir='${bin}' includeantruntime='false'>
        <include name='edu/umn/cs/melt/ableJ14/composed/java_rlp/bin/*.java' />
        <include name='core/*.java' />
        <include name='edu/umn/cs/melt/ableJ14/composed/java_rlp/*.java' />
@@ -78,14 +85,21 @@
        <include name='edu/umn/cs/melt/ableJ14/terminals/*.java' />
        <include name='edu/umn/cs/melt/ableJ14/concretesyntax/*.java' />
        <include name='edu/umn/cs/melt/ableJ14/abstractsyntax/*.java' />
+       <include name='edu/umn/cs/melt/ableJ14/abstractsyntax/exprs/*.java' />
+       <include name='edu/umn/cs/melt/ableJ14/abstractsyntax/packages/*.java' />
        <include name='edu/umn/cs/melt/ableJ14/host/*.java' />
+       <include name='edu/umn/cs/melt/ableJ14/abstractsyntax/aspects/*.java' />
        <include name='edu/umn/cs/melt/ableJ14/driver/lazy/*.java' />
        <include name='silver/driver/*.java' />
        <include name='silver/definition/core/*.java' />
+       <include name='silver/definition/type/syntax/*.java' />
+       <include name='silver/definition/type/gatherfreevars/*.java' />
+       <include name='silver/definition/type/*.java' />
        <include name='silver/definition/regex/*.java' />
+       <include name='silver/analysis/typechecking/core/*.java' />
+       <include name='silver/analysis/typechecking/*.java' />
        <include name='silver/definition/env/*.java' />
        <include name='silver/definition/env/parser/*.java' />
-       <include name='silver/definition/type/anytype/*.java' />
        <include name='silver/definition/type/io/*.java' />
        <include name='silver/util/*.java' />
        <include name='silver/util/command/*.java' />

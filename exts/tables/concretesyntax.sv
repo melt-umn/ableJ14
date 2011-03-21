@@ -22,7 +22,7 @@ synthesized attribute ast_TableRow  :: TableRow ;
 terminal Table_t 'table' dominates { Id_t };--, prefix = true;
 
 concrete production table_c
-t::primaryExpression ::=  'table' '(' trows::TableRows_c ')' 
+t::PrimaryExpression ::=  'table' '(' trows::TableRows_c ')' 
 { t.ast_Expr = table (trows.ast_TableRows); 
 }
 
@@ -37,7 +37,7 @@ trows::TableRows_c ::= trow::TableRow_c
 }
 
 concrete production tableRow_c
-trow::TableRow_c ::= e::expression ':'  tvs::TruthValueList_c
+trow::TableRow_c ::= e::Expression ':'  tvs::TruthValueList_c
 { trow.ast_TableRow = tableRow(e.ast_Expr, tvs'') ; 
 }
 

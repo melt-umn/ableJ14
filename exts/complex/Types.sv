@@ -7,7 +7,7 @@ import edu:umn:cs:melt:ableJ14:host;
 terminal Complex_t 'complex' dominates { Id_t } ;
 
 concrete production complex_type_c
-t::referenceType ::= c::Complex_t {
+t::ReferenceType ::= c::Complex_t {
  t.ast_Reference_Type = complex_type (c);
 }
 
@@ -25,7 +25,7 @@ t::Reference_Type ::= c::Complex_t  {
 terminal ComplexRef_t  'Complex' dominates { Id_t } ;
 
 concrete production reference_complex_type_c
-t::referenceType ::= c::ComplexRef_t {
+t::ReferenceType ::= c::ComplexRef_t {
  t.ast_Reference_Type = reference_complex_type (c);
 }
 

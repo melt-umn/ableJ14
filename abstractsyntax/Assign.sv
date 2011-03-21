@@ -97,8 +97,8 @@ function mk_dispatch_internal_errors_Expr
  return
   [ mkError (loc,  "Internal Compiler Error:\n" ++ 
                    " Types " ++ t1.eqName ++ " and " ++ t2.eqName ++ 
-                   " compatible in multiple ways" ++
-                   "\n First production of first: " ++ head(dispatches).patProdName ++ "\n"  ++
-                   "\n Second production of second: " ++ head(tail(dispatches)).patProdName ++ "\n" 
+                   " compatible in multiple ways" ++ "\n"
+--                   "\n First production of first: " ++ head(dispatches).patProdName ++ "\n"  ++
+--                   "\n Second production of second: " ++ head(tail(dispatches)).patProdName ++ "\n" 
             ) ] ;
 }

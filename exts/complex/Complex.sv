@@ -5,7 +5,7 @@ import edu:umn:cs:melt:ableJ14:host ;
 -- "Primitive type" version
 
 concrete production complex_literal_c
-top::primaryExpression ::= 'complex' '(' r::expression ',' i::expression ')' {
+top::PrimaryExpression ::= 'complex' '(' r::Expression ',' i::Expression ')' {
   top.ast_Expr = complex_literal (r.ast_Expr, i.ast_Expr);
 }
 
@@ -21,7 +21,7 @@ top::Expr ::= r::Expr i::Expr {
 -- "Reference type" version
 
 concrete production reference_complex_literal_c
-top::primaryExpression ::= 'Complex' '(' r::expression ',' i::expression ')' {
+top::PrimaryExpression ::= 'Complex' '(' r::Expression ',' i::Expression ')' {
   top.ast_Expr = reference_complex_literal (r.ast_Expr, i.ast_Expr);
 }
 

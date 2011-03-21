@@ -6,23 +6,23 @@ import edu:umn:cs:melt:ableJ14:abstractsyntax;
 import edu:umn:cs:melt:ableJ14:abstractsyntax:exprs;
 import edu:umn:cs:melt:ableJ14:abstractsyntax:packages;
 
-terminal algebraicTerm        'algebraic'    dominates {Id_t};
+terminal AlgebraicTerm        'algebraic'    dominates {Id_t};
 
 -- Concrete Syntax
 --------------------------------------------------
 
 concrete production algebraic_class_dcl_c
-cdcl::classDefinition ::= mods::modifiersOpt 'algebraic' 'class' id::Id_t cb::classBlock {
+cdcl::ClassDefinition ::= mods::ModifiersOpt_NT 'algebraic' 'class' id::Id_t cb::ClassBlock {
  cdcl.ast_Class_Dcl = algebraic_class_dcl (mods.ast_Modifiers, id, getTypeName ("Object"), type_names_none (), cb.ast_Class_Body ) ;
 }
 
 concrete production class_case_dcl_c
-cdcl::classMemberDefinition ::= 'case' id::Id_t ';'  {
+cdcl::ClassMemberDefinition ::= 'case' id::Id_t ';' {
   cdcl.ast_Class_Member_Dcl = class_case_dcl (id) ;
 }
 
 concrete production class_case_dcl_variant_c
-cdcl::classMemberDefinition ::= 'case' id::Id_t '(' dcls::Case_parameters_c ')' ';'  {
+cdcl::ClassMemberDefinition ::= 'case' id::Id_t '(' dcls::Case_parameters_c ')' ';'  {
   cdcl.ast_Class_Member_Dcl = class_case_dcl_variant (id, dcls.ast_CaseParams) ;
 }
 
@@ -30,12 +30,12 @@ nonterminal Case_parameters_c ;
 synthesized attribute ast_CaseParams :: CaseParams occurs on Case_parameters_c ;
 
 concrete production case_params_one_c
-vdcls::Case_parameters_c ::= t::type  { 
+vdcls::Case_parameters_c ::= t::Type_NT  { 
   vdcls.ast_CaseParams = case_params_one (t.ast_Type); 
 }
 
 concrete production case_params_cons_c
-vdcls::Case_parameters_c ::= t::type ',' vdclstail::Case_parameters_c { 
+vdcls::Case_parameters_c ::= t::Type_NT ',' vdclstail::Case_parameters_c { 
   vdcls.ast_CaseParams = case_params_cons (t.ast_Type, vdclstail.ast_CaseParams); 
 }
 

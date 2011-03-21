@@ -2,6 +2,8 @@ grammar edu:umn:cs:melt:ableJ14:exts:sql ;
 
 import edu:umn:cs:melt:ableJ14:terminals;
 import edu:umn:cs:melt:ableJ14:abstractsyntax;
+import edu:umn:cs:melt:ableJ14:abstractsyntax:exprs;
+import edu:umn:cs:melt:ableJ14:abstractsyntax:packages;
 import edu:umn:cs:melt:ableJ14:exts:foreach;
 
 aspect production enhanced_for_dispatcher

@@ -1,5 +1,7 @@
 grammar edu:umn:cs:melt:ableJ14:exts:rlp;
 import edu:umn:cs:melt:ableJ14:abstractsyntax;
+import edu:umn:cs:melt:ableJ14:abstractsyntax:exprs;
+import edu:umn:cs:melt:ableJ14:abstractsyntax:packages;
 
 -- neededImportedSingleTypes
 -- neededCurrentPackageTypes

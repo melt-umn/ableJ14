@@ -10,19 +10,19 @@ import silver:driver;
 -- Main driver function
 
 function driver
-IO ::= args::String io_in::IO extensionParser::Function (Root_C ::= String) hostParser::Function (Root_C ::= String) {
+IOVal<Integer> ::= args::[ String ] io_in::IO extensionParser::Function (ParseResult<Root_C> ::= String String) hostParser::Function (ParseResult<Root_C> ::= String String) {
 
   local attribute commandLineFile :: String ;  
-  commandLineFile = args;
+  commandLineFile = head (args);
   
-  local attribute classPath :: IOString;
+  local attribute classPath :: IOVal<String>;
   classPath = envVar ("JAVA_PATH", io_in);
 
-  local attribute currentDirectory :: IOString;
+  local attribute currentDirectory :: IOVal<String>;
   currentDirectory = cwd (classPath.io);
 
   local attribute allNeededTypesRoots :: [ LFQN_DecoratedRoot_Defs ];
-  allNeededTypesRoots = getNeededTypesStartingWithCommandLine (commandLineFile, extensionParser, hostParser, getDirectoriesFromClassPath (classPath.sValue), currentDirectory.sValue, globalEnv);
+  allNeededTypesRoots = getNeededTypesStartingWithCommandLine (commandLineFile, extensionParser, hostParser, getDirectoriesFromClassPath (classPath.iovalue), currentDirectory.iovalue, globalEnv);
 
   -- this is the lazy environment
   local attribute globalEnv :: [ ScopeEnv ];
@@ -38,14 +38,14 @@ IO ::= args::String io_in::IO extensionParser::Function (Root_C ::= String) host
   commandLineRoot = head (allNeededTypesRoots).decoratedRoot;
 
   local attribute compile_action :: IO ;
-  compile_action = if classPath.sValue != ""
+  compile_action = if classPath.iovalue != ""
           	         then decorate file_io_action (commandLineRoot) with {ioIn = currentDirectory.io ;}.ioOut 
                          else error ("JAVA_PATH is not defined!");
 
   return
      if   ! (is_jext_file(commandLineFile) || is_java_file (commandLineFile))-- is not a .jext or .java file
      then error ("\nError: - file \"" ++ commandLineFile ++ "\" must have .jext or .java suffix.\n")
-     else compile_action ;
+     else ioval (compile_action, 0) ;
 }
 
 ----------------------------------------------------------------------
@@ -53,7 +53,7 @@ IO ::= args::String io_in::IO extensionParser::Function (Root_C ::= String) host
 -- A lazy definition for the list of neededTypes and import-related errors
 
 function getNeededTypes
-[ LFQN_DecoratedRoot_Defs ]::= soFar::[ LFQN ] toDo::[ LFQN ] extensionParser::Function (Root_C ::= String) hostParser::Function (Root_C ::= String) classPathDirectories::[ String ] currentDirectory::String globalEnv::[ ScopeEnv ] {
+[ LFQN_DecoratedRoot_Defs ]::= soFar::[ LFQN ] toDo::[ LFQN ] extensionParser::Function (ParseResult<Root_C> ::= String String) hostParser::Function (ParseResult<Root_C> ::= String String) classPathDirectories::[ String ] currentDirectory::String globalEnv::[ ScopeEnv ] {
 
   local attribute firstToDo :: LFQN;
   firstToDo = head (toDo);
@@ -70,7 +70,7 @@ function getNeededTypes
 }
 
 function getNeededTypesStartingWithCommandLine
-[ LFQN_DecoratedRoot_Defs ] ::= commandLineFile::String extensionParser::Function (Root_C ::= String) hostParser::Function (Root_C ::= String) classPathDirectories::[ String ] currentDirectory::String globalEnv::[ ScopeEnv ] {
+[ LFQN_DecoratedRoot_Defs ] ::= commandLineFile::String extensionParser::Function (ParseResult<Root_C> ::= String String) hostParser::Function (ParseResult<Root_C> ::= String String) classPathDirectories::[ String ] currentDirectory::String globalEnv::[ ScopeEnv ] {
 
   local attribute commandLineFileResult :: CommandLineLFQNs_DecoratedRoot;
   commandLineFileResult = getNeededTypesForCommandLineFile (commandLineFile, extensionParser, hostParser, classPathDirectories, currentDirectory, globalEnv);
@@ -86,65 +86,65 @@ inherited attribute importErrors :: [ Error ] occurs on Root;
 -- the function reads in the file and gets the list of needed files, errors and type defs, and writes
 -- the list of needed files, the type defs and import-related errors to a .defs file
 function getNeededTypesForOneFile
-LFQNs_DecoratedRoot_Defs ::= T::LFQN extensionParser::Function (Root_C ::= String) hostParser::Function (Root_C ::= String) classPathDirectories::[ String ] currentDirectory::String globalEnv::[ ScopeEnv ] {
+LFQNs_DecoratedRoot_Defs ::= T::LFQN extensionParser::Function (ParseResult<Root_C> ::= String String) hostParser::Function (ParseResult<Root_C> ::= String String) classPathDirectories::[ String ] currentDirectory::String globalEnv::[ ScopeEnv ] {
 
   -- first check to see if a .defs file exists and is nonempty, if it does, we get the info from it
 
   local attribute defsFileName :: String;
   defsFileName = T.location ++ "/" ++ T.fullyQualifiedName.qualifiedFileName ++ ".defs";
 
-  local attribute defsFileExists :: IOBoolean;
-  defsFileExists = isFile (defsFileName, unsafeio ());
+  local attribute defsFileExists :: IOVal<Boolean>;
+  defsFileExists = isFile (defsFileName, unsafeIO ());
 
   -- if .defs file exists, the following are forced by the return statement
   local attribute oldDefsFileText :: String;
-  oldDefsFileText = readFile (defsFileName, defsFileExists.io).sValue;
+  oldDefsFileText = readFile (defsFileName, defsFileExists.io).iovalue;
 
   local attribute oldDefsFileInfo :: DefsFileInfo;
-  oldDefsFileInfo = if jextFileExists.bValue
-			then extensionParser (oldDefsFileText).ast_Root.defsFileInfo
---			then extensionParser ("***" ++ defsFileName ++ "***" ++ oldDefsFileText).ast_Root.defsFileInfo
-		    else if javaFileExists.bValue
-			then hostParser (oldDefsFileText).ast_Root.defsFileInfo
---			then hostParser ("***" ++ defsFileName ++ "***" ++ oldDefsFileText).ast_Root.defsFileInfo
+  oldDefsFileInfo = if jextFileExists.iovalue
+			then extensionParser (oldDefsFileText, defsFileName).parseTree.ast_Root.defsFileInfo
+--			then extensionParser ("***" ++ defsFileName ++ "***" ++ oldDefsFileText).parseTree.ast_Root.defsFileInfo
+		    else if javaFileExists.iovalue
+			then hostParser (oldDefsFileText, defsFileName).parseTree.ast_Root.defsFileInfo
+--			then hostParser ("***" ++ defsFileName ++ "***" ++ oldDefsFileText).parseTree.ast_Root.defsFileInfo
 		    else error ("Internal compiler error: Neither " ++ jextFileName ++ " nor " ++ javaFileName ++ " exists!");
 
   local attribute defsFileValid :: Boolean;
-  defsFileValid = defsFileExists.bValue && oldDefsFileText != "";
+  defsFileValid = defsFileExists.iovalue && oldDefsFileText != "";
 
   -- if .defs file does not exist or is empty, the following are forced by the return statement
   -- reading in the .jext or .java file
   local attribute jextFileName :: String;
   jextFileName = T.location ++ "/" ++ T.fullyQualifiedName.qualifiedFileName ++ ".jext";
 
-  local attribute jextFileExists :: IOBoolean;
+  local attribute jextFileExists :: IOVal<Boolean>;
   jextFileExists = isFile (jextFileName, defsFileExists.io);
 
   local attribute javaFileName :: String;
   javaFileName = T.location ++ "/" ++ T.fullyQualifiedName.qualifiedFileName ++ ".java";
 
-  local attribute javaFileExists :: IOBoolean;
+  local attribute javaFileExists :: IOVal<Boolean>;
   javaFileExists = isFile (javaFileName, defsFileExists.io);
 
-  local attribute javaFileRead :: IOString;
-  javaFileRead = if jextFileExists.bValue
+  local attribute javaFileRead :: IOVal<String>;
+  javaFileRead = if jextFileExists.iovalue
 			then readFile (jextFileName, jextFileExists.io)
-		 else if javaFileExists.bValue
+		 else if javaFileExists.iovalue
 			then readFile (javaFileName, javaFileExists.io)
 		 else error ("Internal compiler error: Neither " ++ jextFileName ++ " nor " ++ javaFileName ++ " exists!");
 
   -- parsing the file and constructing the AST
   local attribute r :: Root;
-  r = if jextFileExists.bValue
-	then extensionParser (javaFileRead.sValue).ast_Root
-      else if javaFileExists.bValue
-	then hostParser (javaFileRead.sValue).ast_Root
+  r = if jextFileExists.iovalue
+	then extensionParser (javaFileRead.iovalue, jextFileName).parseTree.ast_Root
+      else if javaFileExists.iovalue
+	then hostParser (javaFileRead.iovalue, javaFileName).parseTree.ast_Root
       else error ("Internal compiler error: Neither " ++ jextFileName ++ " nor " ++ javaFileName ++ " exists!");
 
   local attribute correctFileName :: String;
-  correctFileName = if jextFileExists.bValue
+  correctFileName = if jextFileExists.iovalue
 			then jextFileName
-		    else if javaFileExists.bValue
+		    else if javaFileExists.iovalue
 			then javaFileName
 		    else error ("Internal compiler error: Neither " ++ jextFileName ++ " nor " ++ javaFileName ++ " exists!");
 
@@ -180,13 +180,13 @@ LFQNs_DecoratedRoot_Defs ::= T::LFQN extensionParser::Function (Root_C ::= Strin
 
   -- now we force the .defs write by returning a list of neededtypes read from the .defs file
   local attribute defsFileRetrieve :: String;
-  defsFileRetrieve = readFile (defsFileName, defsFileWrite).sValue;
+  defsFileRetrieve = readFile (defsFileName, defsFileWrite).iovalue;
 
   local attribute retrievedDefsFileInfo :: DefsFileInfo;
-  retrievedDefsFileInfo = if jextFileExists.bValue
-				then extensionParser (defsFileRetrieve).ast_Root.defsFileInfo
-			  else if javaFileExists.bValue
-				then hostParser (defsFileRetrieve).ast_Root.defsFileInfo
+  retrievedDefsFileInfo = if jextFileExists.iovalue
+				then extensionParser (defsFileRetrieve, defsFileName).parseTree.ast_Root.defsFileInfo
+			  else if javaFileExists.iovalue
+				then hostParser (defsFileRetrieve, defsFileName).parseTree.ast_Root.defsFileInfo
 			  else error ("Internal compiler error: Neither " ++ jextFileName ++ " nor " ++ javaFileName ++ " exists!");
 
   -- Should we cache r.errors? Otherwise it makes no sense to check for .defs files
@@ -215,17 +215,17 @@ LFQNs_DecoratedRoot_Defs ::= T::LFQN extensionParser::Function (Root_C ::= Strin
 -- i.e., you can't do ejc ../../T1.java.
 -- I'll fix this when I separate out the different classes into their own files.
 function getNeededTypesForCommandLineFile
-CommandLineLFQNs_DecoratedRoot ::= commandLineFile::String extensionParser::Function (Root_C ::= String) hostParser::Function (Root_C ::= String) classPathDirectories::[ String ] currentDirectory::String globalEnv::[ ScopeEnv ] {
+CommandLineLFQNs_DecoratedRoot ::= commandLineFile::String extensionParser::Function (ParseResult<Root_C> ::= String String) hostParser::Function (ParseResult<Root_C> ::= String String) classPathDirectories::[ String ] currentDirectory::String globalEnv::[ ScopeEnv ] {
 
-  local attribute javaFileRead :: IOString;
-  javaFileRead = readFile (commandLineFile, unsafeio ());
+  local attribute javaFileRead :: IOVal<String>;
+  javaFileRead = readFile (commandLineFile, unsafeIO ());
 
   -- parsing the file and constructing the AST
   local attribute r :: Root;
   r = if is_jext_file (commandLineFile)
-	then extensionParser (javaFileRead.sValue).ast_Root
+	then extensionParser (javaFileRead.iovalue, commandLineFile).parseTree.ast_Root
       else if is_java_file (commandLineFile)
-	then hostParser (javaFileRead.sValue).ast_Root
+	then hostParser (javaFileRead.iovalue, commandLineFile).parseTree.ast_Root
       else error ("Internal compiler error in getNeededTypesForCommandLineFile");
 
   r.file_name = commandLineFile;

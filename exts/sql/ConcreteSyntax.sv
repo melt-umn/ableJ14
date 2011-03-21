@@ -45,19 +45,19 @@ synthesized attribute ast_TableDcls :: TableDcls occurs on TableDcls_c ;
 -- connection
 --------------------------------------------------
 concrete production type_connection_dcl_c
-s::typeDefinition ::= 'connection' c::Id_t loc::Stringconst_t 'with' ts::TableDcls_c ';'
+s::TypeDefinition ::= 'connection' c::Id_t loc::Stringconst_t 'with' ts::TableDcls_c ';'
 {   
   s.ast_Type_Dcl = type_connection_dcl(c, loc, ts.ast_TableDcls);
 }
 
 concrete production class_member_connection_dcl_c
-s::classMemberDefinition ::= 'connection' c::Id_t loc::Stringconst_t 'with' ts::TableDcls_c ';'
+s::ClassMemberDefinition ::= 'connection' c::Id_t loc::Stringconst_t 'with' ts::TableDcls_c ';'
 {   
   s.ast_Class_Member_Dcl = class_member_connection_dcl(c, loc, ts.ast_TableDcls);
 }
 
 concrete production statement_connection_dcl_c
-s::statement ::= 'connection' c::Id_t loc::Stringconst_t 'with' ts::TableDcls_c ';'
+s::Statement ::= 'connection' c::Id_t loc::Stringconst_t 'with' ts::TableDcls_c ';'
 {   
   s.ast_Stmt = statement_connection_dcl(c, loc, ts.ast_TableDcls);
 }
@@ -102,7 +102,7 @@ f::FieldDcl_c ::=  t::SQL_Type_c fname::SQL_Id_t
 -- register
 --------------------------------------------------
 concrete production register_c
-top::statement ::= 'register' 'driver' s::Stringconst_t ';'
+top::Statement ::= 'register' 'driver' s::Stringconst_t ';'
 {
  top.ast_Stmt = register (removeQuotes2 (s.lexeme));
 }
@@ -111,7 +111,7 @@ top::statement ::= 'register' 'driver' s::Stringconst_t ';'
 -- establish
 --------------------------------------------------
 concrete production establish_c
-e::statement ::= 'establish'  c::Id_t ';'
+e::Statement ::= 'establish'  c::Id_t ';'
 {
   e.ast_Stmt = establish_a(c) ;
 } 
@@ -121,7 +121,7 @@ e::statement ::= 'establish'  c::Id_t ';'
 -- using - query
 --------------------------------------------------
 concrete production using_query
-e::primaryExpression ::= 'using'  c::Id_t 'query' '{' s::SQL_Stmt_c '}'
+e::PrimaryExpression ::= 'using'  c::Id_t 'query' '{' s::SQL_Stmt_c '}'
 {
   e.ast_Expr = a_using_query(c, s.ast_SQL_Stmt);
 }

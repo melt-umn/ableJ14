@@ -3,9 +3,9 @@ import edu:umn:cs:melt:ableJ14:terminals;
 import edu:umn:cs:melt:ableJ14:abstractsyntax;
 import edu:umn:cs:melt:ableJ14:concretesyntax;
 
-terminal algebraic_class_type_rep_defsTerm 'algebraic_class_type_rep_defs' lexer classes { java_kwd } ;
-terminal case_repTerm       'case_rep'       lexer classes { java_kwd } ;
-terminal case_paramTerm     'case_param'     lexer classes { java_kwd } ;
+terminal Algebraic_class_type_rep_defsTerm 'algebraic_class_type_rep_defs' lexer classes { java_kwd } ;
+terminal Case_repTerm       'case_rep'       lexer classes { java_kwd } ;
+terminal Case_paramTerm     'case_param'     lexer classes { java_kwd } ;
 
 nonterminal CaseRep_C with abstractCaseRep;
 nonterminal CaseReps_C with abstractCaseRepList;

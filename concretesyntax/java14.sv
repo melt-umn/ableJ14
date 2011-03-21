@@ -1,77 +1,77 @@
 grammar edu:umn:cs:melt:ableJ14:concretesyntax;
-import  edu:umn:cs:melt:ableJ14:terminals ;
+import edu:umn:cs:melt:ableJ14:terminals ;
 import edu:umn:cs:melt:ableJ14:abstractsyntax ;
 import edu:umn:cs:melt:ableJ14:abstractsyntax:exprs ;
 
 nonterminal Root_C ;
-nonterminal compilationUnit;
-nonterminal packageDefinition;
-nonterminal importDefinitions;
-nonterminal importDefinition;
-nonterminal typeDefinitions;
-nonterminal typeDefinition;
-nonterminal declaration;
-nonterminal type;
-nonterminal arrayType;
-nonterminal declaratorBracketsOpt;
-nonterminal declaratorBrackets;
-nonterminal referenceType;
-nonterminal primitiveType;
-nonterminal nameConcrete;
-nonterminal simpleNameConcrete;
-nonterminal qualifiedNameConcrete;
-nonterminal modifiersOpt;
-nonterminal modifiers;
-nonterminal modifier;
-nonterminal classDefinition;
-nonterminal superClassClause;
-nonterminal interfaceDefinition;
-nonterminal classBlock;
-nonterminal interfaceExtends;
-nonterminal implementsClause;
-nonterminal names;
-nonterminal classMemberDefinitions;
-nonterminal classMemberDefinition;
-nonterminal interfaceBlock;
-nonterminal interfaceMemberDefinitions;
-nonterminal interfaceMemberDefinition;
-nonterminal explicitConstructorInvocation;
-nonterminal expressionListOpt;
-nonterminal expressionList;
-nonterminal variableDeclarators;
-nonterminal variableDeclarator;
-nonterminal initializer;
-nonterminal initializers;
-nonterminal arrayInitializer;
-nonterminal throwsClause;
-nonterminal parameterDeclarationList;
-nonterminal parameterDeclarations;
-nonterminal parameterDeclaration;
-nonterminal blockConcrete;
-nonterminal blockStatements;
-nonterminal blockStatement;
-nonterminal statement;
-nonterminal caseGroups;
-nonterminal caseGroup;
-nonterminal cases;
-nonterminal aCase;
-nonterminal switchBlock;
-nonterminal forInit;
-nonterminal forCond;
-nonterminal forIter;
-nonterminal finallyClause;
-nonterminal handlers;
-nonterminal handler;
-nonterminal expression;
-nonterminal declaratorExpressions;
-nonterminal constructorBody;
-nonterminal statementExpression;
-nonterminal statementExpressionList;
-nonterminal methodDeclarator;
-nonterminal variableDeclaratorId;
-nonterminal primaryExpression;
-nonterminal primaryExpressionAndArrayCreation;
-nonterminal methodBody;
+nonterminal CompilationUnit;
+nonterminal PackageDefinition;
+nonterminal ImportDefinitions;
+nonterminal ImportDefinition;
+nonterminal TypeDefinitions;
+nonterminal TypeDefinition;
+nonterminal Declaration;
+nonterminal Type_NT;
+nonterminal ArrayType;
+nonterminal DeclaratorBracketsOpt;
+nonterminal DeclaratorBrackets;
+nonterminal ReferenceType;
+nonterminal PrimitiveType;
+nonterminal NameConcrete;
+nonterminal SimpleNameConcrete;
+nonterminal QualifiedNameConcrete;
+nonterminal ModifiersOpt_NT;
+nonterminal Modifiers_NT;
+nonterminal Modifier_NT;
+nonterminal ClassDefinition;
+nonterminal SuperClassClause;
+nonterminal InterfaceDefinition;
+nonterminal ClassBlock;
+nonterminal InterfaceExtends;
+nonterminal ImplementsClause;
+nonterminal Names;
+nonterminal ClassMemberDefinitions;
+nonterminal ClassMemberDefinition;
+nonterminal InterfaceBlock;
+nonterminal InterfaceMemberDefinitions;
+nonterminal InterfaceMemberDefinition;
+nonterminal ExplicitConstructorInvocation;
+nonterminal ExpressionListOpt;
+nonterminal ExpressionList;
+nonterminal VariableDeclarators;
+nonterminal VariableDeclarator;
+nonterminal Initializer;
+nonterminal Initializers;
+nonterminal ArrayInitializer;
+nonterminal ThrowsClause;
+nonterminal ParameterDeclarationList;
+nonterminal ParameterDeclarations;
+nonterminal ParameterDeclaration;
+nonterminal BlockConcrete;
+nonterminal BlockStatements;
+nonterminal BlockStatement;
+nonterminal Statement;
+nonterminal CaseGroups;
+nonterminal CaseGroup;
+nonterminal Cases;
+nonterminal ACase;
+nonterminal SwitchBlock;
+nonterminal ForInit;
+nonterminal ForCond;
+nonterminal ForIter;
+nonterminal FinallyClause;
+nonterminal Handlers;
+nonterminal Handler;
+nonterminal Expression;
+nonterminal DeclaratorExpressions;
+nonterminal ConstructorBody;
+nonterminal StatementExpression;
+nonterminal StatementExpressionList;
+nonterminal MethodDeclarator;
+nonterminal VariableDeclaratorId;
+nonterminal PrimaryExpression;
+nonterminal PrimaryExpressionAndArrayCreation;
+nonterminal MethodBody;
 
 synthesized attribute ast_Root :: Root;
 synthesized attribute ast_Package_Dcl :: Package_Dcl ;
@@ -140,79 +140,78 @@ synthesized attribute ast_Switch_Label :: Switch_Label ;
 synthesized attribute ast_Catches :: Catches ;
 synthesized attribute ast_Catch :: Catch ;
 
+attribute ast_Type occurs on Type_NT ;
+attribute ast_Primitive_Type occurs on PrimitiveType;
+attribute ast_Reference_Type occurs on ReferenceType;
+attribute ast_Array_Type occurs on ArrayType;
 
-attribute ast_Type occurs on type ;
-attribute ast_Primitive_Type occurs on primitiveType;
-attribute ast_Reference_Type occurs on referenceType;
-attribute ast_Array_Type occurs on arrayType;
+attribute ast_PackageName occurs on NameConcrete, SimpleNameConcrete, QualifiedNameConcrete;
+attribute ast_TypeName occurs on NameConcrete, SimpleNameConcrete, QualifiedNameConcrete, SuperClassClause;
+attribute ast_TypeNames occurs on InterfaceExtends, ImplementsClause, Names;
+attribute ast_ExprName occurs on NameConcrete, SimpleNameConcrete, QualifiedNameConcrete;
+attribute ast_MethodName occurs on NameConcrete, SimpleNameConcrete, QualifiedNameConcrete; 
+attribute ast_PackageOrTypeName occurs on NameConcrete, SimpleNameConcrete, QualifiedNameConcrete;
+attribute ast_AmbiguousName occurs on NameConcrete, SimpleNameConcrete, QualifiedNameConcrete;
+attribute ast_Root occurs on Root_C, CompilationUnit;
+attribute ast_Package_Dcl occurs on PackageDefinition;
+attribute ast_Import_Dcls occurs on ImportDefinitions;
+attribute ast_Import_Dcl occurs on ImportDefinition;
+attribute ast_Type_Dcls occurs on TypeDefinitions;
+attribute ast_Type_Dcl occurs on TypeDefinition;
+attribute ast_Class_Dcl occurs on ClassDefinition;
+attribute ast_Interface_Dcl occurs on InterfaceDefinition;
+attribute ast_Modifiers occurs on ModifiersOpt_NT, Modifiers_NT;
+attribute ast_Modifier occurs on Modifier_NT;
+attribute ast_Class_Body occurs on ClassBlock;
+attribute ast_Class_Member_Dcls occurs on  ClassMemberDefinitions;
+attribute ast_Interface_Member_Dcls occurs on InterfaceBlock, InterfaceMemberDefinitions;
+attribute ast_Class_Member_Dcl occurs on ClassMemberDefinition;
+attribute ast_Interface_Member_Dcl occurs on InterfaceMemberDefinition;
+attribute ast_Constructor_Invocation occurs on ExplicitConstructorInvocation;
 
-attribute ast_PackageName occurs on nameConcrete,simpleNameConcrete,qualifiedNameConcrete;
-attribute ast_TypeName occurs on nameConcrete,simpleNameConcrete,qualifiedNameConcrete, superClassClause;
-attribute ast_TypeNames occurs on interfaceExtends, implementsClause, names;
-attribute ast_ExprName occurs on nameConcrete,simpleNameConcrete,qualifiedNameConcrete;
-attribute ast_MethodName occurs on nameConcrete,simpleNameConcrete,qualifiedNameConcrete; 
-attribute ast_PackageOrTypeName occurs on nameConcrete,simpleNameConcrete,qualifiedNameConcrete;
-attribute ast_AmbiguousName occurs on nameConcrete,simpleNameConcrete,qualifiedNameConcrete;
-attribute ast_Root occurs on Root_C, compilationUnit;
-attribute ast_Package_Dcl occurs on packageDefinition;
-attribute ast_Import_Dcls occurs on importDefinitions;
-attribute ast_Import_Dcl occurs on importDefinition;
-attribute ast_Type_Dcls occurs on typeDefinitions;
-attribute ast_Type_Dcl occurs on typeDefinition;
-attribute ast_Class_Dcl occurs on classDefinition;
-attribute ast_Interface_Dcl occurs on interfaceDefinition;
-attribute ast_Modifiers occurs on modifiersOpt, modifiers;
-attribute ast_Modifier  occurs on modifier;
-attribute ast_Class_Body occurs on classBlock;
-attribute ast_Class_Member_Dcls occurs on  classMemberDefinitions;
-attribute ast_Interface_Member_Dcls occurs on  interfaceBlock, interfaceMemberDefinitions;
-attribute ast_Class_Member_Dcl occurs on classMemberDefinition;
-attribute ast_Interface_Member_Dcl occurs on interfaceMemberDefinition;
-attribute ast_Constructor_Invocation occurs on explicitConstructorInvocation;
+attribute ast_Method_Declarator occurs on MethodDeclarator ;
+attribute ast_Formal_Params occurs on ParameterDeclarationList, ParameterDeclarations;
+attribute ast_Formal_Param occurs on ParameterDeclaration ;
+attribute ast_Throws occurs on ThrowsClause;
+attribute ast_Var_Declarator_Id occurs on VariableDeclaratorId ;
 
-attribute ast_Method_Declarator occurs on methodDeclarator ;
-attribute ast_Formal_Params occurs on parameterDeclarationList, parameterDeclarations;
-attribute ast_Formal_Param occurs on parameterDeclaration ;
-attribute ast_Throws occurs on throwsClause;
-attribute ast_Var_Declarator_Id occurs on variableDeclaratorId ;
+attribute ast_Var_Init occurs on Initializer;
+attribute ast_Array_Init occurs on ArrayInitializer;
+attribute ast_Var_Inits occurs on Initializers;
+attribute ast_Dim_Exprs occurs on DeclaratorExpressions;
 
-attribute ast_Var_Init occurs on initializer;
-attribute ast_Array_Init occurs on arrayInitializer;
-attribute ast_Var_Inits occurs on initializers;
-attribute ast_Dim_Exprs occurs on declaratorExpressions;
+attribute ast_Block occurs on BlockConcrete, FinallyClause, ConstructorBody;
+attribute ast_Stmt occurs on BlockStatements, BlockStatement, Statement;
 
-attribute ast_Block occurs on blockConcrete, finallyClause, constructorBody;
-attribute ast_Stmt occurs on blockStatements, blockStatement, statement;
+attribute ast_Local_Var_Dcl occurs on Declaration;
+attribute ast_Var_Declarator occurs on VariableDeclarator;
+attribute ast_Var_Declarators occurs on VariableDeclarators;
 
-attribute ast_Local_Var_Dcl occurs on declaration;
-attribute ast_Var_Declarator occurs on variableDeclarator;
-attribute ast_Var_Declarators occurs on variableDeclarators;
+attribute ast_Stmt_Expr occurs on StatementExpression, Expression, PrimaryExpression, PrimaryExpressionAndArrayCreation; -- todo
+attribute ast_Expr occurs on Expression, PrimaryExpression, PrimaryExpressionAndArrayCreation;
+attribute ast_LHS occurs on Expression;
 
-attribute ast_Stmt_Expr occurs on statementExpression, expression, primaryExpression, primaryExpressionAndArrayCreation; -- todo
-attribute ast_Expr occurs on expression, primaryExpression, primaryExpressionAndArrayCreation;
-attribute ast_LHS occurs on expression;
+attribute ast_Stmt_Exprs occurs on StatementExpressionList;
+attribute ast_Exprs occurs on ExpressionListOpt, ExpressionList;
 
-attribute ast_Stmt_Exprs occurs on statementExpressionList;
-attribute ast_Exprs occurs on expressionListOpt, expressionList;
+attribute ast_For_Init occurs on ForInit;
+attribute ast_For_Test occurs on ForCond;
+attribute ast_For_Update occurs on ForIter;
 
-attribute ast_For_Init occurs on forInit;
-attribute ast_For_Test occurs on forCond;
-attribute ast_For_Update occurs on forIter;
+attribute ast_Switch_Block occurs on SwitchBlock;
+attribute ast_Switch_Groups occurs on CaseGroups;
+attribute ast_Switch_Group occurs on CaseGroup;
+attribute ast_Switch_Labels occurs on Cases;
+attribute ast_Switch_Label occurs on ACase;
 
-attribute ast_Switch_Block occurs on switchBlock;
-attribute ast_Switch_Groups occurs on caseGroups;
-attribute ast_Switch_Group occurs on caseGroup;
-attribute ast_Switch_Labels occurs on cases;
-attribute ast_Switch_Label occurs on aCase;
-
-attribute ast_Catches occurs on handlers;
-attribute ast_Catch occurs on handler;
+attribute ast_Catches occurs on Handlers;
+attribute ast_Catch occurs on Handler;
 
 synthesized attribute dims :: Integer ;
-attribute dims occurs on declaratorBracketsOpt, declaratorBrackets;
+attribute dims occurs on DeclaratorBracketsOpt, DeclaratorBrackets;
 
 synthesized attribute isStmtExpr :: Boolean;
-attribute isStmtExpr occurs on expression, primaryExpression, primaryExpressionAndArrayCreation;
+attribute isStmtExpr occurs on Expression, PrimaryExpression, PrimaryExpressionAndArrayCreation;
 
 -- Productions
 
@@ -220,98 +219,98 @@ synthesized attribute canparse :: String occurs on Root_C ;
 -- Adding aspect on root production
 aspect production root_c
 top::Root_C 
-	::=	cu::compilationUnit { 
+	::=	cu::CompilationUnit { 
  top.canparse = "success" ;
 } 
 
 concrete production root_c
 top::Root_C
-	::=	cu::compilationUnit { 
+	::=	cu::CompilationUnit { 
  top.ast_Root = cu.ast_Root ;
 }
 
 -- Compilation Unit: In Java, this is a single file.  This is the start
 --   rule for this parser
 concrete production compilationUnit_c 
-top::compilationUnit
+top::CompilationUnit
 	::=	-- A compilation unit starts with an optional package definition
-		pd::packageDefinition
+		pd::PackageDefinition
 
 		-- Next we have a series of zero or more import statements
-		ids::importDefinitions
+		ids::ImportDefinitions
 
 		-- Wrapping things up with any number of class or interface
 		--    definitions
-		tds::typeDefinitions {
+		tds::TypeDefinitions {
  top.ast_Root = compilation_unit (pd.ast_Package_Dcl, ids.ast_Import_Dcls, tds.ast_Type_Dcls );   
 }
 
 
 -- Package statement: "package" followed by a package name
 concrete production packageDefinition_c 
-top::packageDefinition
-	::=	'package' n::nameConcrete ';' { 
+top::PackageDefinition
+	::=	'package' n::NameConcrete ';' { 
  top.ast_Package_Dcl = package_dcl (n.ast_PackageName);
 }
 
 concrete production packageDefinitionEmpty_c 
-top::packageDefinition
+top::PackageDefinition
 	::=	{
  top.ast_Package_Dcl = package_dcl_none () ;
 }
 
 concrete production importDefinitionsSnoc_c 
-top::importDefinitions
-	::=	many::importDefinitions one::importDefinition {
+top::ImportDefinitions
+	::=	many::ImportDefinitions one::ImportDefinition {
  top.ast_Import_Dcls = import_dcls_snoc (many.ast_Import_Dcls, one.ast_Import_Dcl);
 }
 
 concrete production importDefinitionsEmpty_c 
-top::importDefinitions
+top::ImportDefinitions
 	::=	{
  top.ast_Import_Dcls = import_dcls_none () ;
 }
 
 -- Import statement: import followed by a package or class name
 concrete production importDefinition_c 
-top::importDefinition
-	::=	t::Import_t n::nameConcrete ';' {
+top::ImportDefinition
+	::=	t::Import_t n::NameConcrete ';' {
  top.ast_Import_Dcl = import_dcl (t, n.ast_TypeName);
 }
 
 concrete production importDefinitionOnDemand_c 
-top::importDefinition
-	::=	'import' n::nameConcrete '.' '*' ';' {
+top::ImportDefinition
+	::=	'import' n::NameConcrete '.' '*' ';' {
  top.ast_Import_Dcl = import_dcl_on_demand (n.ast_PackageOrTypeName);
 }
 
 concrete production typeDefinitionsSnoc_c 
-top::typeDefinitions
-	::=	many::typeDefinitions one::typeDefinition {
+top::TypeDefinitions
+	::=	many::TypeDefinitions one::TypeDefinition {
  top.ast_Type_Dcls = type_dcls_snoc (many.ast_Type_Dcls, one.ast_Type_Dcl);
 }
 
 concrete production typeDefinitionsEmpty_c 
-top::typeDefinitions
+top::TypeDefinitions
 	::=	{
  top.ast_Type_Dcls = type_dcls_none() ;
 }
 
 -- A type definition in a file is either a class or interface definition, or nothing.
 concrete production typeDefinitionClass_c 
-top::typeDefinition
-	::=	cd::classDefinition {
+top::TypeDefinition
+	::=	cd::ClassDefinition {
  top.ast_Type_Dcl = type_class_dcl (cd.ast_Class_Dcl);
 }
 
 concrete production typeDefinitionInterface_c 
-top::typeDefinition
-	::=	id::interfaceDefinition {
+top::TypeDefinition
+	::=	id::InterfaceDefinition {
  top.ast_Type_Dcl  = type_interface_dcl (id.ast_Interface_Dcl);
 }
 
 concrete production typeDefinitionEmpty_c 
-top::typeDefinition
+top::TypeDefinition
 	::=	';' {
  top.ast_Type_Dcl = type_dcl_empty ();
 }
@@ -320,132 +319,132 @@ top::typeDefinition
 --   Create a separate Type/Var tree for each var in the var list.
 --
 concrete production declaration_c 
-top::declaration
-	::=	t::type v::variableDeclarators {
+top::Declaration
+	::=	t::Type_NT v::VariableDeclarators {
  top.ast_Local_Var_Dcl = local_var_dcl (t.ast_Type, v.ast_Var_Declarators);
 }
 
 concrete production declarationFinal_c 
-top::declaration
-	::=	'final' t::type v::variableDeclarators {
+top::Declaration
+	::=	'final' t::Type_NT v::VariableDeclarators {
  top.ast_Local_Var_Dcl = local_var_dcl_final (t.ast_Type, v.ast_Var_Declarators);
 }
 
 -- A type specification is a type name with possible brackets afterwards
 --   (which would make it an array type).
 concrete production typeReference_c 
-top::type
-	::= 	t::referenceType {
+top::Type_NT
+	::= 	t::ReferenceType {
  top.ast_Type = reference_type (t.ast_Reference_Type) ;
 }
 
 
 concrete production typePrimitive_c 
-top::type
-	::= 	t::primitiveType {
+top::Type_NT
+	::= 	t::PrimitiveType {
  top.ast_Type = primitive_type (t.ast_Primitive_Type) ;
 }
 
 concrete production typeVoid_c 
-top::type
+top::Type_NT
 	::= 	'void' {
  top.ast_Type = void_type ();
 }
 
 concrete production typeArray_c 
-top::referenceType
-	::= 	t::arrayType { 
+top::ReferenceType
+	::= 	t::ArrayType { 
  top.ast_Reference_Type = array_type ( t.ast_Array_Type ) ;
 }
 
 concrete production typeArrayReference_c
-top::arrayType
-	::=	n::nameConcrete ds::declaratorBrackets {
+top::ArrayType
+	::=	n::NameConcrete ds::DeclaratorBrackets {
  top.ast_Array_Type = name_array ( n.ast_TypeName, ds.dims ) ;
 }
 
 concrete production typeArrayPrimitive_c
-top::arrayType
-	::=	t::primitiveType ds::declaratorBrackets {
+top::ArrayType
+	::=	t::PrimitiveType ds::DeclaratorBrackets {
  top.ast_Array_Type = primitive_array (t.ast_Primitive_Type, ds.dims ) ;
 }
 
 concrete production declaratorBracketsSome
-top::declaratorBracketsOpt
-	::= 	many::declaratorBrackets { 
+top::DeclaratorBracketsOpt
+	::= 	many::DeclaratorBrackets { 
  top.dims = many.dims ;
 }
 
 concrete production declaratorBracketsNone
-top::declaratorBracketsOpt
+top::DeclaratorBracketsOpt
 	::= 	{ 
  top.dims = 0 ;
 }
 
 concrete production declaratorBracketsSnoc
-top::declaratorBrackets 
-	::= 	many::declaratorBrackets '[' ']' { 
+top::DeclaratorBrackets 
+	::= 	many::DeclaratorBrackets '[' ']' { 
  top.dims = many.dims + 1 ;
 }
 
 concrete production declaratorBracketsOne
-top::declaratorBrackets 
+top::DeclaratorBrackets 
 	::= 	'[' ']' { 
  top.dims = 1 ;
 }
 
 -- A type name
 concrete production nameType_c
-top::referenceType
-	::=	n::nameConcrete {
+top::ReferenceType
+	::=	n::NameConcrete {
  top.ast_Reference_Type = name_type( n.ast_TypeName ) ;
 }
 
 -- The primitive types.
 concrete production booleanType_c
-top::primitiveType
+top::PrimitiveType
 	::=	'boolean' { 
  top.ast_Primitive_Type = boolean_type() ;
 }
 
 concrete production byteType_c
-top::primitiveType
+top::PrimitiveType
 	::=	'byte' { 
  top.ast_Primitive_Type = byte_type() ;
 }
 
 concrete production charType_c
-top::primitiveType
+top::PrimitiveType
 	::=	'char' { 
  top.ast_Primitive_Type = char_type() ;
 }
 
 concrete production shortType_c 
-top::primitiveType
+top::PrimitiveType
 	::=	'short' { 
  top.ast_Primitive_Type = short_type() ;
 }
 
 concrete production intType_c
-top::primitiveType
+top::PrimitiveType
 	::=	'int' { 
  top.ast_Primitive_Type = int_type() ;
 }
 
 concrete production floatType_c
-top::primitiveType
+top::PrimitiveType
 	::=	'float' { 
  top.ast_Primitive_Type = float_type() ;
 }
 
 concrete production longType_c
-top::primitiveType
+top::PrimitiveType
 	::=	'long' { 
  top.ast_Primitive_Type = long_type() ;
 }
 
 concrete production doubleType_c
-top::primitiveType
+top::PrimitiveType
 	::=	'double' { 
  top.ast_Primitive_Type = double_type() ;
 }
@@ -454,7 +453,7 @@ top::primitiveType
 --   and expand its name by adding dots and following IDENTS
 
 concrete production name_c
-top::nameConcrete ::= sn::simpleNameConcrete
+top::NameConcrete ::= sn::SimpleNameConcrete
 {
  top.ast_PackageName  = sn.ast_PackageName ;
  top.ast_TypeName  = sn.ast_TypeName ;
@@ -466,7 +465,7 @@ top::nameConcrete ::= sn::simpleNameConcrete
 }
 
 concrete production qname_c
-top::nameConcrete ::= qn::qualifiedNameConcrete
+top::NameConcrete ::= qn::QualifiedNameConcrete
 {
  top.ast_PackageName  = qn.ast_PackageName ;
  top.ast_TypeName  = qn.ast_TypeName ;
@@ -478,7 +477,7 @@ top::nameConcrete ::= qn::qualifiedNameConcrete
 }
 
 concrete production simpleName_c 
-top::simpleNameConcrete
+top::SimpleNameConcrete
 	::=	id::Id_t {
  top.ast_PackageName = simple_package_name(id) ;
  top.ast_TypeName = simple_type_name (id) ;
@@ -489,8 +488,8 @@ top::simpleNameConcrete
 }
 
 concrete production nameQualified_c 
-top::qualifiedNameConcrete
-	::=	n::nameConcrete '.' id::Id_t { 
+top::QualifiedNameConcrete
+	::=	n::NameConcrete '.' id::Id_t { 
  top.ast_PackageName =  qualified_package_name ( n.ast_PackageName, id ) ;
  top.ast_TypeName = qualified_type_name ( n.ast_PackageOrTypeName, id ) ;
  top.ast_ExprName = qualified_expr_name ( n.ast_AmbiguousName, id ) ;
@@ -500,196 +499,196 @@ top::qualifiedNameConcrete
 }
 
 concrete production modifiersSome_c 
-top::modifiersOpt
-	::=	many::modifiers { 
+top::ModifiersOpt_NT
+	::=	many::Modifiers_NT { 
  top.ast_Modifiers = many.ast_Modifiers;
 }
 
 concrete production modifiersEmpty_c 
-top::modifiersOpt
+top::ModifiersOpt_NT
 	::=	{ 
  top.ast_Modifiers = modifiers_none() ;
 }
 
 concrete production modifiersSnoc_c 
-top::modifiers
-	::=	many::modifiers one::modifier { 
+top::Modifiers_NT
+	::=	many::Modifiers_NT one::Modifier_NT { 
  top.ast_Modifiers = modifiers_snoc (many.ast_Modifiers, one.ast_Modifier) ;
 }
 
 concrete production modifiersOne_c 
-top::modifiers
-	::=	one::modifier { 
+top::Modifiers_NT
+	::=	one::Modifier_NT { 
  top.ast_Modifiers = modifiers_snoc (modifiers_none(), one.ast_Modifier) ;
 }
 
 -- modifiers for Java classes, interfaces, class/instance vars and methods
 concrete production modifierPrivate_c 
-top::modifier
+top::Modifier_NT
 	::=	'private' { 
  top.ast_Modifier = private();
 }
 
 concrete production modifierPublic_c 
-top::modifier
+top::Modifier_NT
 	::=	'public' { 
  top.ast_Modifier = public();
 }
 
 concrete production modifierProtected_c 
-top::modifier
+top::Modifier_NT
 	::=	'protected' { 
  top.ast_Modifier = protected();
 }
 
 concrete production modifierStatic_c 
-top::modifier
+top::Modifier_NT
 	::=	'static' { 
  top.ast_Modifier = static_mod();
 }
 
 concrete production modifierTransient_c 
-top::modifier
+top::Modifier_NT
 	::=	'transient' { 
  top.ast_Modifier = transient();
 }
 
 concrete production modifierFinal_c 
-top::modifier
+top::Modifier_NT
 	::=	'final' { 
  top.ast_Modifier = final();
 }
 
 concrete production modifierAbstract_c 
-top::modifier
+top::Modifier_NT
 	::=	'abstract' { 
  top.ast_Modifier = abstract_mod();
 }
 
 concrete production modifierNative_c 
-top::modifier
+top::Modifier_NT
 	::=	'native' { 
  top.ast_Modifier = native();
 }
 
 concrete production modifierSynchronized_c 
-top::modifier
+top::Modifier_NT
 	::=	'synchronized' { 
  top.ast_Modifier = synchronized_mod();
 }
 
 concrete production modifierVolatile_c 
-top::modifier
+top::Modifier_NT
 	::=	'volatile' { 
  top.ast_Modifier = volatile();
 }
 
 concrete production modifierStrictfp_c 
-top::modifier
+top::Modifier_NT
 	::=	'strictfp' { 
  top.ast_Modifier = strictfp();
 }
 
 -- Definition of a Java class
 concrete production classDefinition_c 
-top::classDefinition
-	::=	m::modifiersOpt 
+top::ClassDefinition
+	::=	m::ModifiersOpt_NT
 		'class' 
 		id::Id_t
 		-- it _might_ have a superclass...
-		sc::superClassClause
+		sc::SuperClassClause
 		-- it might implement some interfaces...
-		ic::implementsClause
+		ic::ImplementsClause
 		-- now parse the body of the class
-		cb::classBlock { 
+		cb::ClassBlock { 
  top.ast_Class_Dcl = class_dcl ( m.ast_Modifiers, id, sc.ast_TypeName, ic.ast_TypeNames, cb.ast_Class_Body ) ;
 }
 
 concrete production superClassClause_c 
-top::superClassClause
-	::=	'extends' n::nameConcrete { 
+top::SuperClassClause
+	::=	'extends' n::NameConcrete { 
  top.ast_TypeName = n.ast_TypeName ; 
 }
 
 concrete production superClassClauseEmpty_c 
-top::superClassClause
+top::SuperClassClause
 	::=	{ 
  top.ast_TypeName = getTypeName ("Object") ;
 }
 
 -- Definition of a Java Interface
 concrete production interfaceDefinition_c 
-top::interfaceDefinition
-	::=	m::modifiersOpt 
+top::InterfaceDefinition
+	::=	m::ModifiersOpt_NT
 		'interface' 
 		id::Id_t
 		-- it might extend some other interfaces
-		ie::interfaceExtends
+		ie::InterfaceExtends
 		-- now parse the body of the interface (looks like a class...)
-		ib::interfaceBlock {
+		ib::InterfaceBlock {
  top.ast_Interface_Dcl = interface_dcl (m.ast_Modifiers, id, ie.ast_TypeNames, ib.ast_Interface_Member_Dcls);
 }
 
 -- This is the body of a class.  You can have fields and extra semicolons,
 -- That's about it (until you see what a field is...)
 concrete production classBlock_c 
-top::classBlock
-	::=	'{' ds::classMemberDefinitions '}' { 
+top::ClassBlock
+	::=	'{' ds::ClassMemberDefinitions '}' { 
  top.ast_Class_Body = class_body (ds.ast_Class_Member_Dcls) ;
 }
 
 concrete production interfaceBlock_c 
-top::interfaceBlock
-	::=	'{' ds::interfaceMemberDefinitions '}' {
+top::InterfaceBlock
+	::=	'{' ds::InterfaceMemberDefinitions '}' {
  top.ast_Interface_Member_Dcls = ds.ast_Interface_Member_Dcls;
 }
 
 -- An interface can extend several other interfaces...
 concrete production interfaceExtends_c 
-top::interfaceExtends
-	::=	'extends' ns::names {
+top::InterfaceExtends
+	::=	'extends' ns::Names {
  top.ast_TypeNames = ns.ast_TypeNames ;
 }
 
 concrete production interfaceExtendsEmpty_c 
-top::interfaceExtends
+top::InterfaceExtends
 	::=	{ 
  top.ast_TypeNames = type_names_none();
 }
 
 -- A class can implement several interfaces...
 concrete production implementsClause_c 
-top::implementsClause
-	::=	'implements' ns::names {
+top::ImplementsClause
+	::=	'implements' ns::Names {
  top.ast_TypeNames = ns.ast_TypeNames ;
 }
 
 concrete production implementsClauseEmpty_c 
-top::implementsClause
+top::ImplementsClause
 	::=	{ 
  top.ast_TypeNames = type_names_none();
 }
 
 concrete production namesSnoc_c 
-top::names
-	::=	many::names ',' one::nameConcrete { 
+top::Names
+	::=	many::Names ',' one::NameConcrete { 
  top.ast_TypeNames = type_names_snoc (many.ast_TypeNames, one.ast_TypeName);
 }
 
 concrete production namesOne_c 
-top::names
-	::=	one::nameConcrete { 
+top::Names
+	::=	one::NameConcrete { 
  top.ast_TypeNames = type_names_one(one.ast_TypeName) ;
 }
 
 concrete production classMemberDefinitionsSnoc_c 
-top::classMemberDefinitions
-	::=	many::classMemberDefinitions one::classMemberDefinition { 
+top::ClassMemberDefinitions
+	::=	many::ClassMemberDefinitions one::ClassMemberDefinition { 
  top.ast_Class_Member_Dcls = class_member_dcls_snoc (many.ast_Class_Member_Dcls, one.ast_Class_Member_Dcl); 
 }
 
 concrete production classMemberDefinitionsEmpty_c 
-top::classMemberDefinitions
+top::ClassMemberDefinitions
 	::=	{
  top.ast_Class_Member_Dcls = class_member_dcls_none(); 
 }
@@ -699,65 +698,65 @@ top::classMemberDefinitions
 --   for example), and if this grammar were used for a compiler there would
 --   need to be some semantic checks to make sure we're doing the right thing...
 concrete production classMemberDefinitionConstructor_c 
-top::classMemberDefinition
-	::=	mods::modifiersOpt 
+top::ClassMemberDefinition
+	::=	mods::ModifiersOpt_NT
 		id::Id_t  -- the name of the constructor
 		-- parse the formal parameter declarations.
 		'(' 
-			pdl::parameterDeclarationList 
+			pdl::ParameterDeclarationList 
 		')'
 		-- get the list of exceptions that this constructor is declared to throw
-		tc::throwsClause
-		cb::constructorBody { 
+		tc::ThrowsClause
+		cb::ConstructorBody { 
  top.ast_Class_Member_Dcl = class_constructor (mods.ast_Modifiers, id, pdl.ast_Formal_Params, tc.ast_Throws, cb.ast_Block);
 }
 
 concrete production constructorBody_c
-top::constructorBody
-	::=	'{' eci::explicitConstructorInvocation ss::blockStatements '}' { 
+top::ConstructorBody
+	::=	'{' eci::ExplicitConstructorInvocation ss::BlockStatements '}' { 
  top.ast_Block = block (stmt_seq (stmt_constructor_invocation (eci.ast_Constructor_Invocation), ss.ast_Stmt));
 }
 
 concrete production constructorBodyNoInvocation_c
-top::constructorBody
-	::=	'{' ss::blockStatements '}' {
+top::ConstructorBody
+	::=	'{' ss::BlockStatements '}' {
  top.ast_Block = block (ss.ast_Stmt);
 }
 
 concrete production constructorBodyJustInvocation_c
-top::constructorBody
-	::=	'{' eci::explicitConstructorInvocation '}' { 
+top::ConstructorBody
+	::=	'{' eci::ExplicitConstructorInvocation '}' { 
  top.ast_Block = block (stmt_constructor_invocation (eci.ast_Constructor_Invocation));
 }
 
 concrete production constructorBodyEmpty_c
-top::constructorBody
+top::ConstructorBody
 	::=	'{' '}' { 
  top.ast_Block = empty_block ();
 }
 
 -- inner class
 concrete production classMemberDefinitionInnerClass_c 
-top::classMemberDefinition
-	::=	cd::classDefinition { 
+top::ClassMemberDefinition
+	::=	cd::ClassDefinition { 
  top.ast_Class_Member_Dcl = inner_class (cd.ast_Class_Dcl);
 }
 
 -- inner interface
 concrete production classMemberDefinitionInnerInterface_c 
-top::classMemberDefinition
-	::=	id::interfaceDefinition { 
+top::ClassMemberDefinition
+	::=	id::InterfaceDefinition { 
  top.ast_Class_Member_Dcl = inner_interface (id.ast_Interface_Dcl);
 }
 
 concrete production classMemberDefinitionMethod_c
-top::classMemberDefinition
-	::=	mods::modifiersOpt 
-		t::type
-		md::methodDeclarator
+top::ClassMemberDefinition
+	::=	mods::ModifiersOpt_NT
+		t::Type_NT
+		md::MethodDeclarator
 		-- get the list of exceptions that this method is declared to throw
-		tc::throwsClause
-		mb::methodBody { 
+		tc::ThrowsClause
+		mb::MethodBody { 
  top.ast_Class_Member_Dcl = class_method (
 			     case mb of
 				methodBodyBlock_c (b) -> method_dcl_prod (method_header_declarator (mods.ast_Modifiers, t.ast_Type, md.ast_Method_Declarator, tc.ast_Throws), b.ast_Block) |
@@ -766,167 +765,167 @@ top::classMemberDefinition
 }
 
 concrete production methodBodyBlock_c
-top::methodBody
-	::=	b::blockConcrete {
+top::MethodBody
+	::=	b::BlockConcrete {
 }
 
 concrete production methodBodyEmpty_c
-top::methodBody
+top::MethodBody
 	::=	';' {
 }
 
 concrete production methodDeclarator_c
-top::methodDeclarator
+top::MethodDeclarator
 	::=	id::Id_t  -- the name of the method
 		-- parse the formal parameter declarations.
 		'(' 
-			params::parameterDeclarationList 
+			params::ParameterDeclarationList 
 		')' { 
  top.ast_Method_Declarator = method_declarator (id, params.ast_Formal_Params );
 }
 
 concrete production methodDeclaratorArray_c
-top::methodDeclarator
-	::=	md::methodDeclarator '[' ']' { 
+top::MethodDeclarator
+	::=	md::MethodDeclarator '[' ']' { 
  top.ast_Method_Declarator = method_declarator_array (md.ast_Method_Declarator);
 }
 
 concrete production classMemberDefinitionField_c 
-top::classMemberDefinition
-	::=	mods::modifiersOpt t::type v::variableDeclarators ';' {
+top::ClassMemberDefinition
+	::=	mods::ModifiersOpt_NT t::Type_NT v::VariableDeclarators ';' {
  top.ast_Class_Member_Dcl = class_field (field_dcl (mods.ast_Modifiers, t.ast_Type, v.ast_Var_Declarators));
 }
 
 -- "static { ... }" class initializer
 concrete production classMemberDefinitionClassInitializer_c 
-top::classMemberDefinition
-	::=	'static' b::blockConcrete { 
+top::ClassMemberDefinition
+	::=	'static' b::BlockConcrete { 
  top.ast_Class_Member_Dcl = class_static_initializer (b.ast_Block);
 }
 
 -- "{ ... }" instance initializer
 concrete production classMemberDefinitionInstanceInitializer_c 
-top::classMemberDefinition
-	::=	b::blockConcrete {
+top::ClassMemberDefinition
+	::=	b::BlockConcrete {
  top.ast_Class_Member_Dcl = class_block (b.ast_Block); 
 }
 
 -- empty
 concrete production classMemberDefinitionEmpty_c 
-top::classMemberDefinition
+top::ClassMemberDefinition
 	::=	';' { 
  top.ast_Class_Member_Dcl = class_member_empty() ;
 }
 
 -- Possible interface members
 concrete production interfaceMemberDefinitionsSnoc_c 
-top::interfaceMemberDefinitions
-	::=	many::interfaceMemberDefinitions one::interfaceMemberDefinition { 
+top::InterfaceMemberDefinitions
+	::=	many::InterfaceMemberDefinitions one::InterfaceMemberDefinition { 
  top.ast_Interface_Member_Dcls = interface_member_dcls_snoc (many.ast_Interface_Member_Dcls, one.ast_Interface_Member_Dcl);
 }
 
 concrete production interfaceMemberDefinitionsEmpty_c 
-top::interfaceMemberDefinitions
+top::InterfaceMemberDefinitions
 	::=	{ 
  top.ast_Interface_Member_Dcls = interface_member_dcls_none ();
 }
 
 concrete production interfaceMemberDefinitionField_c 
-top::interfaceMemberDefinition
-	::=	mods::modifiersOpt t::type v::variableDeclarators ';' { 
+top::InterfaceMemberDefinition
+	::=	mods::ModifiersOpt_NT t::Type_NT v::VariableDeclarators ';' { 
  top.ast_Interface_Member_Dcl = interface_field (field_dcl (mods.ast_Modifiers, t.ast_Type, v.ast_Var_Declarators));
 }
 
 concrete production interfaceMemberDefinitionMethod_c
-top::interfaceMemberDefinition
-	::=	mods::modifiersOpt 
-		t::type
-		md::methodDeclarator
+top::InterfaceMemberDefinition
+	::=	mods::ModifiersOpt_NT
+		t::Type_NT
+		md::MethodDeclarator
 		-- get the list of exceptions that this method is declared to throw
-		tc::throwsClause
+		tc::ThrowsClause
 		';' { 
  top.ast_Interface_Member_Dcl = interface_method (method_header_declarator (mods.ast_Modifiers, t.ast_Type, md.ast_Method_Declarator, tc.ast_Throws)) ;
 }
 
 -- inner class
 concrete production interfaceMemberDefinitionInnerClass_c 
-top::interfaceMemberDefinition
-	::=	cd::classDefinition { 
+top::InterfaceMemberDefinition
+	::=	cd::ClassDefinition { 
  top.ast_Interface_Member_Dcl = interface_inner_class (cd.ast_Class_Dcl);
 }
 
  -- inner interface
 concrete production interfaceMemberDefinitionInnerInterface_c 
-top::interfaceMemberDefinition
-	::=	id::interfaceDefinition { 
+top::InterfaceMemberDefinition
+	::=	id::InterfaceDefinition { 
  top.ast_Interface_Member_Dcl = interface_inner_interface (id.ast_Interface_Dcl);
 }
 
 concrete production interfaceMemberDefinitionEmpty_c 
-top::interfaceMemberDefinition
+top::InterfaceMemberDefinition
 	::=	';' { 
  top.ast_Interface_Member_Dcl = interface_empty ();
 }
 
 concrete production expressionListOptSome_c 
-top::expressionListOpt
-	::=	es::expressionList { 
+top::ExpressionListOpt
+	::=	es::ExpressionList { 
  top.ast_Exprs = es.ast_Exprs;
 }
 
 concrete production expressionListOptEmpty_c 
-top::expressionListOpt
+top::ExpressionListOpt
 	::=	{ 
  top.ast_Exprs = exprs_none ();
 }
 
 -- This is a list of expressions.
 concrete production expressionListSnoc_c 
-top::expressionList
-	::=	es::expressionList ',' e::expression {
+top::ExpressionList
+	::=	es::ExpressionList ',' e::Expression {
  top.ast_Exprs = exprs_snoc (es.ast_Exprs, e.ast_Expr);
 }
 
 concrete production expressionListOne_c 
-top::expressionList
-	::=	e::expression { 
+top::ExpressionList
+	::=	e::Expression { 
  top.ast_Exprs = exprs_one (e.ast_Expr);
 }
 
 -- Catch obvious constructor calls, but not the expr.super(...) calls
 concrete production explicitConstructorInvocationThis_c 
-top::explicitConstructorInvocation
-	::=	'this' '(' args::expressionListOpt ')' ';' { 
+top::ExplicitConstructorInvocation
+	::=	'this' '(' args::ExpressionListOpt ')' ';' { 
  top.ast_Constructor_Invocation = this_constructor_invocation (args.ast_Exprs);
 }
 
 concrete production explicitConstructorInvocationSuper_c 
-top::explicitConstructorInvocation
-	::=	'super' '(' args::expressionListOpt ')' ';' { 
+top::ExplicitConstructorInvocation
+	::=	'super' '(' args::ExpressionListOpt ')' ';' { 
  top.ast_Constructor_Invocation = super_constructor_invocation (args.ast_Exprs);
 }
 
 concrete production explicitConstructorInvocationExpressionThis_c 
-top::explicitConstructorInvocation
-	::=	e1::primaryExpressionAndArrayCreation '.' 'this' '(' args::expressionListOpt ')' ';' { 
+top::ExplicitConstructorInvocation
+	::=	e1::PrimaryExpressionAndArrayCreation '.' 'this' '(' args::ExpressionListOpt ')' ';' { 
  top.ast_Constructor_Invocation = this_dot_constructor_invocation (e1.ast_Expr, args.ast_Exprs);
 }
 
 concrete production explicitConstructorInvocationExpressionSuper_c 
-top::explicitConstructorInvocation
-	::=	e1::primaryExpressionAndArrayCreation '.' 'super' '(' args::expressionListOpt ')' ';' { 
+top::ExplicitConstructorInvocation
+	::=	e1::PrimaryExpressionAndArrayCreation '.' 'super' '(' args::ExpressionListOpt ')' ';' { 
  top.ast_Constructor_Invocation = super_dot_constructor_invocation (e1.ast_Expr, args.ast_Exprs);
 }
 
 concrete production variableDeclaratorsSnoc_c 
-top::variableDeclarators
-	::=	vds::variableDeclarators ',' vd::variableDeclarator { 
+top::VariableDeclarators
+	::=	vds::VariableDeclarators ',' vd::VariableDeclarator { 
  top.ast_Var_Declarators = var_declarators_snoc (vds.ast_Var_Declarators, vd.ast_Var_Declarator);
 }
 
 concrete production variableDeclaratorsOne_c 
-top::variableDeclarators
-	::=	vd::variableDeclarator { 
+top::VariableDeclarators
+	::=	vd::VariableDeclarator { 
  top.ast_Var_Declarators = var_declarators_one (vd.ast_Var_Declarator);
 }
 
@@ -934,127 +933,127 @@ top::variableDeclarators
 --    or a local variable in a method
 --  It can also include possible initialization.
 concrete production variableDeclarator_c 
-top::variableDeclarator
-	::=	vd::variableDeclaratorId {
+top::VariableDeclarator
+	::=	vd::VariableDeclaratorId {
  top.ast_Var_Declarator = var_declarator (vd.ast_Var_Declarator_Id);
 }
 
 concrete production variableDeclaratorInitializer_c 
-top::variableDeclarator
-	::=	vd::variableDeclaratorId '=' init::initializer { 
+top::VariableDeclarator
+	::=	vd::VariableDeclaratorId '=' init::Initializer { 
  top.ast_Var_Declarator = var_declarator_init (vd.ast_Var_Declarator_Id, init.ast_Var_Init);
 }
 
 concrete production variableDeclaratorId_c 
-top::variableDeclaratorId
+top::VariableDeclaratorId
 	::=	id::Id_t {
  top.ast_Var_Declarator_Id = var_declarator_id (id);
 }
 
 concrete production variableDeclaratorIdArray_c 
-top::variableDeclaratorId
-	::=	vd::variableDeclaratorId '[' ']' { 
+top::VariableDeclaratorId
+	::=	vd::VariableDeclaratorId '[' ']' { 
  top.ast_Var_Declarator_Id = var_declarator_array (vd.ast_Var_Declarator_Id);
 }
 
 -- The two "things" that can initialize an array element are an expression
 --   and another (nested) array initializer.
 concrete production initializer_c 
-top::initializer
-	::=	e::expression { 
+top::Initializer
+	::=	e::Expression { 
  top.ast_Var_Init = var_init_expr (e.ast_Expr) ;
 }
 
 concrete production initializerArray_c 
-top::initializer
-	::=	ai::arrayInitializer { 
+top::Initializer
+	::=	ai::ArrayInitializer { 
  top.ast_Var_Init = var_init_array (ai.ast_Array_Init) ;
 }
 
 concrete production arrayInitializer_c 
-top::arrayInitializer
-	::=	'{' inits::initializers ',' '}' { 
+top::ArrayInitializer
+	::=	'{' inits::Initializers ',' '}' { 
  top.ast_Array_Init = array_init (inits.ast_Var_Inits);
 }
 
 concrete production arrayInitializerNoComma_c 
-top::arrayInitializer
-	::=	'{' inits::initializers '}' { 
+top::ArrayInitializer
+	::=	'{' inits::Initializers '}' { 
  top.ast_Array_Init = array_init_no_comma (inits.ast_Var_Inits);
 }
 
 concrete production arrayInitializerOnlyComma_c 
-top::arrayInitializer
+top::ArrayInitializer
 	::=	'{' ',' '}' { 
  top.ast_Array_Init = array_init_no_var_inits ();
 }
 
 concrete production arrayInitializerEmpty_c 
-top::arrayInitializer
+top::ArrayInitializer
 	::=	'{' '}' { 
  top.ast_Array_Init = array_init_empty ();
 }
 
 concrete production initializersSnoc_c 
-top::initializers
-	::=	many::initializers ',' one::initializer { 
+top::Initializers
+	::=	many::Initializers ',' one::Initializer { 
  top.ast_Var_Inits = var_inits_snoc (many.ast_Var_Inits, one.ast_Var_Init);
 }
 
 concrete production initializersOne_c 
-top::initializers
-	::=	one::initializer { 
+top::Initializers
+	::=	one::Initializer { 
  top.ast_Var_Inits = var_inits_one (one.ast_Var_Init);
 }
 
 -- This is a list of exception classes that the method is declared to throw
 concrete production throwsClause_c 
-top::throwsClause
-	::=	'throws' ns::names { 
+top::ThrowsClause
+	::=	'throws' ns::Names { 
  top.ast_Throws = throws ( ns.ast_TypeNames ) ;
 }
 
 concrete production throwsClauseEmpty_c 
-top::throwsClause
+top::ThrowsClause
 	::=	{ 
  top.ast_Throws = throws_none();
 }
 
 -- A list of formal parameters
 concrete production parameterDeclarationListEmpty_c 
-top::parameterDeclarationList
+top::ParameterDeclarationList
 	::=	{ 
  top.ast_Formal_Params = formal_params_none();
 }
 
 concrete production parameterDeclarationListSome_c 
-top::parameterDeclarationList
-	::=	ps::parameterDeclarations { 
+top::ParameterDeclarationList
+	::=	ps::ParameterDeclarations { 
  top.ast_Formal_Params = ps.ast_Formal_Params ;
 }
 
 concrete production parameterDeclarationsSnoc_c 
-top::parameterDeclarations
-	::=	ps::parameterDeclarations ',' pd::parameterDeclaration { 
+top::ParameterDeclarations
+	::=	ps::ParameterDeclarations ',' pd::ParameterDeclaration { 
  top.ast_Formal_Params = formal_params_snoc (ps.ast_Formal_Params, pd.ast_Formal_Param);
 }
 
 concrete production parameterDeclarationsOne_c 
-top::parameterDeclarations
-	::=	pd::parameterDeclaration { 
+top::ParameterDeclarations
+	::=	pd::ParameterDeclaration { 
  top.ast_Formal_Params = formal_params_one (pd.ast_Formal_Param);
 }
 
 -- A formal parameter.
 concrete production parameterDeclaration_c 
-top::parameterDeclaration
-	::=	t::type vd::variableDeclaratorId {
+top::ParameterDeclaration
+	::=	t::Type_NT vd::VariableDeclaratorId {
  top.ast_Formal_Param = formal_param (t.ast_Type, vd.ast_Var_Declarator_Id );
 }
 
 concrete production parameterDeclarationFinal_c 
-top::parameterDeclaration
-	::=	'final' t::type vd::variableDeclaratorId {
+top::ParameterDeclaration
+	::=	'final' t::Type_NT vd::VariableDeclaratorId {
  top.ast_Formal_Param = final_formal_param (t.ast_Type, vd.ast_Var_Declarator_Id );
 }
 
@@ -1067,172 +1066,172 @@ top::parameterDeclaration
 --   As a completely independent braced block of code inside a method
 --      it starts a new scope for variable definitions
 concrete production block_c 
-top::blockConcrete
-	::=	'{' ss::blockStatements '}' {
+top::BlockConcrete
+	::=	'{' ss::BlockStatements '}' {
  top.ast_Block = block (ss.ast_Stmt);
 }
 
 concrete production blockEmpty_c 
-top::blockConcrete
+top::BlockConcrete
 	::=	'{' '}' {
  top.ast_Block = empty_block ();
 }
 
 concrete production blockStatementsSnoc_c 
-top::blockStatements
-	::=	many::blockStatements one::blockStatement { 
+top::BlockStatements
+	::=	many::BlockStatements one::BlockStatement { 
  top.ast_Stmt = stmt_seq (many.ast_Stmt, one.ast_Stmt);
 }
 
 concrete production blockStatementsOne_c 
-top::blockStatements
-	::=	one::blockStatement { 
+top::BlockStatements
+	::=	one::BlockStatement { 
  top.ast_Stmt = one.ast_Stmt ;
 }
 
 concrete production statementDeclaration_c 
-top::blockStatement
-	::=	dcl::declaration ';' { 
+top::BlockStatement
+	::=	dcl::Declaration ';' { 
  top.ast_Stmt = stmt_dcl (dcl.ast_Local_Var_Dcl) ;
 }
 
 concrete production statementClass_c 
-top::blockStatement
+top::BlockStatement
 	-- class definition
-	::=	cd::classDefinition { 
+	::=	cd::ClassDefinition { 
  top.ast_Stmt = block_stmt_class (cd.ast_Class_Dcl);
 }
 
 concrete production statementInterface_c 
-top::blockStatement
+top::BlockStatement
 	-- interface definition
-	::=	id::interfaceDefinition { 
+	::=	id::InterfaceDefinition { 
  top.ast_Stmt = block_stmt_interface (id.ast_Interface_Dcl);
 }
 
 concrete production blockStatement_c 
-top::blockStatement
-	::=	s::statement { 
+top::BlockStatement
+	::=	s::Statement { 
  top.ast_Stmt = s.ast_Stmt ;
 }
 
 concrete production statementBlock_c 
-top::statement
+top::Statement
 	-- A list of statements in curly braces -- start a new scope
-	::=	b::blockConcrete { 
+	::=	b::BlockConcrete { 
  top.ast_Stmt = stmt_block (b.ast_Block) ;
 }
 
 concrete production statementExpression_c 
-top::statement
+top::Statement
 	-- An expression statement.  This could be a method call,
 	-- assignment statement, or any other expression evaluated for
 	-- side-effects.
-	::=	e::statementExpression ';' {
+	::=	e::StatementExpression ';' {
  top.ast_Stmt = stmt_stmt_expr (e.ast_Stmt_Expr); 
 }
 
 concrete production statementLabel_c 
-top::statement
+top::Statement
 	-- Attach a label to the front of a statement
-	::=	id::Id_t ':' s::statement { 
+	::=	id::Id_t ':' s::Statement { 
  top.ast_Stmt = label_prod (id, s.ast_Stmt);
 }
 
 concrete production statementIfThenElse_c 
-top::statement
+top::Statement
 	-- If-else statement
-	::=	t::If_t '(' e::expression ')' s::statement 'else' s2::statement { 
+	::=	t::If_t '(' e::Expression ')' s::Statement 'else' s2::Statement { 
  top.ast_Stmt = if_then_else (t, e.ast_Expr, s.ast_Stmt, s2.ast_Stmt);
 }
 
 concrete production statementIfThen_c 
-top::statement
+top::Statement
 	-- If- statement
-	::=	t::If_t '(' e::expression ')' s::statement { 
+	::=	t::If_t '(' e::Expression ')' s::Statement { 
  top.ast_Stmt = if_then (t, e.ast_Expr, s.ast_Stmt);
 }
 
 concrete production statementFor_c 
-top::statement
+top::Statement
 	-- For statement
 	::=	'for'
 			'('
-				init::forInit ';'	-- initializer
-				cond::forCond ';'	-- condition test
-				iter::forIter		-- updater
+				init::ForInit ';'	-- initializer
+				cond::ForCond ';'	-- condition test
+				iter::ForIter		-- updater
 			')'
-			body::statement { -- statement to loop over
+			body::Statement { -- statement to loop over
  top.ast_Stmt = for (init.ast_For_Init, cond.ast_For_Test, iter.ast_For_Update, body.ast_Stmt) ;
 }
 
 concrete production statementWhile_c 
-top::statement
+top::Statement
 	-- While statement
-	::=	t::While_t '(' e::expression ')' s::statement { 
+	::=	t::While_t '(' e::Expression ')' s::Statement { 
  top.ast_Stmt = while_prod (t, e.ast_Expr, s.ast_Stmt);
 }
 
 concrete production statementDo_c 
-top::statement
+top::Statement
 	-- do-while statement
-	::=	'do' s::statement t::While_t '(' e::expression ')' ';' {  
+	::=	'do' s::Statement t::While_t '(' e::Expression ')' ';' {  
  top.ast_Stmt = do (s.ast_Stmt, t, e.ast_Expr);
 }
 
 concrete production statementBreak_c 
-top::statement
+top::Statement
 	-- get out of a loop (or switch)
 	::=	'break' id::Id_t ';' { 
  top.ast_Stmt = break_label (id);
 }
 
 concrete production statementBreakNoLabel_c 
-top::statement
+top::Statement
 	-- get out of a loop (or switch)
 	::=	'break' ';' {  
  top.ast_Stmt = break_prod ();
 }
 
 concrete production statementContinue_c 
-top::statement
+top::Statement
 	-- get out of a loop (or switch)
 	::=	'continue' id::Id_t ';' { 
  top.ast_Stmt = continue_label (id);
 }
 
 concrete production statementContinueNoLabel_c 
-top::statement
+top::Statement
 	-- get out of a loop (or switch)
 	::=	'continue' ';' {  
  top.ast_Stmt = continue_prod ();
 }
 
 concrete production statementReturn_c 
-top::statement
+top::Statement
 	-- Return an expression
-	::=	t::Return_t e::expression ';' {
+	::=	t::Return_t e::Expression ';' {
  top.ast_Stmt = return_expr (t, e.ast_Expr);
 }
 
 concrete production statementReturnNoExpression_c 
-top::statement
+top::Statement
 	-- Return
 	::=	t::Return_t ';' { 
  top.ast_Stmt = return_statement (t);
 }
 
 concrete production statementSwitch_c 
-top::statement
+top::Statement
 	-- switch/case statement
-	::=	'switch' '(' e::expression ')' sg::switchBlock { 
+	::=	'switch' '(' e::Expression ')' sg::SwitchBlock { 
  top.ast_Stmt = switch_prod (e.ast_Expr, sg.ast_Switch_Block);
 }
 
 -- an exception handler try/catch block
 concrete production statementTry_c 
-top::statement
-	::=	'try' b::blockConcrete hs::handlers fc::finallyClause { 
+top::Statement
+	::=	'try' b::BlockConcrete hs::Handlers fc::FinallyClause { 
  top.ast_Stmt = case fc of
 			finallyClauseEmpty_c () -> try (b.ast_Block, hs.ast_Catches) |
 			finallyClause_c (_, b1) -> try_finally (b.ast_Block, hs.ast_Catches, b1.ast_Block)
@@ -1240,187 +1239,187 @@ top::statement
 }
 
 concrete production statementThrow_c 
-top::statement
+top::Statement
 	-- throw an exception
-	::=	'throw' e::expression ';' { 
+	::=	'throw' e::Expression ';' { 
  top.ast_Stmt = throw (e.ast_Expr);
 }
 
 concrete production statementSynchronized_c 
-top::statement
+top::Statement
 	-- synchronize a statement
-	::=	'synchronized' '(' e::expression ')' b::blockConcrete {
+	::=	'synchronized' '(' e::Expression ')' b::BlockConcrete {
  top.ast_Stmt = synchronized (e.ast_Expr, b.ast_Block);
 }
 
 concrete production statementAssert_c 
-top::statement
-	::=	'assert' e::expression ':' e2::expression ';' { 
+top::Statement
+	::=	'assert' e::Expression ':' e2::Expression ';' { 
  top.ast_Stmt = assert_colon (e.ast_Expr, e2.ast_Expr);
 }
 
 concrete production statementAssertNoExpression_c 
-top::statement
-	::=	'assert' e::expression ';' { 
+top::Statement
+	::=	'assert' e::Expression ';' { 
  top.ast_Stmt = assert (e.ast_Expr);
 }
 
 concrete production statementEmpty_c 
-top::statement
+top::Statement
 	-- empty statement
 	::=	';' { 
  top.ast_Stmt = empty_stmt();
 }
 
 concrete production switchBlock_c
-top::switchBlock
-	::= '{' cgs::caseGroups cs::cases '}' { 
+top::SwitchBlock
+	::= '{' cgs::CaseGroups cs::Cases '}' { 
  top.ast_Switch_Block = switch_block (cgs.ast_Switch_Groups, cs.ast_Switch_Labels);
 }
 
 concrete production switchBlockNoLabels_c
-top::switchBlock
-	::= '{' cgs::caseGroups '}' { 
+top::SwitchBlock
+	::= '{' cgs::CaseGroups '}' { 
  top.ast_Switch_Block = switch_block_no_labels (cgs.ast_Switch_Groups);
 }
 
 concrete production switchBlockJustLabels_c
-top::switchBlock
-	::= '{' cs::cases '}' { 
+top::SwitchBlock
+	::= '{' cs::Cases '}' { 
  top.ast_Switch_Block = switch_block_no_groups (cs.ast_Switch_Labels);
 }
 
 concrete production switchBlockEmpty_c
-top::switchBlock
+top::SwitchBlock
 	::= '{' '}' { 
  top.ast_Switch_Block = switch_block_empty ();
 }
 
 concrete production caseGroupsSnoc_c 
-top::caseGroups
-	::=	many::caseGroups one::caseGroup { 
+top::CaseGroups
+	::=	many::CaseGroups one::CaseGroup { 
  top.ast_Switch_Groups = switch_groups_snoc (many.ast_Switch_Groups, one.ast_Switch_Group);
 }
 
 concrete production caseGroupsOne_c 
-top::caseGroups
-	::=	one::caseGroup { 
+top::CaseGroups
+	::=	one::CaseGroup { 
  top.ast_Switch_Groups = switch_groups_one (one.ast_Switch_Group);
 }
 
 concrete production caseGroup_c 
-top::caseGroup
-	::=	cs::cases ss::blockStatements { 
+top::CaseGroup
+	::=	cs::Cases ss::BlockStatements { 
  top.ast_Switch_Group = switch_group (cs.ast_Switch_Labels, ss.ast_Stmt);
 }
 
 concrete production casesSnoc_c 
-top::cases
-	::=	many::cases one::aCase { 
+top::Cases
+	::=	many::Cases one::ACase { 
  top.ast_Switch_Labels = switch_labels_snoc (many.ast_Switch_Labels, one.ast_Switch_Label);
 }
 
 concrete production casesOne_c 
-top::cases
-	::=	one::aCase { 
+top::Cases
+	::=	one::ACase { 
  top.ast_Switch_Labels = switch_labels_one (one.ast_Switch_Label);
 }
 
 concrete production aCase_c 
-top::aCase
-	::=	'case' e::expression ':' { 
+top::ACase
+	::=	'case' e::Expression ':' { 
  top.ast_Switch_Label = switch_label (e.ast_Expr);
 }
 
 concrete production aCaseDefault_c 
-top::aCase
+top::ACase
 	::=	'default' ':'	{ 
  top.ast_Switch_Label = switch_label_default ();
 }
 
 -- The initializer for a for loop
 concrete production forInitDeclaration_c 
-top::forInit
+top::ForInit
 		-- if it looks like a declaration, it is
-	::=	dcl::declaration { 
+	::=	dcl::Declaration { 
  top.ast_For_Init = for_init_dcl (dcl.ast_Local_Var_Dcl);
 }
 
 concrete production forInitExpressionList_c 
-top::forInit
+top::ForInit
 		-- otherwise it could be an expression list...
-	::=	es::statementExpressionList { 
+	::=	es::StatementExpressionList { 
  top.ast_For_Init = for_init_some (es.ast_Stmt_Exprs);
 }
 
 concrete production forInitEmpty_c 
-top::forInit
+top::ForInit
 	::=	{ 
  top.ast_For_Init = for_init_empty ();
 }
 
 concrete production forCond_c 
-top::forCond
-	::=	expr::expression { 
+top::ForCond
+	::=	expr::Expression { 
  top.ast_For_Test = for_test_one (expr.ast_Expr);
 }
 
 concrete production forCondEmpty_c 
-top::forCond
+top::ForCond
 	::=	{ 
  top.ast_For_Test = for_test_none ();
 }
 
 concrete production forIter_c 
-top::forIter
-	::=	es::statementExpressionList { 
+top::ForIter
+	::=	es::StatementExpressionList { 
  top.ast_For_Update = for_update_some (es.ast_Stmt_Exprs);
 }
 
 concrete production forIterEmpty_c 
-top::forIter
+top::ForIter
 	::=	{ 
  top.ast_For_Update = for_update_empty ();
 }
 
 concrete production statementExpressionsSnoc_c 
-top::statementExpressionList
-	::=	many::statementExpressionList ',' one::statementExpression {
+top::StatementExpressionList
+	::=	many::StatementExpressionList ',' one::StatementExpression {
  top.ast_Stmt_Exprs = stmt_exprs_snoc (many.ast_Stmt_Exprs, one.ast_Stmt_Expr);
 }
 
 concrete production statementExpressionsOne_c 
-top::statementExpressionList
-	::=	one::statementExpression { 
+top::StatementExpressionList
+	::=	one::StatementExpression { 
  top.ast_Stmt_Exprs = stmt_exprs_one (one.ast_Stmt_Expr);
 }
 
 concrete production finallyClause_c 
-top::finallyClause
-	::=	'finally' b::blockConcrete {
+top::FinallyClause
+	::=	'finally' b::BlockConcrete {
 }
 
 concrete production finallyClauseEmpty_c 
-top::finallyClause
+top::FinallyClause
 	::=	{
 }
 
 concrete production handlersSnoc_c 
-top::handlers
-	::=	many::handlers one::handler { 
+top::Handlers
+	::=	many::Handlers one::Handler { 
  top.ast_Catches = catches_snoc (many.ast_Catches, one.ast_Catch);
 }
 
 concrete production handlersEmpty_c 
-top::handlers
+top::Handlers
 	::=	{ 
  top.ast_Catches = catches_none ();
 }
 
 -- an exception handler
 concrete production handler_c 
-top::handler
-	::=	'catch' '(' dcl::parameterDeclaration ')' b::blockConcrete { 
+top::Handler
+	::=	'catch' '(' dcl::ParameterDeclaration ')' b::BlockConcrete { 
  top.ast_Catch = catch (dcl.ast_Formal_Param, b.ast_Block);
 }
 
@@ -1449,16 +1448,16 @@ top::handler
 --     new Frame().show()
 
 concrete production statementExpressionToExpression_c
-top::statementExpression
-	::=	e1::expression {
+top::StatementExpression
+	::=	e1::Expression {
  top.ast_Stmt_Expr = if e1.isStmtExpr
 			then e1.ast_Stmt_Expr
 			else error ("Parse error, expecting a statement");
 }
 
 concrete production assign_c
-top::expression
-	::=	e1::expression t::Eq_t e2::expression {
+top::Expression
+	::=	e1::Expression t::Eq_t e2::Expression {
  top.isStmtExpr = true;
  top.ast_Expr = expr_stmt_expr (top.ast_Stmt_Expr);
  top.ast_Stmt_Expr = case e1.ast_Expr of
@@ -1468,8 +1467,8 @@ top::expression
 }
 
 concrete production plusAssign_c
-top::expression
-	::=	e1::expression '+=' e2::expression {
+top::Expression
+	::=	e1::Expression '+=' e2::Expression {
  top.isStmtExpr = true;
  top.ast_Expr = expr_stmt_expr (top.ast_Stmt_Expr);
  top.ast_Stmt_Expr = case e1.ast_Expr of
@@ -1479,8 +1478,8 @@ top::expression
 }
 
 concrete production minusAssign_c
-top::expression
-	::=	e1::expression '-=' e2::expression {
+top::Expression
+	::=	e1::Expression '-=' e2::Expression {
  top.isStmtExpr = true;
  top.ast_Expr = expr_stmt_expr (top.ast_Stmt_Expr);
  top.ast_Stmt_Expr = case e1.ast_Expr of
@@ -1490,8 +1489,8 @@ top::expression
 }
 
 concrete production mulAssign_c
-top::expression
-	::=	e1::expression '*=' e2::expression {
+top::Expression
+	::=	e1::Expression '*=' e2::Expression {
  top.isStmtExpr = true;
  top.ast_Expr = expr_stmt_expr (top.ast_Stmt_Expr);
  top.ast_Stmt_Expr = case e1.ast_Expr of
@@ -1501,8 +1500,8 @@ top::expression
 }
 
 concrete production divAssign_c
-top::expression
-	::=	e1::expression '/=' e2::expression {
+top::Expression
+	::=	e1::Expression '/=' e2::Expression {
  top.isStmtExpr = true;
  top.ast_Expr = expr_stmt_expr (top.ast_Stmt_Expr);
  top.ast_Stmt_Expr = case e1.ast_Expr of
@@ -1512,8 +1511,8 @@ top::expression
 }
 
 concrete production modAssign_c
-top::expression
-	::=	e1::expression '%=' e2::expression {
+top::Expression
+	::=	e1::Expression '%=' e2::Expression {
  top.isStmtExpr = true;
  top.ast_Expr = expr_stmt_expr (top.ast_Stmt_Expr);
  top.ast_Stmt_Expr = case e1.ast_Expr of
@@ -1523,8 +1522,8 @@ top::expression
 }
 
 concrete production shiftRightAssign_c
-top::expression
-	::=	e1::expression '>>=' e2::expression {
+top::Expression
+	::=	e1::Expression '>>=' e2::Expression {
  top.isStmtExpr = true;
  top.ast_Expr = expr_stmt_expr (top.ast_Stmt_Expr);
  top.ast_Stmt_Expr = case e1.ast_Expr of
@@ -1534,8 +1533,8 @@ top::expression
 }
 
 concrete production unsignedShiftRightAssign_c
-top::expression
-	::=	e1::expression '>>>=' e2::expression {
+top::Expression
+	::=	e1::Expression '>>>=' e2::Expression {
  top.isStmtExpr = true;
  top.ast_Expr = expr_stmt_expr (top.ast_Stmt_Expr);
  top.ast_Stmt_Expr = case e1.ast_Expr of
@@ -1545,8 +1544,8 @@ top::expression
 }
 
 concrete production shiftLeftAssign_c
-top::expression
-	::=	e1::expression '<<=' e2::expression {
+top::Expression
+	::=	e1::Expression '<<=' e2::Expression {
  top.isStmtExpr = true;
  top.ast_Expr = expr_stmt_expr (top.ast_Stmt_Expr);
  top.ast_Stmt_Expr = case e1.ast_Expr of
@@ -1556,8 +1555,8 @@ top::expression
 }
 
 concrete production andAssign_c
-top::expression
-	::=	e1::expression '&=' e2::expression {
+top::Expression
+	::=	e1::Expression '&=' e2::Expression {
  top.isStmtExpr = true;
  top.ast_Expr = expr_stmt_expr (top.ast_Stmt_Expr);
  top.ast_Stmt_Expr = case e1.ast_Expr of
@@ -1567,8 +1566,8 @@ top::expression
 }
 
 concrete production xorAssign_c
-top::expression
-	::=	e1::expression '^=' e2::expression {
+top::Expression
+	::=	e1::Expression '^=' e2::Expression {
  top.isStmtExpr = true;
  top.ast_Expr = expr_stmt_expr (top.ast_Stmt_Expr);
  top.ast_Stmt_Expr = case e1.ast_Expr of
@@ -1578,8 +1577,8 @@ top::expression
 }
 
 concrete production orAssign_c
-top::expression
-	::=	e1::expression '|=' e2::expression {
+top::Expression
+	::=	e1::Expression '|=' e2::Expression {
  top.isStmtExpr = true;
  top.ast_Expr = expr_stmt_expr (top.ast_Stmt_Expr);
  top.ast_Stmt_Expr = case e1.ast_Expr of
@@ -1590,211 +1589,211 @@ top::expression
 
 -- conditional test (level 12)
 concrete production conditionalExpression_c 
-top::expression
-	::=	e1::expression '?' e2::expression ':' e3::expression {
+top::Expression
+	::=	e1::Expression '?' e2::Expression ':' e3::Expression {
  top.isStmtExpr = false;
  top.ast_Expr = conditional (e1.ast_Expr, e2.ast_Expr, e3.ast_Expr);
 }
 
 -- logical or (||)  (level 11)
 concrete production logicalOrExpression_c 
-top::expression
-	::=	e1::expression '||' e2::expression { 
+top::Expression
+	::=	e1::Expression '||' e2::Expression { 
  top.isStmtExpr = false;
  top.ast_Expr = or_or (e1.ast_Expr, e2.ast_Expr);
 }
 
 -- logical and (&&)  (level 10)
 concrete production logicalAndExpression_c 
-top::expression
-	::=	e1::expression '&&' e2::expression { 
+top::Expression
+	::=	e1::Expression '&&' e2::Expression { 
  top.isStmtExpr = false;
  top.ast_Expr = and_and (e1.ast_Expr, e2.ast_Expr);
 }
 
 -- bitwise or non-short-circuiting or (|)  (level 9)
 concrete production inclusiveOrExpression_c 
-top::expression
-	::=	e1::expression '|' e2::expression { 
+top::Expression
+	::=	e1::Expression '|' e2::Expression { 
  top.isStmtExpr = false;
  top.ast_Expr = or (e1.ast_Expr, e2.ast_Expr);
 }
 
 -- exclusive or (^)  (level 8)
 concrete production exclusiveOrExpression_c 
-top::expression
-	::=	e1::expression '^' e2::expression { 
+top::Expression
+	::=	e1::Expression '^' e2::Expression { 
  top.isStmtExpr = false;
  top.ast_Expr = xor (e1.ast_Expr, e2.ast_Expr);
 }
 
 -- bitwise or non-short-circuiting and (&)  (level 7)
 concrete production andExpression_c 
-top::expression
-	::=	e1::expression '&' e2::expression { 
+top::Expression
+	::=	e1::Expression '&' e2::Expression { 
  top.isStmtExpr = false;
  top.ast_Expr = and (e1.ast_Expr, e2.ast_Expr);
 }
 
 -- equality/inequality (==/!=) (level 6)
 concrete production equalityExpression_c 
-top::expression
-	::=	e1::expression '==' e2::expression { 
+top::Expression
+	::=	e1::Expression '==' e2::Expression { 
  top.isStmtExpr = false;
  top.ast_Expr = eq (e1.ast_Expr, e2.ast_Expr);
 }
 
 concrete production inequalityExpression_c 
-top::expression
-	::=	e1::expression '!=' e2::expression { 
+top::Expression
+	::=	e1::Expression '!=' e2::Expression { 
  top.isStmtExpr = false;
  top.ast_Expr = not_eq (e1.ast_Expr, e2.ast_Expr);
 }
 
 -- boolean relational expressions (level 5)
 concrete production ltExpression_c 
-top::expression
-	::=	e1::expression '<' e2::expression { 
+top::Expression
+	::=	e1::Expression '<' e2::Expression { 
  top.isStmtExpr = false;
  top.ast_Expr = lt (e1.ast_Expr, e2.ast_Expr);
 }
 
 concrete production gtExpression_c 
-top::expression
-	::=	e1::expression '>' e2::expression { 
+top::Expression
+	::=	e1::Expression '>' e2::Expression { 
  top.isStmtExpr = false;
  top.ast_Expr = gt (e1.ast_Expr, e2.ast_Expr);
 }
 
 concrete production leExpression_c 
-top::expression
-	::=	e1::expression '<=' e2::expression { 
+top::Expression
+	::=	e1::Expression '<=' e2::Expression { 
  top.isStmtExpr = false;
  top.ast_Expr = lteq (e1.ast_Expr, e2.ast_Expr);
 }
 
 concrete production geExpression_c 
-top::expression
-	::=	e1::expression '>=' e2::expression { 
+top::Expression
+	::=	e1::Expression '>=' e2::Expression { 
  top.isStmtExpr = false;
  top.ast_Expr = gteq (e1.ast_Expr, e2.ast_Expr);
 }
 
 -- todo include this
 concrete production instanceOf_c 
-top::expression
-	::=	e1::expression 'instanceof' t::referenceType { 
+top::Expression
+	::=	e1::Expression 'instanceof' t::ReferenceType { 
  top.isStmtExpr = false;
  top.ast_Expr = instanceof (e1.ast_Expr, t.ast_Reference_Type);
 }
 
 -- bit shift expressions (level 4)
 concrete production shiftLeftExpression_c 
-top::expression
-	::=	e1::expression '<<' e2::expression { 
+top::Expression
+	::=	e1::Expression '<<' e2::Expression { 
  top.isStmtExpr = false;
  top.ast_Expr = lshift (e1.ast_Expr, e2.ast_Expr);
 }
 
 concrete production shiftRightExpression_c 
-top::expression
-	::=	e1::expression '>>' e2::expression { 
+top::Expression
+	::=	e1::Expression '>>' e2::Expression { 
  top.isStmtExpr = false;
  top.ast_Expr = rshift (e1.ast_Expr, e2.ast_Expr);
 }
 
 concrete production shiftRightUnsignedExpression_c 
-top::expression
-	::=	e1::expression '>>>' e2::expression { 
+top::Expression
+	::=	e1::Expression '>>>' e2::Expression { 
  top.isStmtExpr = false;
  top.ast_Expr = urshift (e1.ast_Expr, e2.ast_Expr);
 }
 
 -- binary addition/subtraction (level 3)
 concrete production plusExpression_c 
-top::expression
-	::=	e1::expression t::Plus_t e2::expression { 
+top::Expression
+	::=	e1::Expression t::Plus_t e2::Expression { 
  top.isStmtExpr = false;
  top.ast_Expr = plus (e1.ast_Expr, t, e2.ast_Expr);
 }
 
 concrete production minusExpression_c 
-top::expression
-	::=	e1::expression t::Minus_t e2::expression { 
+top::Expression
+	::=	e1::Expression t::Minus_t e2::Expression { 
  top.isStmtExpr = false;
  top.ast_Expr = minus (e1.ast_Expr, t, e2.ast_Expr);
 }
 
 -- multiplication/division/modulo (level 2)
 concrete production mulExpression_c 
-top::expression
-	::=	e1::expression t::Mul_t e2::expression { 
+top::Expression
+	::=	e1::Expression t::Mul_t e2::Expression { 
  top.isStmtExpr = false;
  top.ast_Expr = mul (e1.ast_Expr, t, e2.ast_Expr);
 }
 
 concrete production divExpression_c 
-top::expression
-	::=	e1::expression t::Div_t e2::expression { 
+top::Expression
+	::=	e1::Expression t::Div_t e2::Expression { 
  top.isStmtExpr = false;
  top.ast_Expr = div (e1.ast_Expr, t, e2.ast_Expr);
 }
 
 concrete production modExpression_c 
-top::expression
-	::=	e1::expression t::Mod_t e2::expression { 
+top::Expression
+	::=	e1::Expression t::Mod_t e2::Expression { 
  top.isStmtExpr = false;
  top.ast_Expr = mod (e1.ast_Expr, t, e2.ast_Expr);
 }
 
 concrete production preIncExpression_c 
-top::expression
-	::=	'++' e1::expression { 
+top::Expression
+	::=	'++' e1::Expression { 
  top.isStmtExpr = true;
  top.ast_Expr = expr_stmt_expr (top.ast_Stmt_Expr);
  top.ast_Stmt_Expr = pre_inc (e1.ast_Expr);
 }
 
 concrete production preDecExpression_c 
-top::expression
-	::=	'--' e1::expression { 
+top::Expression
+	::=	'--' e1::Expression { 
  top.isStmtExpr = true;
  top.ast_Expr = expr_stmt_expr (top.ast_Stmt_Expr);
  top.ast_Stmt_Expr = pre_dec (e1.ast_Expr);
 }
 
 concrete production unaryPlusExpression_c 
-top::expression
-	::=	'+' e1::expression precedence = 140 { 
+top::Expression
+	::=	'+' e1::Expression precedence = 140 { 
  top.isStmtExpr = false;
  top.ast_Expr = unary_plus (e1.ast_Expr);
 }
 
 concrete production unaryMinusExpression_c 
-top::expression
-	::=	'-' e1::expression precedence = 140 { 
+top::Expression
+	::=	'-' e1::Expression precedence = 140 { 
  top.isStmtExpr = false;
  top.ast_Expr = unary_minus (e1.ast_Expr);
 }
 
 concrete production bitNotExpression_c 
-top::expression
-	::=	'~' e1::expression { 
+top::Expression
+	::=	'~' e1::Expression { 
  top.isStmtExpr = false;
  top.ast_Expr = comp (e1.ast_Expr);
 }
 
 concrete production logicalNotExpression_c 
-top::expression
-	::=	'!' e1::expression { 
+top::Expression
+	::=	'!' e1::Expression { 
  top.isStmtExpr = false;
  top.ast_Expr = not (e1.ast_Expr);
 }
 
 -- todo include this
 concrete production primitiveTypeCastExpression_c
-top::expression
-	::=	'(' t::primitiveType ds::declaratorBracketsOpt ')' e1::expression { 
+top::Expression
+	::=	'(' t::PrimitiveType ds::DeclaratorBracketsOpt ')' e1::Expression { 
  top.isStmtExpr = false;
  top.ast_Expr = if ds.dims == 0
 		then cast_primitive (t.ast_Primitive_Type, e1.ast_Expr)
@@ -1802,253 +1801,253 @@ top::expression
 }
 
 concrete production nameCastExpression_c
-top::expression
-	::=	'(' e::expression ')' e1::expression { 
+top::Expression
+	::=	'(' e::Expression ')' e1::Expression { 
  top.isStmtExpr = false;
  top.ast_Expr = cast_simple (e.ast_Expr, e1.ast_Expr);
 }
 
 concrete production nameArraycastExpression_c
-top::expression
-	::=	'(' n::nameConcrete ds::declaratorBrackets ')' e1::expression { 
+top::Expression
+	::=	'(' n::NameConcrete ds::DeclaratorBrackets ')' e1::Expression { 
  top.isStmtExpr = false;
  top.ast_Expr = cast_name_array (n.ast_TypeName, ds.dims, e1.ast_Expr);
 }
 
 concrete production nameExpression_c
-top::expression
-	::=	n::nameConcrete { 
+top::Expression
+	::=	n::NameConcrete { 
  top.isStmtExpr = false;
  top.ast_Expr = expr_lhs (lhs_name (n.ast_ExprName));
 }
 
 concrete production primaryExpression_c
-top::expression
-	::=	e1::primaryExpressionAndArrayCreation {
+top::Expression
+	::=	e1::PrimaryExpressionAndArrayCreation {
  top.isStmtExpr = e1.isStmtExpr;
  top.ast_Expr = e1.ast_Expr;
  top.ast_Stmt_Expr = e1.ast_Stmt_Expr;
 }
 
 concrete production primaryExpressionAndArrayCreation_c
-top::primaryExpressionAndArrayCreation
-	::=	e1::primaryExpression { 
+top::PrimaryExpressionAndArrayCreation
+	::=	e1::PrimaryExpression { 
  top.isStmtExpr = e1.isStmtExpr;
  top.ast_Expr = e1.ast_Expr;
  top.ast_Stmt_Expr = e1.ast_Stmt_Expr;
 }
 
 concrete production newPrimitiveArrayExpression_c 
-top::primaryExpressionAndArrayCreation
-	::=	'new' t::primitiveType exprs::declaratorExpressions ds::declaratorBracketsOpt { 
+top::PrimaryExpressionAndArrayCreation
+	::=	'new' t::PrimitiveType exprs::DeclaratorExpressions ds::DeclaratorBracketsOpt { 
  top.isStmtExpr = false;
  top.ast_Expr = new_array_no_init_primitive (t.ast_Primitive_Type, exprs.ast_Dim_Exprs, ds.dims);
 }
 
 concrete production newNameArrayExpression_c 
-top::primaryExpressionAndArrayCreation
-	::=	'new' n::nameConcrete exprs::declaratorExpressions ds::declaratorBracketsOpt { 
+top::PrimaryExpressionAndArrayCreation
+	::=	'new' n::NameConcrete exprs::DeclaratorExpressions ds::DeclaratorBracketsOpt { 
  top.isStmtExpr = false;
  top.ast_Expr = new_array_no_init_name (n.ast_TypeName, exprs.ast_Dim_Exprs, ds.dims);
 }
 
 concrete production newPrimitiveArrayExpressionInitializer_c 
-top::primaryExpressionAndArrayCreation
-	::=	'new' t::primitiveType ds::declaratorBrackets init::arrayInitializer { 
+top::PrimaryExpressionAndArrayCreation
+	::=	'new' t::PrimitiveType ds::DeclaratorBrackets init::ArrayInitializer { 
  top.isStmtExpr = false;
  top.ast_Expr = new_array_init_primitive (t.ast_Primitive_Type, ds.dims, init.ast_Array_Init);
 }
 
 concrete production newNameArrayExpressionInitializer_c 
-top::primaryExpressionAndArrayCreation
-	::=	'new' n::nameConcrete ds::declaratorBrackets init::arrayInitializer {
+top::PrimaryExpressionAndArrayCreation
+	::=	'new' n::NameConcrete ds::DeclaratorBrackets init::ArrayInitializer {
  top.isStmtExpr = false;
  top.ast_Expr = new_array_init_name (n.ast_TypeName, ds.dims, init.ast_Array_Init);
 }
 
 -- qualified names, array expressions, method invocation, post inc/dec
 concrete production expressionFieldAccessExpression_c
-top::primaryExpression
-	::= 	e1::primaryExpressionAndArrayCreation '.' id::Id_t { 
+top::PrimaryExpression
+	::= 	e1::PrimaryExpressionAndArrayCreation '.' id::Id_t { 
  top.isStmtExpr = false;
  top.ast_Expr = expr_lhs (expr_field_access (e1.ast_Expr, id));
 }
 
 concrete production superFieldAccessExpression_c
-top::primaryExpression
+top::PrimaryExpression
 	::= 	'super' '.' id::Id_t { 
  top.isStmtExpr = false;
  top.ast_Expr = expr_lhs (super_field_access (id));
 }
 
 concrete production nameSuperFieldAccessExpression_c
-top::primaryExpression
-	::= 	n::nameConcrete '.' 'super' '.' id::Id_t { 
+top::PrimaryExpression
+	::= 	n::NameConcrete '.' 'super' '.' id::Id_t { 
  top.isStmtExpr = false;
  top.ast_Expr = expr_lhs (name_super_field_access (n.ast_TypeName, id));
 }
 
 concrete production methodCallExpression_c
-top::primaryExpression
-	::=	n::nameConcrete '(' args::expressionListOpt ')' { 
+top::PrimaryExpression
+	::=	n::NameConcrete '(' args::ExpressionListOpt ')' { 
  top.isStmtExpr = true;
  top.ast_Expr = expr_stmt_expr (top.ast_Stmt_Expr);
  top.ast_Stmt_Expr = method_call (n.ast_MethodName, args.ast_Exprs);
 }
 
 concrete production expressionMethodCallExpression_c
-top::primaryExpression
-	::= 	e1::primaryExpressionAndArrayCreation '.' id::Id_t '(' args::expressionListOpt ')' { 
+top::PrimaryExpression
+	::= 	e1::PrimaryExpressionAndArrayCreation '.' id::Id_t '(' args::ExpressionListOpt ')' { 
  top.isStmtExpr = true;
  top.ast_Expr = expr_stmt_expr (top.ast_Stmt_Expr);
  top.ast_Stmt_Expr = expr_method_call (e1.ast_Expr, id, args.ast_Exprs);
 }
 
 concrete production superMethodCallExpression_c
-top::primaryExpression
-	::= 	'super' '.' id::Id_t '(' args::expressionListOpt ')' { 
+top::PrimaryExpression
+	::= 	'super' '.' id::Id_t '(' args::ExpressionListOpt ')' { 
  top.isStmtExpr = true;
  top.ast_Expr = expr_stmt_expr (top.ast_Stmt_Expr);
  top.ast_Stmt_Expr = super_method_call (id, args.ast_Exprs);
 }
 
 concrete production nameSuperMethodCallExpression_c
-top::primaryExpression
-	::= 	n::nameConcrete '.' 'super' '.' id::Id_t '(' args::expressionListOpt ')' { 
+top::PrimaryExpression
+	::= 	n::NameConcrete '.' 'super' '.' id::Id_t '(' args::ExpressionListOpt ')' { 
  top.isStmtExpr = true;
  top.ast_Expr = expr_stmt_expr (top.ast_Stmt_Expr);
  top.ast_Stmt_Expr = name_super_method_call (n.ast_TypeName, id, args.ast_Exprs);
 }
 
 concrete production expressionThisExpression_c
-top::primaryExpression
-	::= 	n::nameConcrete '.' 'this' {  
+top::PrimaryExpression
+	::= 	n::NameConcrete '.' 'this' {  
  top.isStmtExpr = false;
  top.ast_Expr = name_dot_this (n.ast_TypeName);
 }
 
 concrete production expressionDotNewExpression_c
-top::primaryExpression
-	::= 	e1::primaryExpressionAndArrayCreation '.' 'new' id::Id_t '(' args::expressionListOpt ')' { 
+top::PrimaryExpression
+	::= 	e1::PrimaryExpressionAndArrayCreation '.' 'new' id::Id_t '(' args::ExpressionListOpt ')' { 
  top.isStmtExpr = true;
  top.ast_Expr = expr_stmt_expr (top.ast_Stmt_Expr);
  top.ast_Stmt_Expr = new_class_expr (e1.ast_Expr, id, args.ast_Exprs);
 }
 
 concrete production expressionDotNewBodyExpression_c
-top::primaryExpression
-	::= 	e1::primaryExpressionAndArrayCreation '.' 'new' id::Id_t '(' args::expressionListOpt ')' cb::classBlock { 
+top::PrimaryExpression
+	::= 	e1::PrimaryExpressionAndArrayCreation '.' 'new' id::Id_t '(' args::ExpressionListOpt ')' cb::ClassBlock { 
  top.isStmtExpr = true;
  top.ast_Expr = expr_stmt_expr (top.ast_Stmt_Expr);
  top.ast_Stmt_Expr = new_class_expr_body (e1.ast_Expr, id, args.ast_Exprs, cb.ast_Class_Body);
 }
 
 concrete production nameDotNewExpression_c
-top::primaryExpression
-	::= 	n::nameConcrete '.' 'new' id::Id_t '(' args::expressionListOpt ')' { 
+top::PrimaryExpression
+	::= 	n::NameConcrete '.' 'new' id::Id_t '(' args::ExpressionListOpt ')' { 
  top.isStmtExpr = true;
  top.ast_Expr = expr_stmt_expr (top.ast_Stmt_Expr);
  top.ast_Stmt_Expr = new_class_name (n.ast_TypeName, id, args.ast_Exprs);
 }
 
 concrete production nameDotNewBodyExpression_c
-top::primaryExpression
-	::= 	n::nameConcrete '.' 'new' id::Id_t '(' args::expressionListOpt ')' cb::classBlock { 
+top::PrimaryExpression
+	::= 	n::NameConcrete '.' 'new' id::Id_t '(' args::ExpressionListOpt ')' cb::ClassBlock { 
  top.isStmtExpr = true;
  top.ast_Expr = expr_stmt_expr (top.ast_Stmt_Expr);
  top.ast_Stmt_Expr = new_class_name_body (n.ast_TypeName, id, args.ast_Exprs, cb.ast_Class_Body);
 }
 
 concrete production arrayAccessExpression_c
-top::primaryExpression
-	::=	n::nameConcrete '[' e1::expression ']' { 
+top::PrimaryExpression
+	::=	n::NameConcrete '[' e1::Expression ']' { 
  top.isStmtExpr = false;
  top.ast_Expr = expr_lhs (array_access (n.ast_ExprName, e1.ast_Expr));
 }
 
 concrete production expressionArrayAccess_c
-top::primaryExpression
-	::= 	e1::primaryExpression '[' e2::expression ']' { 
+top::PrimaryExpression
+	::= 	e1::PrimaryExpression '[' e2::Expression ']' { 
  top.isStmtExpr = false;
  top.ast_Expr = expr_lhs (array_access_general (e1.ast_Expr, e2.ast_Expr));
 }
 
 concrete production postIncExpression_c 
-top::expression
-	::=	e1::expression '++' { 
+top::Expression
+	::=	e1::Expression '++' { 
  top.isStmtExpr = true;
  top.ast_Expr = expr_stmt_expr (top.ast_Stmt_Expr);
  top.ast_Stmt_Expr = post_inc (e1.ast_Expr);
 }
 
 concrete production postDecExpression_c 
-top::expression
-	::=	e1::expression '--' { 
+top::Expression
+	::=	e1::Expression '--' { 
  top.isStmtExpr = true;
  top.ast_Expr = expr_stmt_expr (top.ast_Stmt_Expr);
  top.ast_Stmt_Expr = post_dec (e1.ast_Expr);
 } 
 
 concrete production trueConstExpression_c
-top::primaryExpression
+top::PrimaryExpression
 	::=	'true' { 
  top.isStmtExpr = false;
  top.ast_Expr = true_const();
 }
 
 concrete production falseConstExpression_c
-top::primaryExpression
+top::PrimaryExpression
 	::=	'false' { 
  top.isStmtExpr = false;
  top.ast_Expr = false_const();
 }
 
 concrete production nullConstExpression_c
-top::primaryExpression
+top::PrimaryExpression
 	::=	'null' { 
  top.isStmtExpr = false;
  top.ast_Expr = null_const();
 }
 
 concrete production thisExpression_c
-top::primaryExpression
+top::PrimaryExpression
 	::=	'this' { 
  top.isStmtExpr = false;
  top.ast_Expr = this();
 }
 
 concrete production parenExpression_c
-top::primaryExpression
-	::=	'(' e1::expression ')' {
+top::PrimaryExpression
+	::=	'(' e1::Expression ')' {
  top.isStmtExpr = false;
  top.ast_Expr = e1.ast_Expr;
 }
 
 -- look for int.class and int[].class
 concrete production primitiveTypeDotClassExpression_c
-top::primaryExpression
-	::=	t::primitiveType '.' 'class' { 
+top::PrimaryExpression
+	::=	t::PrimitiveType '.' 'class' { 
  top.isStmtExpr = false;
  top.ast_Expr = primitive_dot_class (t.ast_Primitive_Type);
 }
 
 concrete production voidDotClassExpression_c
-top::primaryExpression
+top::PrimaryExpression
 	::=	'void' '.' 'class' { 
  top.isStmtExpr = false;
  top.ast_Expr = void_dot_class ();
 }
 
 concrete production nameDotClassExpression_c
-top::primaryExpression
-	::=	n::nameConcrete '.' 'class' { 
+top::PrimaryExpression
+	::=	n::NameConcrete '.' 'class' { 
  top.isStmtExpr = false;
  top.ast_Expr = name_dot_class (n.ast_TypeName);
 }
 
 concrete production arrayDotClassExpression_c
-top::primaryExpression
-	::=	t::arrayType '.' 'class' { 
+top::PrimaryExpression
+	::=	t::ArrayType '.' 'class' { 
  top.isStmtExpr = false;
  top.ast_Expr = array_dot_class (t.ast_Array_Type);
 }
@@ -2058,56 +2057,56 @@ top::primaryExpression
 --   this or super.
 
 concrete production newClassExpression_c 
-top::primaryExpression
-	::=	'new' n::nameConcrete '(' args::expressionListOpt ')' { 
+top::PrimaryExpression
+	::=	'new' n::NameConcrete '(' args::ExpressionListOpt ')' { 
  top.isStmtExpr = true;
  top.ast_Expr = expr_stmt_expr (top.ast_Stmt_Expr);
  top.ast_Stmt_Expr = new_class (n.ast_TypeName, args.ast_Exprs);
 }
 
 concrete production newClassBodyExpression_c 
-top::primaryExpression
-	::=	'new' n::nameConcrete '(' args::expressionListOpt ')' cb::classBlock {
+top::PrimaryExpression
+	::=	'new' n::NameConcrete '(' args::ExpressionListOpt ')' cb::ClassBlock {
  top.isStmtExpr = true;
  top.ast_Expr = expr_stmt_expr (top.ast_Stmt_Expr);
  top.ast_Stmt_Expr = new_class_body (n.ast_TypeName, args.ast_Exprs, cb.ast_Class_Body);
 }
 
 concrete production declaratorExpressionsSnoc_c 
-top::declaratorExpressions
-	::=	many::declaratorExpressions '[' e1::expression ']' { 
+top::DeclaratorExpressions
+	::=	many::DeclaratorExpressions '[' e1::Expression ']' { 
  top.ast_Dim_Exprs = dim_exprs_snoc (many.ast_Dim_Exprs, e1.ast_Expr);
 }
 
 concrete production declaratorExpressionsOne_c 
-top::declaratorExpressions
-	::=	'[' e1::expression ']' { 
+top::DeclaratorExpressions
+	::=	'[' e1::Expression ']' { 
  top.ast_Dim_Exprs = dim_exprs_one (e1.ast_Expr);
 }
 
 concrete production intConstExpression_c 
-top::primaryExpression
+top::PrimaryExpression
 	::=	t::Intconst_t { 
  top.isStmtExpr = false;
  top.ast_Expr = int_const(t.lexeme);
 }
 
 concrete production charConstExpression_c 
-top::primaryExpression
+top::PrimaryExpression
 	::=	t::Charconst_t { 
  top.isStmtExpr = false;
  top.ast_Expr = char_const(t.lexeme);
 }
 
 concrete production floatConstExpression_c 
-top::primaryExpression
+top::PrimaryExpression
 	::=	t::Floatconst_t { 
  top.isStmtExpr = false;
  top.ast_Expr = float_const(t.lexeme);
 }
 
 concrete production stringConstExpression_c 
-top::primaryExpression
+top::PrimaryExpression
 	::=	t::Stringconst_t { 
  top.isStmtExpr = false;
  top.ast_Expr = string_const(t.lexeme);

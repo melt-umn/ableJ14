@@ -21,10 +21,10 @@ synthesized attribute ast_algebraic_switch_group   :: Algebraic_Switch_Group;
 synthesized attribute ast_pattern                  :: Pattern;
 synthesized attribute ast_pattern_list             :: Pattern_List;
 
-terminal aswitchTerm        'aswitch'      dominates {Id_t};
+terminal AswitchTerm        'aswitch'      dominates {Id_t};
 
 concrete production algebraic_switch_c
-s::statement ::= t::aswitchTerm '(' e::expression ')' b::Algebraic_Switch_Block_c {
+s::Statement ::= t::AswitchTerm '(' e::Expression ')' b::Algebraic_Switch_Block_c {
   s.ast_Stmt = algebraic_switch (t'', e.ast_Expr, b.ast_algebraic_switch_block);
 }
 
@@ -45,7 +45,7 @@ sgs::Algebraic_Switch_Groups_c ::= sgs1::Algebraic_Switch_Groups_c sg::Algebraic
 
 -- changed blockStatementsOpt to blockStatements
 concrete production algebraic_switch_group_c
-sg::Algebraic_Switch_Group_c ::= 'case' p::Pattern_c ':' bs::blockStatements {
+sg::Algebraic_Switch_Group_c ::= 'case' p::Pattern_c ':' bs::BlockStatements {
   sg.ast_algebraic_switch_group = algebraic_switch_group (p.ast_pattern, bs.ast_Stmt);
 }
 
@@ -142,11 +142,11 @@ inherited attribute variant_defs_inh :: [CaseParam] occurs on Pattern_List;
 attribute ast_Stmt occurs on Algebraic_Switch_Block, Algebraic_Switch_Groups, Algebraic_Switch_Group;
 
 abstract production algebraic_switch
-switch::Stmt ::= t::aswitchTerm expr::Expr switchblock::Algebraic_Switch_Block {
+switch::Stmt ::= t::AswitchTerm expr::Expr switchblock::Algebraic_Switch_Block {
  switch.pp = "algebraic switch (" ++ expr.pp ++ ") " ++ switchblock.pp;
  switch.errors := (case expr.typerep of
 			classTypeRep (algebraic_class_type_rep (_,_,_,_,_,_,_,_,_,_,_)) -> [ ] |
-                        _ ->  [ mkError (t.line, expr.pp ++ " is not an algebraic datatype") ]
+                        _ ->  [ mkError (-1, expr.pp ++ " is not an algebraic datatype") ]
 		   end) ++ switchblock.errors;
  switch.defs = [];
 

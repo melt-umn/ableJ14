@@ -15,14 +15,14 @@ attribute labels occurs on Stmt;
 terminal NewFor_t 'newfor' dominates { Id_t } ;
 
 concrete production stmt_enhanced_for_c
-top::statement ::= fors::Enhanced_For_Stmt_c          
+top::Statement ::= fors::Enhanced_For_Stmt_c          
 precedence = 10 
 { top.ast_Stmt = fors.ast_Stmt;
   fors.labels = [];
 }
 
 concrete production enhanced_for_c
-top::Enhanced_For_Stmt_c ::= f::For_t '(' t::type id::Id_t ':' e::expression ')' body::statement { 
+top::Enhanced_For_Stmt_c ::= f::For_t '(' t::Type_NT id::Id_t ':' e::Expression ')' body::Statement { 
  top.ast_Stmt = enhanced_for_dispatcher (f, t.ast_Type, id, e.ast_Expr, body.ast_Stmt, top.labels);
 }
 

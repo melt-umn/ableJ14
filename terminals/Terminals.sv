@@ -4,10 +4,10 @@ lexer class java_kwd ;
 
 ignore terminal LineComment /[\/][\/].*/ ;
 ignore terminal BlockComment /[\/][\*]([^\*]|[\r\n]|([\*]+([^\*\/]|[\r\n])))*[\*]+[\/]/ ;
-ignore terminal tabs /[\t]+/;
-ignore terminal spaces /[\ ]+/;
-ignore terminal newlines /[\n]+/;
---ignore terminal whitespace /[\n\t\ ]+/ ;
+ignore terminal Tabs /[\t]+/;
+ignore terminal Spaces /[\ ]+/;
+ignore terminal Newlines /[\n]+/;
+--ignore terminal Whitespace /[\n\t\ ]+/ ;
 
 
 terminal Id_t           /[a-zA-Z_\$][0-9a-zA-Z_\$]*/ submits to { java_kwd } ;

@@ -23,15 +23,15 @@ terminal ParenCurlyRight_t '})'  precedence = 10 ;
 
 -- changed blockStatementsOpt to blockStatements
 concrete production exprBlock_c
-e::primaryExpression ::= '({' '(' params::ExprBlockParams_c ')' bs::blockStatements 'return' '{' returnType::type '}' re::expression ';' '})' 
+e::PrimaryExpression ::= '({' '(' params::ExprBlockParams_c ')' bs::BlockStatements 'return' '{' returnType::Type_NT '}' re::Expression ';' '})' 
 {
   e.ast_Expr = exprBlock ( params.ast_ExprBlockParams, bs.ast_Stmt, returnType.ast_Type, re.ast_Expr ) ;
 }
 
 nonterminal ExprBlockParam_c with ast_ExprBlockParam;
 nonterminal ExprBlockParams_c with ast_ExprBlockParams;
-synthesized attribute  ast_ExprBlockParam :: ExprBlockParam ;
-synthesized attribute  ast_ExprBlockParams :: ExprBlockParams ;
+synthesized attribute ast_ExprBlockParam :: ExprBlockParam ;
+synthesized attribute ast_ExprBlockParams :: ExprBlockParams ;
 
 concrete production exprBlockParam_one_c
 ps::ExprBlockParams_c ::= p::ExprBlockParam_c 
@@ -45,7 +45,7 @@ ps::ExprBlockParams_c ::=   ps2::ExprBlockParams_c ','  p::ExprBlockParam_c
 }
 
 concrete production exprBlockParam_c
-p::ExprBlockParam_c ::= t::type v::variableDeclaratorId '=' init::initializer 
+p::ExprBlockParam_c ::= t::Type_NT v::VariableDeclaratorId '=' init::Initializer 
 {
  p.ast_ExprBlockParam = exprBlockParam (t.ast_Type, v.ast_Var_Declarator_Id, init.ast_Var_Init);
 }
