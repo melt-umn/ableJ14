@@ -1,9 +1,9 @@
 grammar edu:umn:cs:melt:ableJ14:driver:strict;
 
-import core ;
+--import core ;
 import edu:umn:cs:melt:ableJ14:concretesyntax;
 import edu:umn:cs:melt:ableJ14:abstractsyntax;
-import silver:driver;
+--import silver:driver;
 
 ----------------------------------------------------------------------
 -- Main driver function
@@ -245,6 +245,9 @@ String ::= filename::String {
 -- IO Stuff
 
 nonterminal IO_Action with ioIn, ioOut ;
+
+synthesized attribute ioOut :: IO;
+inherited attribute ioIn :: IO;
 
 abstract production io_action_write_file
 task::IO_Action ::= fn::String text::String {
