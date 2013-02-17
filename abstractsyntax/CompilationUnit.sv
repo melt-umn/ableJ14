@@ -1,5 +1,5 @@
 grammar edu:umn:cs:melt:ableJ14:abstractsyntax;
-exports edu:umn:cs:melt:ableJ14:abstractsyntax;
+
 import edu:umn:cs:melt:ableJ14:terminals;
 
 nonterminal Root        with errors, pp, basepp, allerrors, type_env, type_defs;
