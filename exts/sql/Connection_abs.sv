@@ -124,11 +124,11 @@ top::ConvertedEnvItem ::= old::EnvItem environment::[ ScopeEnv ] {
 	case new (old) of
 		  envItem (	name_, 
 				_, 
-				dcl_rep_connection (connection_dcl_rep (_, fqn, loc, tableDcls, tr)))
+				dcl_rep_connection (connection_dcl_rep (_, fqn, loc1, tableDcls, tr)))
 		->  
 		[  envItem (	name_, 
 				fqn, 
-				dcl_rep_connection (connection_dcl_rep (name_, fqn, loc, tableDcls, tr))) ]
+				dcl_rep_connection (connection_dcl_rep (name_, fqn, loc1, tableDcls, tr))) ]
 		|
 		_
 		->
