@@ -18,7 +18,7 @@ while::Stmt ::= t::While_t cond::Expr body::Stmt {
   body.pp_indent = while.pp_indent + 3;
 }
 
-abstract production do
+abstract production dowhile
 dowhile::Stmt ::= body::Stmt t::While_t cond::Expr {
   dowhile.pp = "do " ++ body.pp ++ " while (" ++ cond.pp ++ ");";
   forwards to stmt_seq (body, while_prod (t, cond, body));

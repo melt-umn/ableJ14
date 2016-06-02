@@ -336,7 +336,7 @@ while::Stmt ::= t::While_t cond::Expr body::Stmt {
  while.neededImportedSingleTypes = cond.neededImportedSingleTypes ++ body.neededImportedSingleTypes;
 }
 
-aspect production do
+aspect production dowhile
 dowhile::Stmt ::= body::Stmt t::While_t cond::Expr {
  dowhile.neededImportedSingleTypes = body.neededImportedSingleTypes ++ cond.neededImportedSingleTypes;
 }
@@ -1566,7 +1566,7 @@ while::Stmt ::= t::While_t cond::Expr body::Stmt {
  while.neededCurrentPackageTypes = cond.neededCurrentPackageTypes ++ body.neededCurrentPackageTypes;
 }
 
-aspect production do
+aspect production dowhile
 dowhile::Stmt ::= body::Stmt t::While_t cond::Expr {
  dowhile.neededCurrentPackageTypes = body.neededCurrentPackageTypes ++ cond.neededCurrentPackageTypes;
 }
@@ -2796,7 +2796,7 @@ while::Stmt ::= t::While_t cond::Expr body::Stmt {
  while.neededImportedOnDemandTypes = cond.neededImportedOnDemandTypes ++ body.neededImportedOnDemandTypes;
 }
 
-aspect production do
+aspect production dowhile
 dowhile::Stmt ::= body::Stmt t::While_t cond::Expr {
  dowhile.neededImportedOnDemandTypes = body.neededImportedOnDemandTypes ++ cond.neededImportedOnDemandTypes;
 }
@@ -3837,7 +3837,7 @@ while::Stmt ::= t::While_t cond::Expr body::Stmt {
  while.localTypes = [];
 }
 
-aspect production do
+aspect production dowhile
 dowhile::Stmt ::= body::Stmt t::While_t cond::Expr {
  dowhile.localTypes = [];
 }
@@ -4220,7 +4220,7 @@ while::Stmt ::= t::While_t cond::Expr body::Stmt {
  while.neededFullyQualifiedTypes = cond.neededFullyQualifiedTypes ++ body.neededFullyQualifiedTypes;
 }
 
-aspect production do
+aspect production dowhile
 dowhile::Stmt ::= body::Stmt t::While_t cond::Expr {
  dowhile.neededFullyQualifiedTypes = body.neededFullyQualifiedTypes ++ cond.neededFullyQualifiedTypes;
 }

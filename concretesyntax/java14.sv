@@ -1176,7 +1176,7 @@ concrete production statementDo_c
 top::Statement
 	-- do-while statement
 	::=	'do' s::Statement t::While_t '(' e::Expression ')' ';' {  
- top.ast_Stmt = do (s.ast_Stmt, t, e.ast_Expr);
+ top.ast_Stmt = dowhile (s.ast_Stmt, t, e.ast_Expr);
 }
 
 concrete production statementBreak_c 
