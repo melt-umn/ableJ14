@@ -9,7 +9,7 @@ import edu:umn:cs:melt:ableJ14:abstractsyntax;
 -- Main driver function
 
 function driver
-IO ::= args::String io_in::IO extensionParser::Function (Root_C ::= String) hostParser::Function (Root_C ::= String) {
+IO ::= args::String io_in::IO extensionParser::(Root_C ::= String) hostParser::(Root_C ::= String) {
 
   local attribute commandLineFile :: String ;  
   commandLineFile = args ;
@@ -36,7 +36,7 @@ IO ::= args::String io_in::IO extensionParser::Function (Root_C ::= String) host
 
 -- driver function: separate function to generate the java translation of the command line argument
 function firstCompileFiles
-CompilationResult ::= io_in::IO commandLineFile::String extensionParser::Function (Root_C ::= String) classPath::String globalEnv::[ ScopeEnv ] {
+CompilationResult ::= io_in::IO commandLineFile::String extensionParser::(Root_C ::= String) classPath::String globalEnv::[ ScopeEnv ] {
 
  local attribute commandLineFileResult :: FileCompilationResult;
  commandLineFileResult = compileFile (io_in, commandLineFile, extensionParser, classPath, globalEnv);
@@ -54,7 +54,7 @@ CompilationResult ::= io_in::IO commandLineFile::String extensionParser::Functio
 
 -- main driver function
 function compileFiles
-CompilationResult ::= io_in::IO files_compiled::[String] files_to_compile::[String] extensionParser::Function (Root_C ::= String) classPath::String 
+CompilationResult ::= io_in::IO files_compiled::[String] files_to_compile::[String] extensionParser::(Root_C ::= String) classPath::String 
 			defs_so_far::[ EnvItem ] globalEnv::[ ScopeEnv ] {
 
  local attribute firstFile :: String;
@@ -86,7 +86,7 @@ function getNewFilesToCompile
 inherited attribute importErrors :: [ Error ] occurs on Root;
 
 function compileFile
-FileCompilationResult ::= io_in::IO fileToCompile::String extensionParser::Function (Root_C ::= String) classPath::String globalEnv::[ ScopeEnv ] {
+FileCompilationResult ::= io_in::IO fileToCompile::String extensionParser::(Root_C ::= String) classPath::String globalEnv::[ ScopeEnv ] {
 
   -- checking for .defs file
 

@@ -142,7 +142,7 @@ nonterminal ConvertBy with convertProd, superType, convertName, toConvertExpr, c
 -- convertedExpr is the converted expression that may have a 
 -- different type.
 
-synthesized attribute convertProd :: Production(Expr::=Expr) ;  -- maybe should be a local attr.
+synthesized attribute convertProd :: (Expr::=Expr) ;  -- maybe should be a local attr.
 synthesized attribute superType   :: TypeRep ;  -- the type we are converting to
 synthesized attribute convertName :: String ;
 synthesized attribute convertedExpr :: Expr ;  
@@ -151,7 +151,7 @@ inherited attribute   toConvertExpr :: Expr ;
 
 -- This is the generic "convert by" constructor.
 abstract production mkConvertBy
-c::ConvertBy ::= n::String p::Production(Expr::=Expr)  st::TypeRep 
+c::ConvertBy ::= n::String p::(Expr::=Expr)  st::TypeRep 
 {
  c.convertName = n ;
  c.convertProd = p ;

@@ -113,7 +113,7 @@ e::Expr ::= l::Expr r::Expr
 }
 
 function addThing
-[Expr] ::= p::Production(Expr ::= Expr Plus_t Expr) ls::[Expr] rs::[Expr]
+[Expr] ::= p::(Expr ::= Expr Plus_t Expr) ls::[Expr] rs::[Expr]
 {
  return [ p ( head(ls), terminal(Plus_t,"+",-2,-2), head(rs) ) ] ++ addThing ( p, tail(ls), tail(rs) ) ;
  -- we rely on laziness here, knowing that we only take the ones we need from
@@ -121,7 +121,7 @@ function addThing
 }
 
 function subThing
-[Expr] ::= p::Production(Expr ::= Expr Minus_t Expr) ls::[Expr] rs::[Expr]
+[Expr] ::= p::(Expr ::= Expr Minus_t Expr) ls::[Expr] rs::[Expr]
 {
  return [ p ( head(ls), terminal(Minus_t,"-",-3,-3), head(rs) ) ] ++ subThing ( p, tail(ls), tail(rs) ) ;
  -- we rely on laziness here, knowing that we only take the ones we need from
@@ -143,7 +143,7 @@ e::Expr ::= l::Expr r::Expr
 }
 
 function mulThing
-[Expr] ::= addp::Production(Expr ::= Expr Plus_t Expr) mulp::Production(Expr ::= Expr Mul_t Expr) ls::[Expr] rs::[Expr] 
+[Expr] ::= addp::(Expr ::= Expr Plus_t Expr) mulp::(Expr ::= Expr Mul_t Expr) ls::[Expr] rs::[Expr] 
 {
  return addLists(addp,ess) ;
 
@@ -153,28 +153,28 @@ function mulThing
 }
 
 function addLists 
-[Expr] ::= addp::Production(Expr ::= Expr Plus_t Expr)  ess::[[Expr]] 
+[Expr] ::= addp::(Expr ::= Expr Plus_t Expr)  ess::[[Expr]] 
 {
  return --if leng(ess)==0 then [::Expr] else 
         head(head(ess)) :: add2(addp, tail(head(ess)), addLists(addp,tail(ess))) ;
 }
 
 function add2
-[Expr] ::= addp::Production(Expr ::= Expr Plus_t Expr) l1::[Expr] l2::[Expr]
+[Expr] ::= addp::(Expr ::= Expr Plus_t Expr) l1::[Expr] l2::[Expr]
 {
  return --if leng(l1)==0 then l2 else
         addp(head(l1), terminal(Plus_t,"+",-4,-4), head(l2)) :: add2(addp,tail(l1),tail(l2)) ;
 }
 
 function do_cs
-[[Expr]] ::=  mp::Production(Expr ::= Expr Mul_t Expr) cs::[Expr] ds::[Expr]
+[[Expr]] ::=  mp::(Expr ::= Expr Mul_t Expr) cs::[Expr] ds::[Expr]
 {
  return --if leng(cs)==0 then [[::Expr]] else 
         do_c_to_ds(mp,head(cs),ds) :: do_cs(mp,tail(cs),ds) ;
 }
 
 function do_c_to_ds
-[Expr] ::= mp::Production(Expr ::= Expr Mul_t Expr) ce::Expr ds::[Expr]
+[Expr] ::= mp::(Expr ::= Expr Mul_t Expr) ce::Expr ds::[Expr]
 {
  return --if leng(ds)==0 then [::Expr] else
         (mp(ce,  terminal(Mul_t,"+",-4,-4), head(ds))) :: do_c_to_ds (mp,ce,tail(ds)) ;

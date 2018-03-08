@@ -10,7 +10,7 @@ import edu:umn:cs:melt:ableJ14:abstractsyntax:packages;
 -- Main driver function
 
 function driver
-IOVal<Integer> ::= args::[ String ] io_in::IO extensionParser::Function (ParseResult<Root_C> ::= String String) hostParser::Function (ParseResult<Root_C> ::= String String) {
+IOVal<Integer> ::= args::[ String ] io_in::IO extensionParser::(ParseResult<Root_C> ::= String String) hostParser::(ParseResult<Root_C> ::= String String) {
 
   local attribute commandLineFile :: String ;  
   commandLineFile = head (args);
@@ -53,7 +53,7 @@ IOVal<Integer> ::= args::[ String ] io_in::IO extensionParser::Function (ParseRe
 -- A lazy definition for the list of neededTypes and import-related errors
 
 function getNeededTypes
-[ LFQN_DecoratedRoot_Defs ]::= soFar::[ LFQN ] toDo::[ LFQN ] extensionParser::Function (ParseResult<Root_C> ::= String String) hostParser::Function (ParseResult<Root_C> ::= String String) classPathDirectories::[ String ] currentDirectory::String globalEnv::[ ScopeEnv ] {
+[ LFQN_DecoratedRoot_Defs ]::= soFar::[ LFQN ] toDo::[ LFQN ] extensionParser::(ParseResult<Root_C> ::= String String) hostParser::(ParseResult<Root_C> ::= String String) classPathDirectories::[ String ] currentDirectory::String globalEnv::[ ScopeEnv ] {
 
   local attribute firstToDo :: LFQN;
   firstToDo = head (toDo);
@@ -70,7 +70,7 @@ function getNeededTypes
 }
 
 function getNeededTypesStartingWithCommandLine
-[ LFQN_DecoratedRoot_Defs ] ::= commandLineFile::String extensionParser::Function (ParseResult<Root_C> ::= String String) hostParser::Function (ParseResult<Root_C> ::= String String) classPathDirectories::[ String ] currentDirectory::String globalEnv::[ ScopeEnv ] {
+[ LFQN_DecoratedRoot_Defs ] ::= commandLineFile::String extensionParser::(ParseResult<Root_C> ::= String String) hostParser::(ParseResult<Root_C> ::= String String) classPathDirectories::[ String ] currentDirectory::String globalEnv::[ ScopeEnv ] {
 
   local attribute commandLineFileResult :: CommandLineLFQNs_DecoratedRoot;
   commandLineFileResult = getNeededTypesForCommandLineFile (commandLineFile, extensionParser, hostParser, classPathDirectories, currentDirectory, globalEnv);
@@ -86,7 +86,7 @@ inherited attribute importErrors :: [ Error ] occurs on Root;
 -- the function reads in the file and gets the list of needed files, errors and type defs, and writes
 -- the list of needed files, the type defs and import-related errors to a .defs file
 function getNeededTypesForOneFile
-LFQNs_DecoratedRoot_Defs ::= T::LFQN extensionParser::Function (ParseResult<Root_C> ::= String String) hostParser::Function (ParseResult<Root_C> ::= String String) classPathDirectories::[ String ] currentDirectory::String globalEnv::[ ScopeEnv ] {
+LFQNs_DecoratedRoot_Defs ::= T::LFQN extensionParser::(ParseResult<Root_C> ::= String String) hostParser::(ParseResult<Root_C> ::= String String) classPathDirectories::[ String ] currentDirectory::String globalEnv::[ ScopeEnv ] {
 
   -- first check to see if a .defs file exists and is nonempty, if it does, we get the info from it
 
@@ -215,7 +215,7 @@ LFQNs_DecoratedRoot_Defs ::= T::LFQN extensionParser::Function (ParseResult<Root
 -- i.e., you can't do ejc ../../T1.java.
 -- I'll fix this when I separate out the different classes into their own files.
 function getNeededTypesForCommandLineFile
-CommandLineLFQNs_DecoratedRoot ::= commandLineFile::String extensionParser::Function (ParseResult<Root_C> ::= String String) hostParser::Function (ParseResult<Root_C> ::= String String) classPathDirectories::[ String ] currentDirectory::String globalEnv::[ ScopeEnv ] {
+CommandLineLFQNs_DecoratedRoot ::= commandLineFile::String extensionParser::(ParseResult<Root_C> ::= String String) hostParser::(ParseResult<Root_C> ::= String String) classPathDirectories::[ String ] currentDirectory::String globalEnv::[ ScopeEnv ] {
 
   local attribute javaFileRead :: IOVal<String>;
   javaFileRead = readFile (commandLineFile, unsafeIO ());
