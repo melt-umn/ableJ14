@@ -144,7 +144,7 @@ ptn::PackageOrTypeName ::= pn::PackageOrTypeName id::Id_t {
  q = pn.disambiguatedName;
 
  local attribute typesToSearch :: [ ScopeEnv ];
- typesToSearch = case q'' of
+ typesToSearch = case q of
                  disambiguated_type_name (t) ->
                     case t of
                             classTypeRep (ctr) -> ctr.innerTypes |
@@ -160,13 +160,13 @@ ptn::PackageOrTypeName ::= pn::PackageOrTypeName id::Id_t {
 
  local attribute firstType :: TypeRep;
  firstType = case (head (typeSearchResult)).dclrep of
-                  dcl_rep_class (class_dcl_rep (_, t)) -> t'' |
-                  dcl_rep_interface (interface_dcl_rep (_, t)) -> t'' |
+                  dcl_rep_class (class_dcl_rep (_, t)) -> t |
+                  dcl_rep_interface (interface_dcl_rep (_, t)) -> t |
                   _ -> error ("Internal compiler error 3 production qualified_package_or_type_name " ++ ptn.pp)
               end;
 
  ptn.disambiguatedName =
- case q'' of
+ case q of
  disambiguated_package_name (p) ->
 	    case ptn.resolvedPackageOrTypeName of
 		fully_qualified_name_unknown () -> 
@@ -261,7 +261,7 @@ tn::TypeName ::= pn::PackageOrTypeName id::Id_t {
  q = pn.disambiguatedName;
 
  local attribute typesToSearch :: [ ScopeEnv ];
- typesToSearch = case q'' of
+ typesToSearch = case q of
                  disambiguated_type_name (t) ->
                     case t of
                             classTypeRep (ctr) -> ctr.innerTypes |
@@ -277,13 +277,13 @@ tn::TypeName ::= pn::PackageOrTypeName id::Id_t {
 
  local attribute firstType :: TypeRep;
  firstType = case (head (typeSearchResult)).dclrep of
-                  dcl_rep_class (class_dcl_rep (_, t)) -> t'' |
-                  dcl_rep_interface (interface_dcl_rep (_, t)) -> t'' |
+                  dcl_rep_class (class_dcl_rep (_, t)) -> t |
+                  dcl_rep_interface (interface_dcl_rep (_, t)) -> t |
                   _ -> error ("Internal compiler error 3 production qualified_type_name " ++ tn.pp)
               end;
 
  tn.disambiguatedName =
- case q'' of
+ case q of
  disambiguated_package_name (p) ->
 	     case tn.resolvedPackageOrTypeName of
 		fully_qualified_name_unknown () -> disambiguated_error_name (resolvedPackageOrType.errors) |
@@ -397,7 +397,7 @@ en::ExprName ::= an::AmbiguousName  id::Id_t {
  q = an.disambiguatedName;
 
  local attribute fieldsToSearch :: [ ScopeEnv ];
- fieldsToSearch = case q'' of
+ fieldsToSearch = case q of
                   disambiguated_type_name (t) ->
                          case t of
                             classTypeRep (ctr) -> ctr.fields |
@@ -420,12 +420,12 @@ en::ExprName ::= an::AmbiguousName  id::Id_t {
 
  local attribute firstField :: FieldDclRep;
  firstField = case (head (fieldSearchResult)).dclrep of
-                  dcl_rep_field (fdr) -> fdr'' |
+                  dcl_rep_field (fdr) -> fdr |
                   _ -> error ("Internal compiler error 4 production qualified_expr_name " ++ en.pp)
               end;
 
  en.disambiguatedName =
-   case q'' of
+   case q of
    disambiguated_package_name (_) ->
              disambiguated_error_name ([mkError (id.line, "Expression Name " ++ en.pp ++ " cannot have package name as component")]) |
 
@@ -574,7 +574,7 @@ mn::MethodName ::= an::AmbiguousName id::Id_t {
  q = an.disambiguatedName;
 
  local attribute methodsToSearch :: [ ScopeEnv ];
- methodsToSearch = case q'' of
+ methodsToSearch = case q of
                    disambiguated_type_name (t) ->
                        case t of
                             classTypeRep (ctr) -> ctr.methods |
@@ -596,7 +596,7 @@ mn::MethodName ::= an::AmbiguousName id::Id_t {
  methodSearchResult = lookupId (id, methodsToSearch);
 
  mn.disambiguatedName =
-   case q'' of
+   case q of
    disambiguated_package_name (_) ->
              disambiguated_error_name ( [mkError (id.line, "Method Name " ++ mn.pp ++ " cannot have package name as component")]) |
 
@@ -728,7 +728,7 @@ andi::AmbiguousName ::= an::AmbiguousName id::Id_t {
  q = an.disambiguatedName;
 
  local attribute fieldsToSearch :: [ ScopeEnv ];
- fieldsToSearch = case q'' of
+ fieldsToSearch = case q of
                   disambiguated_type_name (t) ->
                          case t of
                             classTypeRep (ctr) -> ctr.fields |
@@ -750,12 +750,12 @@ andi::AmbiguousName ::= an::AmbiguousName id::Id_t {
 
  local attribute firstField :: FieldDclRep;
  firstField = case (head (fieldSearchResult)).dclrep of
-                  dcl_rep_field (fdr) -> fdr'' |
+                  dcl_rep_field (fdr) -> fdr |
                   _ -> error ("Internal compiler error 4 production qualified_ambiguous_name" ++ andi.pp)
               end;
 
  local attribute typesToSearch :: [ ScopeEnv ];
- typesToSearch = case q'' of
+ typesToSearch = case q of
                  disambiguated_type_name (t) ->
                          case t of
                             classTypeRep (ctr) -> ctr.innerTypes |
@@ -780,13 +780,13 @@ andi::AmbiguousName ::= an::AmbiguousName id::Id_t {
 
  local attribute firstType :: TypeRep;
  firstType = case (head (typeSearchResult)).dclrep of
-                  dcl_rep_class (class_dcl_rep (_, t)) -> t'' |
-                  dcl_rep_interface (interface_dcl_rep (_, t)) -> t'' |
+                  dcl_rep_class (class_dcl_rep (_, t)) -> t |
+                  dcl_rep_interface (interface_dcl_rep (_, t)) -> t |
                   _ -> error ("Internal compiler error 8 production qualified_ambiguous_name" ++ andi.pp)
               end;
 
  andi.disambiguatedName =
- case q'' of
+ case q of
  disambiguated_package_name (p) ->
 	     case andi.resolvedPackageOrTypeName of
 		fully_qualified_name_unknown () -> 
@@ -923,7 +923,7 @@ andi::AmbiguousName ::= an::AmbiguousName id::Id_t {
 
 function hasUnknownSupers
 Boolean ::= t::TypeRep {
- return case t'' of
+ return case t of
         classTypeRep (ct) -> ct.name != "Object" && (equality_check (ct.superClass, unknownTypeRep ()) || hasUnknownSupers (ct.superClass)) |
         interfaceTypeRep (it) -> false |
         _ -> error ("Internal compiler error in function hasUnknownSupers " ++ t.pp)
@@ -935,7 +935,7 @@ function getMethodDclReps
  return if null (dis)
 	then []
 	else (case head (dis) of
-		dclInfo (_, dcl_rep_method (mdr), _) -> [ mdr'' ] |
+		dclInfo (_, dcl_rep_method (mdr), _) -> [ mdr ] |
 		_ -> error ("Internal compiler error in getMethodDclReps")
 	      end) ++ getMethodDclReps (tail (dis));
 }

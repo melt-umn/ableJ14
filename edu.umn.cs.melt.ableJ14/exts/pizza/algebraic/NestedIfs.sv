@@ -25,7 +25,7 @@ terminal AswitchTerm        'aswitch'      dominates {Id_t};
 
 concrete production algebraic_switch_c
 s::Statement ::= t::AswitchTerm '(' e::Expression ')' b::Algebraic_Switch_Block_c {
-  s.ast_Stmt = algebraic_switch (t'', e.ast_Expr, b.ast_algebraic_switch_block);
+  s.ast_Stmt = algebraic_switch (t, e.ast_Expr, b.ast_algebraic_switch_block);
 }
 
 concrete production algebraic_switch_block_c
@@ -161,7 +161,7 @@ switch::Stmt ::= t::AswitchTerm expr::Expr switchblock::Algebraic_Switch_Block {
                                         type_typerep (expr.typerep),
                                         var_declarators_one (var_declarator_init (
                                                         var_declarator_id (terminal (Id_t, temp_switched_name)),
-                                                        var_init_expr (expr'')))));
+                                                        var_init_expr (expr)))));
 
  local attribute temp_done_name :: String;
  temp_done_name = temp_switched_name ++ "__done";
@@ -233,7 +233,7 @@ switch::Algebraic_Switch_Group ::= p::Pattern stmts::Stmt {
  switch.errors := p.errors;
 
  switch.ast_Stmt = p.ast_Stmt;
- p.switch_statement = stmt_seq (switch.set_done_true, stmts'');
+ p.switch_statement = stmt_seq (switch.set_done_true, stmts);
 
  stmts.pp_indent = switch.pp_indent + 3;
 }

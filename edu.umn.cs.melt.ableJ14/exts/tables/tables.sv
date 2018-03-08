@@ -30,7 +30,7 @@ t::Expr ::= trows::TableRows
  t.typerep = booleanTypeRep ();
  t.errors := trows.errors ;
 
- forwards to exprBlock ( trows.trow_dcls, body'', primitive_type (boolean_type ()), ret_expr'' ) ;
+ forwards to exprBlock ( trows.trow_dcls, body, primitive_type (boolean_type ()), ret_expr'' ) ;
 
  --  ({ (boolean t1 = c1, boolean t2 = c2, boolean t3 = c3)
  --     boolean result ;
@@ -127,7 +127,7 @@ trow::TableRow ::= e::Expr tvl::TruthValueList_c
 
  trow.trow_dcl = exprBlockParam ( primitive_type(boolean_type()), 
                                   var_declarator_id(terminal(Id_t,temp_name)) ,
-                                  var_init_expr(e'') ) ;                                  
+                                  var_init_expr(e) ) ;                                  
 
  local attribute temp_name :: String ;
  temp_name = "temp" ++  toString(genInt()) ;
@@ -240,13 +240,13 @@ function transpose
 [[Expr]] ::= matrix::[[Expr]]
 {
  return if length(matrix) == 1 -- matrix.length_Expr_List == 1
-        then mapWrap_Expr ( row'' )
-        else mapCons_Expr ( row'' , 
-               transpose ( tail(matrix'')) -- matrix.tail_Expr_List )
+        then mapWrap_Expr ( row )
+        else mapCons_Expr ( row , 
+               transpose ( tail(matrix)) -- matrix.tail_Expr_List )
               ) ;
 
  local attribute row :: [Expr] ;
- row = head(matrix'') ; -- matrix.head_Expr_List ;
+ row = head(matrix) ; -- matrix.head_Expr_List ;
 }
 
 
@@ -254,21 +254,21 @@ function transpose
 function mapCons_Expr
 [[Expr]] ::= row::[Expr] matrix::[[Expr]]
 {
- return if null(row'')
+ return if null(row)
          then [ ]
          else cons (
-                 cons ( head(row'') , head(matrix'') ) ,
-                 mapCons_Expr ( tail(row'') , tail(matrix'') ) ) ;
+                 cons ( head(row) , head(matrix) ) ,
+                 mapCons_Expr ( tail(row) , tail(matrix) ) ) ;
 }
 
 
 function mapWrap_Expr
 [[Expr]] ::= l::[Expr]
 {
- return  if null(l'')
+ return  if null(l)
          then [ ] 
          else cons (
-                 cons ( head(l''), [ ] ),
-                 mapWrap_Expr ( tail(l'') ) ) ;
+                 cons ( head(l), [ ] ),
+                 mapWrap_Expr ( tail(l) ) ) ;
 }
 

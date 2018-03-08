@@ -122,7 +122,7 @@ function mapCons_ConvertBy
 {
  return if null(tails)
         then []
-        else (hd'' :: head(tails) ) ::
+        else (hd :: head(tails) ) ::
              mapCons_ConvertBy (hd, tail(tails)) ;
 }
 
@@ -163,7 +163,7 @@ Boolean ::= e::ConvertBy l::[ConvertBy]
 abstract production idConvertBy
 e::Expr ::= e2::Expr 
 { -- e.pp = "idConvertBy(" ++ e2.pp ++ ")" ;
-  forwards to e2'' ; 
+  forwards to e2 ; 
 }
 
 

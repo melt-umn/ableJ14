@@ -38,7 +38,7 @@ trows::TableRows_c ::= trow::TableRow_c
 
 concrete production tableRow_c
 trow::TableRow_c ::= e::Expression ':'  tvs::TruthValueList_c
-{ trow.ast_TableRow = tableRow(e.ast_Expr, tvs'') ; 
+{ trow.ast_TableRow = tableRow(e.ast_Expr, tvs) ; 
 }
 
 --Truth Value List

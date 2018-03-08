@@ -41,9 +41,9 @@ cdcl::Class_Dcl ::= {
 abstract production class_dcl
 cdcl::Class_Dcl ::= mods::Modifiers cname::Id_t parent::TypeName inters::TypeNames cb::Class_Body {
   cdcl.pp = mods.pp ++ "class " ++ cname.lexeme ++ " extends " ++ parent.pp ++ 
-		(case inters'' of type_names_none () -> "" | _ -> " implements " ++ inters.pp end) ++ " " ++ cb.pp;
+		(case inters of type_names_none () -> "" | _ -> " implements " ++ inters.pp end) ++ " " ++ cb.pp;
   cdcl.basepp = mods.basepp ++ "class " ++ cname.lexeme ++ " extends " ++ parent.basepp ++ 
-		(case inters'' of type_names_none () -> "" | _ -> " implements " ++ inters.basepp end) ++ " " ++ cb.basepp;
+		(case inters of type_names_none () -> "" | _ -> " implements " ++ inters.basepp end) ++ " " ++ cb.basepp;
 
   cdcl.errors := mods.errors ++ parentErrors ++ inters.errors ++ cb.errors ;
 

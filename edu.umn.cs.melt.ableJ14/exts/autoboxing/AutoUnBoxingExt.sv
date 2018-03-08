@@ -15,7 +15,7 @@ ct::ClassTypeRep ::= cname::String qualifiedName_::String modlist_::[ Modifier ]
 
 abstract production convert_Byte_to_byte 
 prim::Expr ::= ref::Expr {
- forwards to expr_stmt_expr (expr_method_call(ref'', terminal(Id_t,"byteValue"),exprs_none())); 
+ forwards to expr_stmt_expr (expr_method_call(ref, terminal(Id_t,"byteValue"),exprs_none())); 
 }
 
 -- Converting Char to char
@@ -29,7 +29,7 @@ ct::ClassTypeRep ::= cname::String qualifiedName_::String modlist_::[ Modifier ]
 
 abstract production convert_Char_to_char 
 prim::Expr ::= ref::Expr {
- forwards to expr_stmt_expr (expr_method_call(ref'', terminal(Id_t,"charValue"),exprs_none())); 
+ forwards to expr_stmt_expr (expr_method_call(ref, terminal(Id_t,"charValue"),exprs_none())); 
 }
 
 -- Converting Short to short
@@ -43,7 +43,7 @@ ct::ClassTypeRep ::= cname::String qualifiedName_::String modlist_::[ Modifier ]
 
 abstract production convert_Short_to_short 
 prim::Expr ::= ref::Expr {
- forwards to expr_stmt_expr (expr_method_call(ref'', terminal(Id_t,"shortValue"),exprs_none())); 
+ forwards to expr_stmt_expr (expr_method_call(ref, terminal(Id_t,"shortValue"),exprs_none())); 
 }
 
 -- Converting Integer to int
@@ -57,7 +57,7 @@ ct::ClassTypeRep ::= cname::String qualifiedName_::String modlist_::[ Modifier ]
 
 abstract production convert_Integer_to_int 
 prim::Expr ::= ref::Expr {
- forwards to expr_stmt_expr (expr_method_call(ref'', terminal(Id_t,"intValue"),exprs_none())); 
+ forwards to expr_stmt_expr (expr_method_call(ref, terminal(Id_t,"intValue"),exprs_none())); 
 }
 
 -- Converting Long to long
@@ -71,7 +71,7 @@ ct::ClassTypeRep ::= cname::String qualifiedName_::String modlist_::[ Modifier ]
 
 abstract production convert_Long_to_long 
 prim::Expr ::= ref::Expr {
- forwards to expr_stmt_expr (expr_method_call(ref'', terminal(Id_t,"longValue"),exprs_none())); 
+ forwards to expr_stmt_expr (expr_method_call(ref, terminal(Id_t,"longValue"),exprs_none())); 
 }
 
 -- Converting Float to float
@@ -85,7 +85,7 @@ ct::ClassTypeRep ::= cname::String qualifiedName_::String modlist_::[ Modifier ]
                            
 abstract production convert_Float_to_float
 prim::Expr ::= ref::Expr {
- forwards to expr_stmt_expr (expr_method_call(ref'', terminal(Id_t,"floatValue"),exprs_none())); 
+ forwards to expr_stmt_expr (expr_method_call(ref, terminal(Id_t,"floatValue"),exprs_none())); 
 }
 
 -- Converting Double to double
@@ -99,7 +99,7 @@ ct::ClassTypeRep ::= cname::String qualifiedName_::String modlist_::[ Modifier ]
                            
 abstract production convert_Double_to_double
 prim::Expr ::= ref::Expr {
- forwards to expr_stmt_expr (expr_method_call(ref'', terminal(Id_t,"doubleValue"),exprs_none())); 
+ forwards to expr_stmt_expr (expr_method_call(ref, terminal(Id_t,"doubleValue"),exprs_none())); 
 }
 
 -- Converting Boolean to boolean
@@ -113,5 +113,5 @@ ct::ClassTypeRep ::= cname::String qualifiedName_::String modlist_::[ Modifier ]
 
 abstract production convert_Boolean_to_boolean 
 prim::Expr ::= ref::Expr {
- forwards to expr_stmt_expr (expr_method_call(ref'', terminal(Id_t,"booleanValue"),exprs_none())); 
+ forwards to expr_stmt_expr (expr_method_call(ref, terminal(Id_t,"booleanValue"),exprs_none())); 
 }

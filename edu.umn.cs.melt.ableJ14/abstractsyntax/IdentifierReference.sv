@@ -12,7 +12,7 @@ lhs::LHS ::= en::ExprName {
  lhs.pp = en.pp;
 
  forwards to case en.disambiguatedName of
-                  disambiguated_expr_name (l) -> l'' |
+                  disambiguated_expr_name (l) -> l |
                   disambiguated_error_name (errs) -> erroneous_LHS (lhs, errs) |
                   _ -> error ("Internal compiler error in production lhs_name " ++ lhs.pp)
 	     end ;

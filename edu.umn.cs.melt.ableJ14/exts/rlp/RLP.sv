@@ -91,8 +91,8 @@ s::Stmt ::= pt::Type  dcl::Var_Declarator
   -- "pt dcl ;"
   -- "pt e_x ;"
   stmt_seq (
-   stmt_dcl (local_var_dcl(pt'', var_declarators_one (dcl'') ) ) ,
-   stmt_dcl (local_var_dcl(pt'', var_declarators_one ( var_declarator_init (
+   stmt_dcl (local_var_dcl(pt, var_declarators_one (dcl) ) ) ,
+   stmt_dcl (local_var_dcl(pt, var_declarators_one ( var_declarator_init (
                    var_declarator_id (terminal(Id_t,"e_" ++ dcl.name)),
                    var_init_expr ( -- AST for "java.lang.Math.random()"
                                    ast_java_lang_Math_random_method_call )
@@ -146,7 +146,7 @@ s::Stmt ::= lhs::LHS e::Expr
 		[ getQualifiedFQN (getQualifiedFQN (getQualifiedFQN ( getQualifiedFQN (getQualifiedFQN ( getQualifiedFQN (getQualifiedFQN ( 
 			getSimpleFQN ("edu"), "umn"), "cs"), "melt"), "ableJ14"), "exts"), "rlp"), "Sign") ];
  forwards to if   null(lhs.errors ++ e.errors)
-             then signSym (lhs'',e.symTree)  
+             then signSym (lhs,e.symTree)  
              else erroneous_Stmt ( s, lhs.errors ++ e.errors ) ;
 }
 
@@ -160,7 +160,7 @@ e::Expr ::= e1::Expr t::Mul_t e2::Expr
 {
  dispatches <-
     if   e1.typerep.isPeturbedType && e2.typerep.isPeturbedType
-    then [ multiplyRLP(e1'',e2'') ]
+    then [ multiplyRLP(e1,e2) ]
     else [ ] ;
 
  -- if e1 and e2 are RLP types the overload multiply (mul)
@@ -182,7 +182,7 @@ aspect production plus
 e::Expr ::= e1::Expr t::Plus_t e2::Expr {
  dispatches <-
     if   e1.typerep.isPeturbedType && e2.typerep.isPeturbedType
-    then [ addRLP(e1'',e2'') ]
+    then [ addRLP(e1,e2) ]
     else [ ] ;
 }
 
@@ -200,7 +200,7 @@ aspect production minus
 e::Expr ::= e1::Expr t::Minus_t e2::Expr {
  dispatches <- 
     if   e1.typerep.isPeturbedType && e2.typerep.isPeturbedType
-    then [ subtractRLP(e1'',e2'') ]
+    then [ subtractRLP(e1,e2) ]
     else [ ] ;
 }
 
@@ -235,7 +235,7 @@ e::LHS ::= id::Id_t dr::DclRep
                               " must be a local variable.") ] )
     else 
     if   dr.local_rep.typerep.isPeturbedType
-    then idRefTrans(id, dr'')
+    then idRefTrans(id, dr)
     else erroneous_Expr (
            expr_lhs(e), 
            [ mkError (id.line, "Identifier " ++ id.lexeme ++ 

@@ -102,7 +102,7 @@ lhs::LHS ::= e1::Expr id::Id_t {
 
  local attribute firstField :: FieldDclRep;
  firstField = case (head (fieldSearchResult)).dclrep of
-                  dcl_rep_field (fdr) -> fdr'' |
+                  dcl_rep_field (fdr) -> fdr |
                   _ -> error ("Internal compiler error 2 production expr_field_access " ++ lhs.pp)
               end;
 
@@ -187,7 +187,7 @@ e::Stmt_Expr ::= obj::Expr id::Id_t params::Exprs {
 
  local attribute firstMethod :: MethodDclRep;
  firstMethod = case (head (methodSearchResult)).dclrep of
-                  dcl_rep_method (mdr) -> mdr'' |
+                  dcl_rep_method (mdr) -> mdr |
                   _ -> error ("Internal compiler error 2 in production method_call " ++ e.pp)
                end;
 
@@ -398,7 +398,7 @@ e::Stmt_Expr ::= t::TypeName params::Exprs cb::Class_Body typeFQN::FullyQualifie
   fqn = getQualifiedFQN (e.qualifiersSoFar, anon_class_name);
 
   local attribute this_typerepdefs :: TypeRep ;
-  this_typerepdefs = case tr'' of
+  this_typerepdefs = case tr of
 		      classTypeRep (_) -> classTypeRepDefs (class_type_rep_defs (anon_class_name, fqn.qualifiedName, [ ], typeFQN, [ ], 
 								cb.field_defs, cb.method_defs,cb.constructor_defs, cb.inner_type_defs)) |
 		      interfaceTypeRep (_) -> classTypeRepDefs (class_type_rep_defs (anon_class_name, fqn.qualifiedName, [ ], 
@@ -461,7 +461,7 @@ abstract production cast_simple
 e::Expr ::= t::Expr e1::Expr {
   e.pp = "((" ++ t.pp ++ ") " ++ e1.pp ++ ")";
 
-  forwards to case t'' of
+  forwards to case t of
 		expr_lhs (lhs_name (en)) -> cast_prod (getTypeNameFromExprName (en), e1) |
 		_ -> cast_expression (t, e1)
 	      end;
@@ -469,7 +469,7 @@ e::Expr ::= t::Expr e1::Expr {
 
 function getTypeNameFromExprName
 TypeName ::= en::ExprName {
-  return case en'' of
+  return case en of
 		simple_expr_name (id) -> simple_type_name (id) |
 		qualified_expr_name (an, id) -> qualified_type_name (getPackageOrTypeNameFromAmbiguousName (an), id) |
 		_ -> error ("Internal error in getTypeNameFromExprName " ++ en.pp)
@@ -478,7 +478,7 @@ TypeName ::= en::ExprName {
 
 function getPackageOrTypeNameFromAmbiguousName
 PackageOrTypeName ::= an::AmbiguousName {
-  return case an'' of
+  return case an of
 		simple_ambiguous_name (id) -> simple_package_or_type_name (id) |
 		qualified_ambiguous_name (a, id) -> qualified_package_or_type_name (getPackageOrTypeNameFromAmbiguousName (a), id) |
 		_ -> error ("Internal error in getPackageOrTypeNameFromAmbiguousName " ++ an.pp)

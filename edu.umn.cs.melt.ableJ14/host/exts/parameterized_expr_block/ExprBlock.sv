@@ -89,12 +89,12 @@ e::Expr ::= params::ExprBlockParams bs::Stmt returnType::Type re::Expr
 						method_dcl_prod (
 				                           -- Method_Header
 				                           method_header_prod ( modifiers_one (public()),
-										returnType'',
+										returnType,
 										terminal(Id_t,"doit"),
 										params.exprBlockFormals,
 										throws_none() ),
                 				           -- Block
-				                           block(bs''))))))),
+				                           block(bs))))))),
 	terminal(Id_t,"doit") ,
 	params.exprBlockParamExprs));
 
@@ -140,7 +140,7 @@ p::ExprBlockParam ::= t::Type v::Var_Declarator_Id init::Var_Init
  p.pp = t.pp ++ " " ++ v.pp ++ " = " ++ init.pp ;
  p.errors := t.errors ++ init.errors ;
  p.exprBlockParamExpr = init.exprBlockParamExpr ;
- p.exprBlockFormal = formal_param(t'',v'') ;
+ p.exprBlockFormal = formal_param(t,v) ;
 
  p.defs = [ envItem (v.name, getSimpleFQN ("NoFQN"), paramDcl (v.name, t.typerep)) ];
 
@@ -153,7 +153,7 @@ p::ExprBlockParam ::= t::Type v::Var_Declarator_Id init::Var_Init
 attribute exprBlockParamExpr occurs on Var_Init ;
 aspect production var_init_expr
 init::Var_Init ::= e::Expr {
-  init.exprBlockParamExpr = e'' ;
+  init.exprBlockParamExpr = e ;
 }
 
 

@@ -295,7 +295,7 @@ LFQNs_Errors ::= currentPack::FullyQualifiedName classPathDirectories::[ String 
  currentDirectoryOnlySearch = findCurrentPackageInClassPath (currentPack, [ currentDirectory ], currentFile);
  
  local attribute lfqns::[ LFQN ];
- lfqns = case currentPack'' of
+ lfqns = case currentPack of
 -- if there is no package, we search in the current directory
 		fully_qualified_name_none () -> currentDirectoryOnlySearch.L_FQNs |
 		fully_qualified_name_unknown () -> [ ] |
@@ -1120,7 +1120,7 @@ function filterOutPackageDefs
 
 function samePackage
 Boolean ::= typ::FullyQualifiedName pack::FullyQualifiedName {
- return case typ'' of
+ return case typ of
 		fully_qualified_name_none () -> false |
 		fully_qualified_name_simple (id1) -> false |
 		fully_qualified_name_qualified (qn1, id1) -> equalFullyQualifiedName (    (qn1), pack)

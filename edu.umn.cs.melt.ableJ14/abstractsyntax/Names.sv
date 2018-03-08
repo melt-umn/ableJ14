@@ -38,11 +38,11 @@ fqn::FullyQualifiedName ::= n::Id_t {
 
 abstract production fully_qualified_name_qualified
 fqn::FullyQualifiedName ::= fqn1::FullyQualifiedName n::Id_t {
-    fqn.qualifiedFileName = case fqn1'' of
+    fqn.qualifiedFileName = case fqn1 of
 				fully_qualified_name_none () -> n.lexeme |
 				_ -> fqn1.qualifiedFileName ++ "/" ++ n.lexeme
 			    end;
-    fqn.qualifiedName = case fqn1'' of
+    fqn.qualifiedName = case fqn1 of
 				fully_qualified_name_none () -> n.lexeme |
 				_ -> fqn1.qualifiedName ++ "." ++ n.lexeme
 			end;
@@ -122,21 +122,21 @@ String ::= lfqns::[ LFQN ] {
 function equalFullyQualifiedName
 Boolean ::= fqn1::FullyQualifiedName fqn2::FullyQualifiedName {
  return (
-  case fqn1'' of  
+  case fqn1 of  
      fully_qualified_name_none () ->
-	(case fqn2'' of
+	(case fqn2 of
  		fully_qualified_name_none () -> true |
 		_ -> false
 	 end) |
 
      fully_qualified_name_simple (id1) -> 
-	(case fqn2'' of
+	(case fqn2 of
 		fully_qualified_name_simple (id2) -> id1.lexeme == id2.lexeme |
 		_ -> false
 	 end) |
 
      fully_qualified_name_qualified (qn1, id1) ->
-	(case fqn2'' of
+	(case fqn2 of
 		fully_qualified_name_qualified (qn2, id2) -> id1.lexeme == id2.lexeme && equalFullyQualifiedName (    (qn1),     (qn2)) |
 		_ -> false
          end)

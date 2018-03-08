@@ -16,9 +16,9 @@ td::Type_Dcl ::= idcl::Interface_Dcl {
 
 abstract production interface_dcl
 idcl::Interface_Dcl ::= mods::Modifiers iname::Id_t inters::TypeNames dcls::Interface_Member_Dcls {
-  idcl.pp = mods.pp ++ "interface " ++ iname.lexeme ++ (case inters'' of type_names_none () -> "" | _ -> " extends " ++ inters.pp end) ++ 
+  idcl.pp = mods.pp ++ "interface " ++ iname.lexeme ++ (case inters of type_names_none () -> "" | _ -> " extends " ++ inters.pp end) ++ 
 			" {" ++ space(dcls.pp_indent) ++ dcls.pp ++ "\n" ++ space(idcl.pp_indent) ++ "}";
-  idcl.basepp = mods.basepp ++ "interface " ++ iname.lexeme ++ (case inters'' of type_names_none () -> "" | _ -> " extends " ++ inters.basepp end) ++ 
+  idcl.basepp = mods.basepp ++ "interface " ++ iname.lexeme ++ (case inters of type_names_none () -> "" | _ -> " extends " ++ inters.basepp end) ++ 
 			" {" ++ space(dcls.pp_indent) ++ dcls.basepp ++ "\n" ++ space(idcl.pp_indent) ++ "}";
 
   dcls.pp_indent = idcl.pp_indent + 3;

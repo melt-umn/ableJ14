@@ -131,7 +131,7 @@ FileCompilationResult ::= io_in::IO fileToCompile::String extensionParser::Funct
 
   local attribute fileDefs :: [ EnvItem ];
   fileDefs = if defsFileExists.bValue
-	 	then case defsInfo'' of
+	 	then case defsInfo of
 			defs_file_info (_, typeDefs, _) -> typeDefs |
 			_ -> error ("Internal compiler error 1 in function compileFile with file " ++ fileToCompile)
 		     end
@@ -182,7 +182,7 @@ FileCompilationResult ::= io_in::IO fileToCompile::String extensionParser::Funct
   r.importErrors = availableSingleTypeErrors.errors ++ availableCurrentPackageTypeErrors.errors ++ availableOnDemandTypeErrors.errors;
 
   return if defsFileExists.bValue
-	 then case defsInfo'' of
+	 then case defsInfo of
 		defs_file_info (ts, typeDefs, errs) -> file_compilation_result (jextFileRead.io, getPackageFiles (classPath, ts), r, typeDefs) |
 		_ -> error ("Internal compiler error 2 in function compileFile with file " ++ fileToCompile)
 	      end

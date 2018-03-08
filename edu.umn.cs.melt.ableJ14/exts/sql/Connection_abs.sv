@@ -62,7 +62,7 @@ DclRep ::= n::String fqn::FullyQualifiedName u::String
 abstract production connectionTypeRep
 top::TypeRep ::= n::String fqn::FullyQualifiedName u::String 
                  td::[Decorated TableBinding] tr::TypeRep {
-  forwards to tr'';
+  forwards to tr;
 }
 
 abstract production type_connection_dcl

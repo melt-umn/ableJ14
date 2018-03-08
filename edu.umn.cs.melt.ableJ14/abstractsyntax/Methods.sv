@@ -138,7 +138,7 @@ mh::Method_Header ::= mods::Modifiers t::Type md::Method_Declarator th::Throws {
   local attribute newReturnType :: Type;
   newReturnType = if md.dimensions == 0
 			then t
-			else reference_type (array_type (case t'' of
+			else reference_type (array_type (case t of
 								primitive_type (pt) -> primitive_array (pt, md.dimensions) |
 								reference_type (name_type (tn)) -> name_array (tn, md.dimensions) |
 								void_type () -> error ("void method declarator array in " ++ md.method_id.lexeme) | 

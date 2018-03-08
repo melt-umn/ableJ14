@@ -39,7 +39,7 @@ forstmt::Stmt ::= f::For_t t::Type id::Id_t e::Expr body::Stmt labs::[ Id_t ] {
   isResultSet = subtype_check (e.typerep, retrieveTypeRep ("java.sql.ResultSet", forstmt.type_env)).isSubType;
 
   forwards to if isResultSet
-		then resultSetTranslation''
+		then resultSetTranslation
 	      else empty_stmt ();
 
   body.pp_indent = forstmt.pp_indent + 3;

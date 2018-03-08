@@ -17,9 +17,9 @@ t::TypeRep ::= pt::TypeRep
  t.superTypes_ConvertBy := [ ] ;
 
  t.isPeturbedType = true ; 
- t.componentTypeRep = pt'';
+ t.componentTypeRep = pt;
 
- forwards to defaultTypeRep(t'');
+ forwards to defaultTypeRep(t);
 }
 
 
@@ -42,9 +42,9 @@ t::TypeRep ::= ct::TypeRep
  t.pp = "symbolic<" ++ ct.pp ++ ">" ;
  t.superTypes_ConvertBy := [ ] ;
 
- t.componentTypeRep = ct'';
+ t.componentTypeRep = ct;
 
- forwards to defaultTypeRep(t'');
+ forwards to defaultTypeRep(t);
 
  t.isPeturbedType = true ;    
  -- ToDo: why?  can we set this to false?

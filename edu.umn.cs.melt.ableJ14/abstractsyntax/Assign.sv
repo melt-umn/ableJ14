@@ -54,7 +54,7 @@ top::Expr ::= expr::Expr requiredType::TypeRep lineNo::Integer {
       else if res.isSubType 
            	then convert.convertedExpr
            	else erroneous_Expr (top, all_errors);
-  forwards to f'';
+  forwards to f;
 
   top.copyWorked = length (copy_dispatches) == 1 || res.isSubType;
 

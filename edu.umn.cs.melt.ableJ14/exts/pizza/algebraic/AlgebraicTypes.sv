@@ -47,8 +47,8 @@ synthesized attribute class_member_dcls :: Class_Member_Dcls occurs on Class_Bod
 abstract production algebraic_class_dcl
 cdcl::Class_Dcl ::= mods::Modifiers cname::Id_t parent::TypeName inters::TypeNames cb::Class_Body {
  cdcl.pp = mods.pp ++ "algebraic class " ++ cname.lexeme ++ " extends " ++ parent.pp ++ 
-		(case inters'' of type_names_none () -> "" | _ -> " implements " ++ inters.pp end) ++ " " ++ cb.pp;
- forwards to getClassDclTree ([algebraic_case_class_dcl (mods'', cname,  parent'', inters'', newClassBodyWithTag'' )] ++ cb.caseClasses);
+		(case inters of type_names_none () -> "" | _ -> " implements " ++ inters.pp end) ++ " " ++ cb.pp;
+ forwards to getClassDclTree ([algebraic_case_class_dcl (mods, cname,  parent, inters, newClassBodyWithTag )] ++ cb.caseClasses);
 
  cb.datatypeClassName = cname.lexeme;
 
@@ -66,9 +66,9 @@ cdcl::Class_Dcl ::= mods::Modifiers cname::Id_t parent::TypeName inters::TypeNam
 abstract production algebraic_case_class_dcl
 cdcl::Class_Dcl ::= mods::Modifiers cname::Id_t parent::TypeName inters::TypeNames cb::Class_Body {
   cdcl.pp = mods.pp ++ "algebraic class " ++ cname.lexeme ++ " extends " ++ parent.pp ++ 
-		(case inters'' of type_names_none () -> "" | _ -> " implements " ++ inters.pp end) ++ cb.pp;
+		(case inters of type_names_none () -> "" | _ -> " implements " ++ inters.pp end) ++ cb.pp;
   cdcl.basepp = mods.basepp ++ "class " ++ cname.lexeme ++ " extends " ++ parent.basepp ++ 
-		(case inters'' of type_names_none () -> "" | _ -> " implements " ++ inters.basepp end) ++ " " ++ cb.basepp;
+		(case inters of type_names_none () -> "" | _ -> " implements " ++ inters.basepp end) ++ " " ++ cb.basepp;
 
   -- check for duplicate pattern names in cb.caseReps
   cdcl.errors := mods.errors ++ inters.errors ++ cb.errors ;
@@ -159,7 +159,7 @@ function convertCaseReps
 
  return if null (oldCaseReps)
 	then []
-	else newCaseRep'' :: convertCaseReps (tail (oldCaseReps), environment);
+	else newCaseRep :: convertCaseReps (tail (oldCaseReps), environment);
 
  local attribute oldCaseRep :: CaseRep;
  oldCaseRep = head (oldCaseReps);
@@ -173,7 +173,7 @@ function convertCaseParams
 
  return if null (caseParams)
 	then []
-	else newCaseParam'' :: convertCaseParams (tail (caseParams), environment);
+	else newCaseParam :: convertCaseParams (tail (caseParams), environment);
 
  local attribute oldCaseParam :: CaseParam;
  oldCaseParam = head (caseParams);
@@ -307,11 +307,11 @@ vdcls::CaseParams ::= t::Type {
  local attribute id :: Id_t;
  id = terminal (Id_t, fieldName);
 
- vdcls.constructorParams = formal_params_one (formal_param (t'', var_declarator_id (id)));
+ vdcls.constructorParams = formal_params_one (formal_param (t, var_declarator_id (id)));
  vdcls.variant_defs = [ case_param (id, t.resolvedTypeRep ) ] ;
  vdcls.fieldDeclarations = class_member_dcls_one (class_field (field_dcl (
 									modifiers_none(), 
-									t'',
+									t,
 									var_declarators_one (var_declarator (var_declarator_id (id))))));
 
  vdcls.fieldDefinitions = stmt_stmt_expr (
@@ -332,12 +332,12 @@ vdcls::CaseParams ::= t::Type vdclstail::CaseParams {
  local attribute id :: Id_t;
  id = terminal (Id_t, fieldName);
 
- vdcls.constructorParams = formal_params_cons (formal_param (t'', var_declarator_id (id)), vdclstail.constructorParams);
+ vdcls.constructorParams = formal_params_cons (formal_param (t, var_declarator_id (id)), vdclstail.constructorParams);
  vdcls.variant_defs = [ case_param (id, t.resolvedTypeRep ) ] ++ vdclstail.variant_defs ;
  vdcls.fieldDeclarations = class_member_dcls_snoc (	vdclstail.fieldDeclarations,
 							class_field (field_dcl (
 									modifiers_none(), 
-									t'',
+									t,
 									var_declarators_one (var_declarator (var_declarator_id (id))))));
 
  vdcls.fieldDefinitions = stmt_seq (
@@ -374,8 +374,8 @@ synthesized attribute name_id :: Id_t;
 
 abstract production case_param
 v::CaseParam ::= id::Id_t t::TypeRep { 
- v.name_id = id'' ;  
- v.typerep = t'' ;
+ v.name_id = id ;  
+ v.typerep = t ;
  v.unparse = "case_param (terminal (Id_t, \"" ++ id.lexeme ++ "\", " ++ t.unparse ++ ")";
 }
 
@@ -412,7 +412,7 @@ String ::= cases_::[ CaseParam ] {
 
 aspect production class_body
 cb::Class_Body ::= dcls::Class_Member_Dcls {
- cb.class_member_dcls = dcls'' ;
+ cb.class_member_dcls = dcls ;
  cb.caseClasses = dcls.caseClasses;
  cb.caseReps = dcls.caseReps;
 }

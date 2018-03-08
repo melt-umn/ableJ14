@@ -53,9 +53,9 @@ s::Stmt ::= lhs::LHS e::Expr
  s.defs = [];
 
  local attribute rest :: Stmt ;
- rest = mkRest (tail(e.coefs), e.ncoefs, lhs'',  int_const("0") ) ; 
+ rest = mkRest (tail(e.coefs), e.ncoefs, lhs,  int_const("0") ) ; 
 
- forwards to stmt_block ( block ( stmt_seq ( signHost(lhs'', head(e.coefs)), rest'' ) ) ) ;
+ forwards to stmt_block ( block ( stmt_seq ( signHost(lhs, head(e.coefs)), rest ) ) ) ;
  s.neededFullyQualifiedTypes = lhs.neededFullyQualifiedTypes ++ e.neededFullyQualifiedTypes ++ 
 		[ getQualifiedFQN (getQualifiedFQN (getQualifiedFQN ( getQualifiedFQN (getQualifiedFQN ( getQualifiedFQN (getQualifiedFQN ( 
 			getSimpleFQN ("edu"), "umn"), "cs"), "melt"), "ableJ14"), "exts"), "rlp"), "Sign") ];
@@ -66,11 +66,11 @@ Stmt ::= es::[Expr] sz::Integer lhs::LHS zero::Expr
 {
  return if   sz==0
         then if_then(terminal (If_t, "if"),  
-                     equalInt(expr_lhs(lhs''),zero'') , 
-                     stmt_stmt_expr(assign(lhs'', terminal (Eq_t, "="), int_const("0"))) )
-        else if_then(terminal (If_t, "if"),   equalInt(expr_lhs(lhs''),zero'') ,
-                      blk (stmt_seq ( signHost(lhs'',head(es)) ,
-                                      mkRest ( tail(es), sz-1, lhs'', zero'' ) ) ) )  ;
+                     equalInt(expr_lhs(lhs),zero) , 
+                     stmt_stmt_expr(assign(lhs, terminal (Eq_t, "="), int_const("0"))) )
+        else if_then(terminal (If_t, "if"),   equalInt(expr_lhs(lhs),zero) ,
+                      blk (stmt_seq ( signHost(lhs,head(es)) ,
+                                      mkRest ( tail(es), sz-1, lhs, zero ) ) ) )  ;
 }
 
 
@@ -162,7 +162,7 @@ function addLists
 function add2
 [Expr] ::= addp::Production(Expr ::= Expr Plus_t Expr) l1::[Expr] l2::[Expr]
 {
- return --if leng(l1)==0 then l2'' else
+ return --if leng(l1)==0 then l2 else
         addp(head(l1), terminal(Plus_t,"+",-4,-4), head(l2)) :: add2(addp,tail(l1),tail(l2)) ;
 }
 
@@ -170,14 +170,14 @@ function do_cs
 [[Expr]] ::=  mp::Production(Expr ::= Expr Mul_t Expr) cs::[Expr] ds::[Expr]
 {
  return --if leng(cs)==0 then [[::Expr]] else 
-        do_c_to_ds(mp,head(cs),ds'') :: do_cs(mp,tail(cs),ds'') ;
+        do_c_to_ds(mp,head(cs),ds) :: do_cs(mp,tail(cs),ds) ;
 }
 
 function do_c_to_ds
 [Expr] ::= mp::Production(Expr ::= Expr Mul_t Expr) ce::Expr ds::[Expr]
 {
  return --if leng(ds)==0 then [::Expr] else
-        (mp(ce'',  terminal(Mul_t,"+",-4,-4), head(ds))) :: do_c_to_ds (mp,ce'',tail(ds)) ;
+        (mp(ce,  terminal(Mul_t,"+",-4,-4), head(ds))) :: do_c_to_ds (mp,ce,tail(ds)) ;
 }
 
 
@@ -217,5 +217,5 @@ function maxI Integer ::= a::Integer b::Integer
 
 abstract production blk
 b::Stmt::= s::Stmt {
- forwards to stmt_block ( block ( s'') ) ; }
+ forwards to stmt_block ( block ( s) ) ; }
 

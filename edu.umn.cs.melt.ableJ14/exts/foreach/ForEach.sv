@@ -100,9 +100,9 @@ forstmt::Stmt ::= f::For_t t::Type id::Id_t e::Expr body::Stmt labs::[ Id_t ] {
   isCollection = subtype_check (e.typerep, retrieveTypeRep ("java.util.Collection", forstmt.type_env)).isSubType;
 
   forwards to if isAnArray
-	      	then arrayTranslation''
+	      	then arrayTranslation
 	      else if isCollection
-		then collectionTranslation''
+		then collectionTranslation
 	      else empty_stmt ();
 
   body.pp_indent = forstmt.pp_indent + 3;

@@ -290,7 +290,7 @@ function all_super_types
 function all_super_types_ConvertBy
 [ ConvertBy ] ::= c::ConvertBy
 {
- return c'' :: map__all_super_types_ConvertBy(sups) ;
+ return c :: map__all_super_types_ConvertBy(sups) ;
 
  local attribute sups :: [ConvertBy] ;
  sups = c.superType.superTypes_ConvertBy ;

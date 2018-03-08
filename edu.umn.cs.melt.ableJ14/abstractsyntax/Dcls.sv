@@ -258,18 +258,18 @@ vis::Var_Inits ::= vis1::Var_Inits vi::Var_Init {
 
 function getTypeWithDeclarator
 TypeRep ::= t::TypeRep ds::Integer {
-  return case t'' of
+  return case t of
 		arrayTypeRep (tr, dims) -> arrayTypeRep (tr, dims + ds) |
 		tr -> if ds == 0
-			then tr''
+			then tr
 			else arrayTypeRep (tr, ds)
 	 end;
 }
 
 function oneLessDimension
 TypeRep ::= t::TypeRep {
-  return case t'' of
-		arrayTypeRep (tr, dims) -> if dims == 0 then tr'' else arrayTypeRep (tr, dims - 1) |
+  return case t of
+		arrayTypeRep (tr, dims) -> if dims == 0 then tr else arrayTypeRep (tr, dims - 1) |
 		tr -> errorTypeRep ([ mkError (-1, "Cannot reduce dimension of non-array type " ++ t.eqName) ])
 	 end;
 }
