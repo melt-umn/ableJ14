@@ -1,0 +1,22 @@
+#!/bin/bash
+
+set -eu
+
+if ! which silver > /dev/null; then
+  echo "Requires a silver installation to use. ('silver' should be in PATH)"
+  echo "See https://github.com/melt-umn/silver/"
+  echo "Or http://melt.cs.umn.edu/ for more information."
+  exit 1
+fi
+
+silver $@ edu:umn:cs:melt:ableJ14:composed:java_foreach:bin
+silver $@ edu:umn:cs:melt:ableJ14:composed:java_alone:bin
+silver $@ edu:umn:cs:melt:ableJ14:composed:java_sql:bin
+silver $@ edu:umn:cs:melt:ableJ14:composed:java_pizza:bin
+silver $@ edu:umn:cs:melt:ableJ14:composed:java_rlp:bin
+silver $@ edu:umn:cs:melt:ableJ14:composed:java_autoboxing:bin
+silver $@ edu:umn:cs:melt:ableJ14:composed:java_tables:bin
+silver $@ edu:umn:cs:melt:ableJ14:composed:java_complex:bin
+
+echo "Success"
+
