@@ -115,7 +115,7 @@ e::Expr ::= l::Expr r::Expr
 function addThing
 [Expr] ::= p::(Expr ::= Expr Plus_t Expr) ls::[Expr] rs::[Expr]
 {
- return [ p ( head(ls), terminal(Plus_t,"+",-2,-2), head(rs) ) ] ++ addThing ( p, tail(ls), tail(rs) ) ;
+ return [ p ( head(ls), terminal(Plus_t,"+"), head(rs) ) ] ++ addThing ( p, tail(ls), tail(rs) ) ;
  -- we rely on laziness here, knowing that we only take the ones we need from
  -- the created list.
 }
@@ -123,7 +123,7 @@ function addThing
 function subThing
 [Expr] ::= p::(Expr ::= Expr Minus_t Expr) ls::[Expr] rs::[Expr]
 {
- return [ p ( head(ls), terminal(Minus_t,"-",-3,-3), head(rs) ) ] ++ subThing ( p, tail(ls), tail(rs) ) ;
+ return [ p ( head(ls), terminal(Minus_t,"-"), head(rs) ) ] ++ subThing ( p, tail(ls), tail(rs) ) ;
  -- we rely on laziness here, knowing that we only take the ones we need from
  -- the created list.
 }
@@ -163,7 +163,7 @@ function add2
 [Expr] ::= addp::(Expr ::= Expr Plus_t Expr) l1::[Expr] l2::[Expr]
 {
  return --if leng(l1)==0 then l2 else
-        addp(head(l1), terminal(Plus_t,"+",-4,-4), head(l2)) :: add2(addp,tail(l1),tail(l2)) ;
+        addp(head(l1), terminal(Plus_t,"+"), head(l2)) :: add2(addp,tail(l1),tail(l2)) ;
 }
 
 function do_cs
@@ -177,7 +177,7 @@ function do_c_to_ds
 [Expr] ::= mp::(Expr ::= Expr Mul_t Expr) ce::Expr ds::[Expr]
 {
  return --if leng(ds)==0 then [::Expr] else
-        (mp(ce,  terminal(Mul_t,"+",-4,-4), head(ds))) :: do_c_to_ds (mp,ce,tail(ds)) ;
+        (mp(ce,  terminal(Mul_t,"+"), head(ds))) :: do_c_to_ds (mp,ce,tail(ds)) ;
 }
 
 

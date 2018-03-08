@@ -37,7 +37,7 @@ s::Stmt ::= c::Id_t
 										terminal(Id_t, "getConnection")), 
 							exprs_one(string_const(u))))));
 
--- forwards to '' c = java.sql.DriverManager.getConnection("jdbc:derby:/project/melt/People/evw/Melt/GrammarSpace/edu/umn/cs/melt/java14/demos/derby/db/testdb;create=true"); 
+-- forwards to  c = java.sql.DriverManager.getConnection("jdbc:derby:/project/melt/People/evw/Melt/GrammarSpace/edu/umn/cs/melt/java14/demos/derby/db/testdb;create=true"); 
 
  s.neededImportedSingleTypes = [];
  s.neededCurrentPackageTypes = [];

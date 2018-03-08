@@ -565,10 +565,10 @@ t::TypeRep ::= errs::[ Error ]
 --{ t.superTypes_ConvertBy <- [ mkToUnknownCnvt() ] ;
 --}
 
-aspect production classTypeRep t::TypeRep ::= classTR
+aspect production classTypeRep t::TypeRep ::= _
 { t.superTypes_ConvertBy <- [ mkToUnknownCnvt() ] ;
 }
-aspect production interfaceTypeRep t::TypeRep ::= interfaceTR
+aspect production interfaceTypeRep t::TypeRep ::= _
 { t.superTypes_ConvertBy <- [ mkToUnknownCnvt() ] ;
 }
 aspect production booleanTypeRep t::TypeRep ::=   

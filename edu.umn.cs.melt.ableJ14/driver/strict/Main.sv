@@ -210,14 +210,14 @@ synthesized attribute decoratedRoot :: Decorated Root;
 
 abstract production compilation_result
 cr::CompilationResult ::= io_::IO needed_files_::[ String ] type_defs_::[ EnvItem ] {
-  cr.io = io_'';
+  cr.io = io_;
   cr.needed_files = needed_files_;
   cr.type_defs = type_defs_;
 }
 
 abstract production file_compilation_result
 cr::FileCompilationResult ::= io_::IO needed_files_::[ String ] decoratedRoot_::Decorated Root type_defs_::[ EnvItem ] {
-  cr.io = io_''; 
+  cr.io = io_; 
   cr.needed_files = needed_files_;
   cr.decoratedRoot = decoratedRoot_;
   cr.type_defs = type_defs_;

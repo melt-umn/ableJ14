@@ -53,7 +53,7 @@ cdcl::Class_Dcl ::= mods::Modifiers cname::Id_t parent::TypeName inters::TypeNam
  cb.datatypeClassName = cname.lexeme;
 
  local attribute newClassBodyWithTag :: Class_Body ;
- newClassBodyWithTag = class_body (class_member_dcls_snoc (cb.class_member_dcls, tag_dcl''));
+ newClassBodyWithTag = class_body (class_member_dcls_snoc (cb.class_member_dcls, tag_dcl));
 
  -- int tag;
  local attribute tag_dcl :: Class_Member_Dcl ;

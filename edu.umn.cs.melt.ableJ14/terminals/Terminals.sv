@@ -6,7 +6,7 @@ ignore terminal LineComment /[\/][\/].*/ ;
 ignore terminal BlockComment /[\/][\*]([^\*]|[\r\n]|([\*]+([^\*\/]|[\r\n])))*[\*]+[\/]/ ;
 ignore terminal Tabs /[\t]+/;
 ignore terminal Spaces /[\ ]+/;
-ignore terminal Newlines /[\n]+/;
+ignore terminal Newlines /[\r\n]+/;
 --ignore terminal Whitespace /[\n\t\ ]+/ ;
 
 

@@ -5,7 +5,7 @@ import edu:umn:cs:melt:ableJ14:host;
 -- Overloading Assignment --
 ----------------------------
 aspect production copy
-top ::= expr requiredType _ {
+top ::= expr::Expr requiredType::TypeRep _ {
   copy_dispatches <- if expr.typerep.eqName == "complex" && requiredType.eqName == "complex"
 			then [ expr_stmt_expr (resolved_method_call_copy (expr, terminal (Id_t, "clone"), exprs_none (), complexTypeRep ())) ]
 			else [];
@@ -14,7 +14,7 @@ top ::= expr requiredType _ {
 -- Overloading Addition --
 --------------------------
 aspect production plus
-e ::= e1 op e2 {
+e ::= e1::Expr _ e2::Expr {
  dispatches <- if elem_of_TypeRep ( complexTypeRep(), min_common_super_types ) 
                then [ complex_plus    ( convertTo(e1, e1.typerep, complexTypeRep()),
                                         convertTo(e2, e2.typerep, complexTypeRep()), 
@@ -36,7 +36,7 @@ e::Expr ::= l::Expr r::Expr tr::TypeRep {
 }
 
 aspect production minus
-e ::= e1 op e2 {
+e ::= e1::Expr _ e2::Expr {
  dispatches <- if elem_of_TypeRep ( complexTypeRep(), min_common_super_types ) 
                then [ complex_minus    ( convertTo(e1, e1.typerep, complexTypeRep()),
                                         convertTo(e2, e2.typerep, complexTypeRep()), 
@@ -58,7 +58,7 @@ e::Expr ::= l::Expr r::Expr tr::TypeRep {
 }
 
 aspect production mul
-e ::= e1 op e2 {
+e ::= e1::Expr _ e2::Expr {
  dispatches <- if elem_of_TypeRep ( complexTypeRep(), min_common_super_types ) 
                then [ complex_mul    ( convertTo(e1, e1.typerep, complexTypeRep()),
                                         convertTo(e2, e2.typerep, complexTypeRep()), 

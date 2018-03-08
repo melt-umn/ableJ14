@@ -177,17 +177,17 @@ switch::Stmt ::= t::AswitchTerm expr::Expr switchblock::Algebraic_Switch_Block {
                                                         var_init_expr (false_const ())))));
 
  local attribute temp_done_true :: Stmt;
- temp_done_true = stmt_stmt_expr (assign ( temp_done_expr'',
+ temp_done_true = stmt_stmt_expr (assign ( temp_done_expr,
                                            terminal (Eq_t, "="),
                                            true_const ()));
 
- switchblock.switched_expr = temp_switched_expr'';
+ switchblock.switched_expr = temp_switched_expr;
  switchblock.switched_type = expr.typerep;
- switchblock.done_expr = temp_done_expr'';
- switchblock.set_done_true = temp_done_true'';
+ switchblock.done_expr = temp_done_expr;
+ switchblock.set_done_true = temp_done_true;
 
- forwards to stmt_seq ( temp_switched_dcl'',
-             stmt_seq ( temp_done_dcl'',
+ forwards to stmt_seq ( temp_switched_dcl,
+             stmt_seq ( temp_done_dcl,
                         switchblock.ast_Stmt));
 
 
@@ -252,7 +252,7 @@ p::Pattern ::= n::Id_t pl::Pattern_List {
                                  and_and (not (expr_lhs (p.done_expr)),
                                       eq (expr_lhs (expr_field_access (p.switched_expr, terminal (Id_t, "tag"))),
                                           expr_lhs (lhs_name (qualified_expr_name (simple_ambiguous_name (terminal (Id_t, p.switched_type.eqName)), terminal (Id_t, n.lexeme ++ "_tag")))))),
-                                 stmt_block (block (stmt_seq (temp_switched_dcl'', pl.ast_Stmt))));
+                                 stmt_block (block (stmt_seq (temp_switched_dcl, pl.ast_Stmt))));
 
  local attribute temp_switched_name :: String;
  temp_switched_name = "temp__" ++ toString (genInt ());
@@ -267,7 +267,7 @@ p::Pattern ::= n::Id_t pl::Pattern_List {
                                                      var_declarator_id (terminal (Id_t, temp_switched_name)),
                                                      var_init_expr (cast_prod (getTypeName (n.lexeme), p.switched_expr))))));
 
- pl.switched_expr = temp_switched_expr'';
+ pl.switched_expr = temp_switched_expr;
  pl.variant_defs_inh = if null (pattern_result) then [] else (head (pattern_result)).variant_defs;
 
  local attribute pattern_result :: [CaseRep];

@@ -30,7 +30,7 @@ t::Expr ::= trows::TableRows
  t.typerep = booleanTypeRep ();
  t.errors := trows.errors ;
 
- forwards to exprBlock ( trows.trow_dcls, body, primitive_type (boolean_type ()), ret_expr'' ) ;
+ forwards to exprBlock ( trows.trow_dcls, body, primitive_type (boolean_type ()), ret_expr ) ;
 
  --  ({ (boolean t1 = c1, boolean t2 = c2, boolean t3 = c3)
  --     boolean result ;
@@ -51,7 +51,7 @@ t::Expr ::= trows::TableRows
  body = stmt_seq ( stmt_dcl (local_var_dcl( primitive_type(boolean_type()) , 
                             var_declarators_one (var_declarator(var_declarator_id(terminal(Id_t,"result")))))) ,
                    stmt_seq (
-                      stmt_stmt_expr (assign ( getLHS ("result"), terminal (Eq_t, "="), result_expr'' ) ) ,
+                      stmt_stmt_expr (assign ( getLHS ("result"), terminal (Eq_t, "="), result_expr ) ) ,
                       return_expr ( terminal (Return_t, "return"), getExpr ("result"))
                             )
                  ) ; 
