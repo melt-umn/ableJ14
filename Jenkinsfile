@@ -18,6 +18,8 @@ try {
     // For this project, re-using 'generated' gains as much as parallelism, so don't bother
     withEnv(newenv) {
       sh "./build-all"
+        // clean up
+        sh "rm *.jar"
     }
   }
 
