@@ -1640,7 +1640,7 @@ concrete production equalityExpression_c
 top::Expression
 	::=	e1::Expression '==' e2::Expression { 
  top.isStmtExpr = false;
- top.ast_Expr = eq (e1.ast_Expr, e2.ast_Expr);
+ top.ast_Expr = eq_op (e1.ast_Expr, e2.ast_Expr);
 }
 
 concrete production inequalityExpression_c 
@@ -1655,14 +1655,14 @@ concrete production ltExpression_c
 top::Expression
 	::=	e1::Expression '<' e2::Expression { 
  top.isStmtExpr = false;
- top.ast_Expr = lt (e1.ast_Expr, e2.ast_Expr);
+ top.ast_Expr = lt_op (e1.ast_Expr, e2.ast_Expr);
 }
 
 concrete production gtExpression_c 
 top::Expression
 	::=	e1::Expression '>' e2::Expression { 
  top.isStmtExpr = false;
- top.ast_Expr = gt (e1.ast_Expr, e2.ast_Expr);
+ top.ast_Expr = gt_op (e1.ast_Expr, e2.ast_Expr);
 }
 
 concrete production leExpression_c 

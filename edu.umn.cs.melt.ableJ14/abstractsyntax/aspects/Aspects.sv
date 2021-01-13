@@ -1026,7 +1026,7 @@ e::Expr ::= e1::Expr e2::Expr {
  e.neededImportedSingleTypes = e1.neededImportedSingleTypes ++ e2.neededImportedSingleTypes;
 }
 
-aspect production eq
+aspect production eq_op
 e::Expr ::= e1::Expr e2::Expr {
  e.neededImportedSingleTypes = e1.neededImportedSingleTypes ++ e2.neededImportedSingleTypes;
 }
@@ -1036,12 +1036,12 @@ e::Expr ::= e1::Expr e2::Expr {
  e.neededImportedSingleTypes = e1.neededImportedSingleTypes ++ e2.neededImportedSingleTypes;
 }
 
-aspect production lt
+aspect production lt_op
 e::Expr ::= e1::Expr e2::Expr {
  e.neededImportedSingleTypes = e1.neededImportedSingleTypes ++ e2.neededImportedSingleTypes;
 }
 
-aspect production gt
+aspect production gt_op
 e::Expr ::= e1::Expr e2::Expr {
  e.neededImportedSingleTypes = e1.neededImportedSingleTypes ++ e2.neededImportedSingleTypes;
 }
@@ -2256,7 +2256,7 @@ e::Expr ::= e1::Expr e2::Expr {
  e.neededCurrentPackageTypes = e1.neededCurrentPackageTypes ++ e2.neededCurrentPackageTypes;
 }
 
-aspect production eq
+aspect production eq_op
 e::Expr ::= e1::Expr e2::Expr {
  e.neededCurrentPackageTypes = e1.neededCurrentPackageTypes ++ e2.neededCurrentPackageTypes;
 }
@@ -2266,12 +2266,12 @@ e::Expr ::= e1::Expr e2::Expr {
  e.neededCurrentPackageTypes = e1.neededCurrentPackageTypes ++ e2.neededCurrentPackageTypes;
 }
 
-aspect production lt
+aspect production lt_op
 e::Expr ::= e1::Expr e2::Expr {
  e.neededCurrentPackageTypes = e1.neededCurrentPackageTypes ++ e2.neededCurrentPackageTypes;
 }
 
-aspect production gt
+aspect production gt_op
 e::Expr ::= e1::Expr e2::Expr {
  e.neededCurrentPackageTypes = e1.neededCurrentPackageTypes ++ e2.neededCurrentPackageTypes;
 }
@@ -3486,7 +3486,7 @@ e::Expr ::= e1::Expr e2::Expr {
  e.neededImportedOnDemandTypes = e1.neededImportedOnDemandTypes ++ e2.neededImportedOnDemandTypes;
 }
 
-aspect production eq
+aspect production eq_op
 e::Expr ::= e1::Expr e2::Expr {
  e.neededImportedOnDemandTypes = e1.neededImportedOnDemandTypes ++ e2.neededImportedOnDemandTypes;
 }
@@ -3496,12 +3496,12 @@ e::Expr ::= e1::Expr e2::Expr {
  e.neededImportedOnDemandTypes = e1.neededImportedOnDemandTypes ++ e2.neededImportedOnDemandTypes;
 }
 
-aspect production lt
+aspect production lt_op
 e::Expr ::= e1::Expr e2::Expr {
  e.neededImportedOnDemandTypes = e1.neededImportedOnDemandTypes ++ e2.neededImportedOnDemandTypes;
 }
 
-aspect production gt
+aspect production gt_op
 e::Expr ::= e1::Expr e2::Expr {
  e.neededImportedOnDemandTypes = e1.neededImportedOnDemandTypes ++ e2.neededImportedOnDemandTypes;
 }
@@ -4910,7 +4910,7 @@ e::Expr ::= e1::Expr e2::Expr {
  e.neededFullyQualifiedTypes = e1.neededFullyQualifiedTypes ++ e2.neededFullyQualifiedTypes;
 }
 
-aspect production eq
+aspect production eq_op
 e::Expr ::= e1::Expr e2::Expr {
  e.neededFullyQualifiedTypes = e1.neededFullyQualifiedTypes ++ e2.neededFullyQualifiedTypes;
 }
@@ -4920,12 +4920,12 @@ e::Expr ::= e1::Expr e2::Expr {
  e.neededFullyQualifiedTypes = e1.neededFullyQualifiedTypes ++ e2.neededFullyQualifiedTypes;
 }
 
-aspect production lt
+aspect production lt_op
 e::Expr ::= e1::Expr e2::Expr {
  e.neededFullyQualifiedTypes = e1.neededFullyQualifiedTypes ++ e2.neededFullyQualifiedTypes;
 }
 
-aspect production gt
+aspect production gt_op
 e::Expr ::= e1::Expr e2::Expr {
  e.neededFullyQualifiedTypes = e1.neededFullyQualifiedTypes ++ e2.neededFullyQualifiedTypes;
 }

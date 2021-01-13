@@ -52,7 +52,7 @@ top::CaseReps_C ::= cr::CaseRep_C {
 
 concrete production case_rep_c
 top::CaseRep_C ::= 'case_rep' '('id::Stringconst_t ',' t::Intconst_t ',' cps::CaseParamList_C ')' {
-  top.abstractCaseRep = case_rep (removeQuotes (id.lexeme), toInt (t.lexeme), cps.abstractCaseParamList);
+  top.abstractCaseRep = case_rep (removeQuotes (id.lexeme), toInteger (t.lexeme), cps.abstractCaseParamList);
 }
 
 concrete production case_param_list

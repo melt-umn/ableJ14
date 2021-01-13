@@ -187,7 +187,7 @@ forstmt::Stmt ::= f::For_t t::Type id::Id_t e::Expr body::Stmt labs::[ Id_t ] {
 										     var_init_expr (int_const ("0"))))));
 
   local attribute arrayTest :: For_Test;
-  arrayTest = for_test_one (lt (getExpr (arrayIterName), 
+  arrayTest = for_test_one (lt_op (getExpr (arrayIterName), 
 				expr_lhs (expr_field_access (getExpr (arrayExprName), terminal (Id_t, "length")))));
 
   local attribute arrayUpdate :: For_Update;

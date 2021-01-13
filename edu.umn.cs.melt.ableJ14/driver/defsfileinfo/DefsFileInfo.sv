@@ -129,7 +129,7 @@ top::Errors_C ::= item::Error_C {
 
 concrete production mkError_c
 top::Error_C ::= 'mkError' '(' lin::Intconst_t ',' mess::Stringconst_t ')' {
-  top.abstractError = mkError (toInt (lin.lexeme), removeQuotes (mess.lexeme));
+  top.abstractError = mkError (toInteger (lin.lexeme), removeQuotes (mess.lexeme));
 }
 
 concrete production env_item_list_c
@@ -244,7 +244,7 @@ top::TypeRep_C ::= 'booleanTypeRep' '(' ')' {
 
 concrete production arrayTypeRep_c
 top::TypeRep_C ::= 'arrayTypeRep' '(' typeRep_::TypeRep_C ',' dims::Intconst_t ')' {
-  top.abstractTypeRep = arrayTypeRep (typeRep_.abstractTypeRep, toInt (dims.lexeme));
+  top.abstractTypeRep = arrayTypeRep (typeRep_.abstractTypeRep, toInteger (dims.lexeme));
 }
 
 concrete production voidTypeRep_c

@@ -904,7 +904,7 @@ e::Expr ::= e1::Expr e2::Expr {
   e.typerep = e1.typerep; --booleanTypeRep ();
 }
 
-abstract production eq
+abstract production eq_op
 e::Expr ::= e1::Expr e2::Expr {
   e.pp = "(" ++ e1.pp ++ " == " ++ e2.pp ++ ")";
   e.basepp = "(" ++ e1.basepp ++ " == " ++ e2.basepp ++ ")";
@@ -920,7 +920,7 @@ e::Expr ::= e1::Expr e2::Expr {
   e.typerep = booleanTypeRep ();
 }
 
-abstract production lt
+abstract production lt_op
 e::Expr ::= e1::Expr e2::Expr {
   e.pp = "(" ++ e1.pp ++ " < " ++ e2.pp ++ ")";
   e.basepp = "(" ++ e1.basepp ++ " < " ++ e2.basepp ++ ")";
@@ -928,7 +928,7 @@ e::Expr ::= e1::Expr e2::Expr {
   e.typerep = booleanTypeRep ();
 }
 
-abstract production gt
+abstract production gt_op
 e::Expr ::= e1::Expr e2::Expr {
   e.pp = "(" ++ e1.pp ++ " > " ++ e2.pp ++ ")";
   e.basepp = "(" ++ e1.basepp ++ " > " ++ e2.basepp ++ ")";

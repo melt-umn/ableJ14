@@ -250,7 +250,7 @@ p::Pattern ::= n::Id_t pl::Pattern_List {
 
  p.ast_Stmt = if_then (	 terminal (If_t, "if"),
                                  and_and (not (expr_lhs (p.done_expr)),
-                                      eq (expr_lhs (expr_field_access (p.switched_expr, terminal (Id_t, "tag"))),
+                                   eq_op (expr_lhs (expr_field_access (p.switched_expr, terminal (Id_t, "tag"))),
                                           expr_lhs (lhs_name (qualified_expr_name (simple_ambiguous_name (terminal (Id_t, p.switched_type.eqName)), terminal (Id_t, n.lexeme ++ "_tag")))))),
                                  stmt_block (block (stmt_seq (temp_switched_dcl, pl.ast_Stmt))));
 
@@ -317,7 +317,7 @@ p::Pattern ::= n::Id_t {
 
                    else if_then (terminal (If_t, "if"),
                                  and_and (not (expr_lhs (p.done_expr)),
-                                      eq (expr_lhs (expr_field_access (p.switched_expr, terminal (Id_t, "tag"))),
+                                   eq_op (expr_lhs (expr_field_access (p.switched_expr, terminal (Id_t, "tag"))),
                                           expr_lhs (lhs_name (qualified_expr_name (simple_ambiguous_name (terminal (Id_t, p.switched_type.eqName)), terminal (Id_t, n.lexeme ++ "_tag")))))),
                                  stmt_block (block (p.switch_statement)));
 
