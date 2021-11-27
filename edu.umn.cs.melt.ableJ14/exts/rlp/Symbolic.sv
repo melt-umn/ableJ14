@@ -136,7 +136,7 @@ e::Expr ::= l::Expr r::Expr
  e.typerep = l.typerep ;
  e.errors := [] ;
  e.ncoefs = l.ncoefs + r.ncoefs ;
- e.coefs = mulThing ( plus, mul, -- float_plus, float_mul,
+ e.coefs = mulThing ( plus, mulOp, -- float_plus, float_mul,
                       l.coefs, r.coefs ) ;
 -- l.type.compType.addProd, l.type.compType.multiplyProd, 
 -- we really should be able to just use the dispatcher..

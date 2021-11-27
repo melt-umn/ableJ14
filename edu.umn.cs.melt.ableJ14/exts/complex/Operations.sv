@@ -57,7 +57,7 @@ e::Expr ::= l::Expr r::Expr tr::TypeRep {
   forwards to expr_stmt_expr (expr_method_call (l, terminal (Id_t, "minus"), exprs_one (r)));
 }
 
-aspect production mul
+aspect production mulOp
 e ::= e1::Expr _ e2::Expr {
  dispatches <- if elem_of_TypeRep ( complexTypeRep(), min_common_super_types ) 
                then [ complex_mul    ( convertTo(e1, e1.typerep, complexTypeRep()),

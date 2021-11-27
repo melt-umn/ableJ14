@@ -155,7 +155,7 @@ synthesized attribute symTree :: Expr ;
 attribute symTree occurs on Expr,LHS ;
 
 -- Multiply Overloading --
-aspect production mul
+aspect production mulOp
 e::Expr ::= e1::Expr t::Mul_t e2::Expr 
 {
  dispatches <-

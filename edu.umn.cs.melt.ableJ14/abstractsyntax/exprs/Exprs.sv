@@ -671,7 +671,7 @@ e::Expr ::= {
 ----- OPERATORS
 --------------------------------------------------------------------------
 
-abstract production not
+abstract production notOp
 e::Expr ::= e1::Expr {
   e.pp = "(! " ++ e1.pp ++ ")";
   e.basepp = "(! " ++ e1.basepp ++ ")";
