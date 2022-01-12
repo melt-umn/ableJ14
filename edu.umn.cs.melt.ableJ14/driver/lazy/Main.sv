@@ -10,16 +10,16 @@ import edu:umn:cs:melt:ableJ14:abstractsyntax:packages;
 -- Main driver function
 
 function driver
-IOVal<Integer> ::= args::[ String ] io_in::IO extensionParser::(ParseResult<Root_C> ::= String String) hostParser::(ParseResult<Root_C> ::= String String) {
+IOVal<Integer> ::= args::[ String ] io_in::IOToken extensionParser::(ParseResult<Root_C> ::= String String) hostParser::(ParseResult<Root_C> ::= String String) {
 
   local attribute commandLineFile :: String ;  
   commandLineFile = head (args);
   
   local attribute classPath :: IOVal<String>;
-  classPath = envVar ("JAVA_PATH", io_in);
+  classPath = envVarT ("JAVA_PATH", io_in);
 
   local attribute currentDirectory :: IOVal<String>;
-  currentDirectory = cwd (classPath.io);
+  currentDirectory = cwdT (classPath.io);
 
   local attribute allNeededTypesRoots :: [ LFQN_DecoratedRoot_Defs ];
   allNeededTypesRoots = getNeededTypesStartingWithCommandLine (commandLineFile, extensionParser, hostParser, getDirectoriesFromClassPath (classPath.iovalue), currentDirectory.iovalue, globalEnv);
@@ -37,7 +37,7 @@ IOVal<Integer> ::= args::[ String ] io_in::IO extensionParser::(ParseResult<Root
   local attribute commandLineRoot :: Decorated Root;
   commandLineRoot = head (allNeededTypesRoots).decoratedRoot;
 
-  local attribute compile_action :: IO ;
+  local attribute compile_action :: IOToken ;
   compile_action = if classPath.iovalue != ""
           	         then decorate file_io_action (commandLineRoot) with {ioIn = currentDirectory.io ;}.ioOut 
                          else error ("JAVA_PATH is not defined!");
@@ -94,11 +94,11 @@ LFQNs_DecoratedRoot_Defs ::= T::LFQN extensionParser::(ParseResult<Root_C> ::= S
   defsFileName = T.location ++ "/" ++ T.fullyQualifiedName.qualifiedFileName ++ ".defs";
 
   local attribute defsFileExists :: IOVal<Boolean>;
-  defsFileExists = isFile (defsFileName, unsafeIO ());
+  defsFileExists = isFileT (defsFileName, unsafeIOT ());
 
   -- if .defs file exists, the following are forced by the return statement
   local attribute oldDefsFileText :: String;
-  oldDefsFileText = readFile (defsFileName, defsFileExists.io).iovalue;
+  oldDefsFileText = readFileT (defsFileName, defsFileExists.io).iovalue;
 
   local attribute oldDefsFileInfo :: DefsFileInfo;
   oldDefsFileInfo = if jextFileExists.iovalue
@@ -118,19 +118,19 @@ LFQNs_DecoratedRoot_Defs ::= T::LFQN extensionParser::(ParseResult<Root_C> ::= S
   jextFileName = T.location ++ "/" ++ T.fullyQualifiedName.qualifiedFileName ++ ".jext";
 
   local attribute jextFileExists :: IOVal<Boolean>;
-  jextFileExists = isFile (jextFileName, defsFileExists.io);
+  jextFileExists = isFileT (jextFileName, defsFileExists.io);
 
   local attribute javaFileName :: String;
   javaFileName = T.location ++ "/" ++ T.fullyQualifiedName.qualifiedFileName ++ ".java";
 
   local attribute javaFileExists :: IOVal<Boolean>;
-  javaFileExists = isFile (javaFileName, defsFileExists.io);
+  javaFileExists = isFileT (javaFileName, defsFileExists.io);
 
   local attribute javaFileRead :: IOVal<String>;
   javaFileRead = if jextFileExists.iovalue
-			then readFile (jextFileName, jextFileExists.io)
+			then readFileT (jextFileName, jextFileExists.io)
 		 else if javaFileExists.iovalue
-			then readFile (javaFileName, javaFileExists.io)
+			then readFileT (javaFileName, javaFileExists.io)
 		 else error ("Internal compiler error: Neither " ++ jextFileName ++ " nor " ++ javaFileName ++ " exists!");
 
   -- parsing the file and constructing the AST
@@ -175,12 +175,12 @@ LFQNs_DecoratedRoot_Defs ::= T::LFQN extensionParser::(ParseResult<Root_C> ::= S
   newDefsFileText = defs_file_info (neededTypes_, r.type_defs, 
 			availableSingleTypeErrors.errors ++ availableCurrentPackageTypeErrors.errors ++ availableOnDemandTypeErrors.errors).unparse;
 
-  local attribute defsFileWrite :: IO;
-  defsFileWrite = writeFile (defsFileName, newDefsFileText, javaFileRead.io);
+  local attribute defsFileWrite :: IOToken;
+  defsFileWrite = writeFileT (defsFileName, newDefsFileText, javaFileRead.io);
 
   -- now we force the .defs write by returning a list of neededtypes read from the .defs file
   local attribute defsFileRetrieve :: String;
-  defsFileRetrieve = readFile (defsFileName, defsFileWrite).iovalue;
+  defsFileRetrieve = readFileT (defsFileName, defsFileWrite).iovalue;
 
   local attribute retrievedDefsFileInfo :: DefsFileInfo;
   retrievedDefsFileInfo = if jextFileExists.iovalue
@@ -218,7 +218,7 @@ function getNeededTypesForCommandLineFile
 CommandLineLFQNs_DecoratedRoot ::= commandLineFile::String extensionParser::(ParseResult<Root_C> ::= String String) hostParser::(ParseResult<Root_C> ::= String String) classPathDirectories::[ String ] currentDirectory::String globalEnv::[ ScopeEnv ] {
 
   local attribute javaFileRead :: IOVal<String>;
-  javaFileRead = readFile (commandLineFile, unsafeIO ());
+  javaFileRead = readFileT (commandLineFile, unsafeIOT ());
 
   -- parsing the file and constructing the AST
   local attribute r :: Root;
@@ -421,12 +421,12 @@ Boolean ::= filename::String
 
 nonterminal IO_Action with ioIn, ioOut ;
 
-synthesized attribute ioOut :: IO;
-inherited attribute ioIn :: IO;
+synthesized attribute ioOut :: IOToken;
+inherited attribute ioIn :: IOToken;
 
 abstract production io_action_write_file
 task::IO_Action ::= fn::String text::String {
- task.ioOut = writeFile (fn, text, task.ioIn);
+ task.ioOut = writeFileT (fn, text, task.ioIn);
 }
 
 abstract production io_action_null

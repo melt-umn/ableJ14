@@ -130,7 +130,7 @@ trow::TableRow ::= e::Expr tvl::TruthValueList_c
                                   var_init_expr(e) ) ;                                  
 
  local attribute temp_name :: String ;
- temp_name = "temp" ++  toString(genInt()) ;
+ temp_name = "temp" ++  toString(genIntT()) ;
 
  trow.neededImportedSingleTypes = e.neededImportedSingleTypes;
  trow.neededCurrentPackageTypes = e.neededCurrentPackageTypes;

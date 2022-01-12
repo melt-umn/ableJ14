@@ -130,7 +130,7 @@ forstmt::Stmt ::= f::For_t t::Type id::Id_t e::Expr body::Stmt labs::[ Id_t ] {
   collectionLoop = for (collectionInit, collectionTest, collectionUpdate, collectionBody);
 
   local attribute collectionIterName :: String;
-  collectionIterName = "__it" ++ toString (genInt ());
+  collectionIterName = "__it" ++ toString (genIntT ());
 
   local attribute collectionInit :: For_Init;
   collectionInit = for_init_dcl (local_var_dcl (getType ("Iterator"),
@@ -168,10 +168,10 @@ forstmt::Stmt ::= f::For_t t::Type id::Id_t e::Expr body::Stmt labs::[ Id_t ] {
   arrayTranslation = stmt_seq (exprInit, applyLabels (labs, arrayLoop));
 
   local attribute arrayIterName :: String;
-  arrayIterName = "__it" ++ toString (genInt ());
+  arrayIterName = "__it" ++ toString (genIntT ());
 
   local attribute arrayExprName :: String;
-  arrayExprName = "__ex" ++ toString (genInt ());
+  arrayExprName = "__ex" ++ toString (genIntT ());
 
   local attribute exprInit :: Stmt;
   exprInit = stmt_dcl (local_var_dcl (reference_type (array_type (primitive_array (int_type (), 1))), 
