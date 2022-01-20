@@ -392,7 +392,7 @@ e::Stmt_Expr ::= t::TypeName params::Exprs cb::Class_Body typeFQN::FullyQualifie
   cb.type_env = this_typerep.classtyperep.innerTypes ++ e.type_env;
 
   local attribute anon_class_name :: String;
-  anon_class_name = "#AnonymousClass" ++ toString (genIntT ());
+  anon_class_name = "#AnonymousClass" ++ toString (genInt ());
 
   local attribute fqn :: FullyQualifiedName;
   fqn = getQualifiedFQN (e.qualifiersSoFar, anon_class_name);

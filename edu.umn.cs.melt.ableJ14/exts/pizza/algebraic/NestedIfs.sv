@@ -151,7 +151,7 @@ switch::Stmt ::= t::AswitchTerm expr::Expr switchblock::Algebraic_Switch_Block {
  switch.defs = [];
 
  local attribute temp_switched_name :: String;
- temp_switched_name = "temp__" ++ toString (genIntT ());
+ temp_switched_name = "temp__" ++ toString (genInt ());
 
  local attribute temp_switched_expr :: Expr;
  temp_switched_expr = getExpr (temp_switched_name);
@@ -255,7 +255,7 @@ p::Pattern ::= n::Id_t pl::Pattern_List {
                                  stmt_block (block (stmt_seq (temp_switched_dcl, pl.ast_Stmt))));
 
  local attribute temp_switched_name :: String;
- temp_switched_name = "temp__" ++ toString (genIntT ());
+ temp_switched_name = "temp__" ++ toString (genInt ());
 
  local attribute temp_switched_expr :: Expr;
  temp_switched_expr = getExpr (temp_switched_name);

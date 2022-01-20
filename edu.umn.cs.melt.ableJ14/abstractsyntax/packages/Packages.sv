@@ -276,7 +276,7 @@ LFQNs_Errors ::= singleTypeImport::FullyQualifiedName classPathDirectories:: [ S
  javaFilePath = firstDirectory ++ "/" ++ singleTypeImport.qualifiedFileName ++ ".java";
 
  local attribute fileInFirstDirectory :: Boolean;
- fileInFirstDirectory = isFileT (jextFilePath, unsafeIOT ()).iovalue || isFileT (javaFilePath, unsafeIOT ()).iovalue;
+ fileInFirstDirectory = isFileT (jextFilePath, unsafeIO ()).iovalue || isFileT (javaFilePath, unsafeIO ()).iovalue;
 
  return if null (classPathDirectories)
 		then lfqns_errors ([], [ mkError (singleTypeImport.line_no, "Unknown import type: " ++ singleTypeImport.qualifiedName) ])
@@ -318,10 +318,10 @@ LFQNs_Errors ::= currentPack::FullyQualifiedName classPathDirectories:: [ String
  packagePath = firstDirectory ++ "/" ++ currentPack.qualifiedFileName;
 
  local attribute packageInFirstDirectory :: Boolean;
- packageInFirstDirectory = isDirectoryT (packagePath, unsafeIOT ()).iovalue;
+ packageInFirstDirectory = isDirectoryT (packagePath, unsafeIO ()).iovalue;
 
  local attribute packageContents :: [ String ];
- packageContents = listContentsT (packagePath, unsafeIOT ()).iovalue;
+ packageContents = listContentsT (packagePath, unsafeIO ()).iovalue;
 
  local attribute javaLFQNs :: [ LFQN ];
  javaLFQNs = getJavaFileLFQNsWithoutCurrentFile (firstDirectory, currentPack, packageContents, currentFile);
@@ -397,10 +397,10 @@ LFQNs_Errors ::= onDemImport::FullyQualifiedName classPathDirectories:: [ String
  packagePath = firstDirectory ++ "/" ++ onDemImport.qualifiedFileName;
 
  local attribute packageInFirstDirectory :: Boolean;
- packageInFirstDirectory = isDirectoryT (packagePath, unsafeIOT ()).iovalue;
+ packageInFirstDirectory = isDirectoryT (packagePath, unsafeIO ()).iovalue;
 
  local attribute packageContents :: [ String ];
- packageContents = listContentsT (packagePath, unsafeIOT ()).iovalue;
+ packageContents = listContentsT (packagePath, unsafeIO ()).iovalue;
 
  local attribute javaLFQNs :: [ LFQN ];
  javaLFQNs = getJavaFileLFQNs (firstDirectory, onDemImport, packageContents);
@@ -853,7 +853,7 @@ LFQNs_Errors ::= fullyQualifiedTypeSoFar::FullyQualifiedName restOfType::[ Strin
  directoryName = location_ ++ "/" ++ fullyQualifiedTypeSoFar.qualifiedFileName;
 
  local attribute foundDirectory :: Boolean;
- foundDirectory = isDirectoryT (directoryName, unsafeIOT ()).iovalue;
+ foundDirectory = isDirectoryT (directoryName, unsafeIO ()).iovalue;
 
  local attribute jextFileName :: String;
  jextFileName = directoryName ++ ".jext";
@@ -862,7 +862,7 @@ LFQNs_Errors ::= fullyQualifiedTypeSoFar::FullyQualifiedName restOfType::[ Strin
  javaFileName = directoryName ++ ".java";
 
  local attribute foundFile :: Boolean;
- foundFile = isFileT (jextFileName, unsafeIOT ()).iovalue || isFileT (javaFileName, unsafeIOT ()).iovalue;
+ foundFile = isFileT (jextFileName, unsafeIO ()).iovalue || isFileT (javaFileName, unsafeIO ()).iovalue;
 
  return if foundDirectory && null (restOfType)
                 then lfqns_errors ([],

@@ -94,7 +94,7 @@ LFQNs_DecoratedRoot_Defs ::= T::LFQN extensionParser::(ParseResult<Root_C> ::= S
   defsFileName = T.location ++ "/" ++ T.fullyQualifiedName.qualifiedFileName ++ ".defs";
 
   local attribute defsFileExists :: IOVal<Boolean>;
-  defsFileExists = isFileT (defsFileName, unsafeIOT ());
+  defsFileExists = isFileT (defsFileName, unsafeIO ());
 
   -- if .defs file exists, the following are forced by the return statement
   local attribute oldDefsFileText :: String;
@@ -218,7 +218,7 @@ function getNeededTypesForCommandLineFile
 CommandLineLFQNs_DecoratedRoot ::= commandLineFile::String extensionParser::(ParseResult<Root_C> ::= String String) hostParser::(ParseResult<Root_C> ::= String String) classPathDirectories::[ String ] currentDirectory::String globalEnv::[ ScopeEnv ] {
 
   local attribute javaFileRead :: IOVal<String>;
-  javaFileRead = readFileT (commandLineFile, unsafeIOT ());
+  javaFileRead = readFileT (commandLineFile, unsafeIO ());
 
   -- parsing the file and constructing the AST
   local attribute r :: Root;

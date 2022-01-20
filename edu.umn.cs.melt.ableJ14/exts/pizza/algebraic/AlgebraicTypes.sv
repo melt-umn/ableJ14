@@ -216,7 +216,7 @@ cdcl::Class_Member_Dcl ::= id::Id_t {
 				var_declarators_one (var_declarator_init (var_declarator_id (terminal (Id_t, id.lexeme ++ "_tag")),
 									  var_init_expr (int_const (toString (tag_value))))))) ;
  local attribute tag_value :: Integer ;
- tag_value = genIntT() ;
+ tag_value = genInt() ;
 
  cdcl.caseReps = [case_rep (id.lexeme, tag_value, [] )] ;
 
@@ -250,7 +250,7 @@ cdcl::Class_Member_Dcl ::= id::Id_t  dcls::CaseParams {
 				var_declarators_one (var_declarator_init (var_declarator_id (terminal (Id_t, id.lexeme ++ "_tag")),
 									  var_init_expr (int_const (toString (tag_value))))))) ;
  local attribute tag_value :: Integer ;
- tag_value = genIntT() ;
+ tag_value = genInt() ;
  
 
  cdcl.caseReps = [case_rep (id.lexeme, tag_value, dcls.variant_defs )] ;
