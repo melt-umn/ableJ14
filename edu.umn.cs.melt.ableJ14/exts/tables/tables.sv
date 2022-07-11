@@ -193,7 +193,7 @@ aspect production tvFalse
 tv::TruthValue_c ::= falsetv::FalseTV_t
 {
  tv.pp = "F" ;
- tv.ft_expr = not (tv.row_temp_expr) ;
+ tv.ft_expr = notOp (tv.row_temp_expr) ;
  tv.line_no = falsetv.line ;
 }
 

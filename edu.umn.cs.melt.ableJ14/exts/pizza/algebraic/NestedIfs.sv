@@ -249,7 +249,7 @@ p::Pattern ::= n::Id_t pl::Pattern_List {
  p.line_no = n.line;
 
  p.ast_Stmt = if_then (	 terminal (If_t, "if"),
-                                 and_and (not (expr_lhs (p.done_expr)),
+                                 and_and (notOp (expr_lhs (p.done_expr)),
                                    eq_op (expr_lhs (expr_field_access (p.switched_expr, terminal (Id_t, "tag"))),
                                           expr_lhs (lhs_name (qualified_expr_name (simple_ambiguous_name (terminal (Id_t, p.switched_type.eqName)), terminal (Id_t, n.lexeme ++ "_tag")))))),
                                  stmt_block (block (stmt_seq (temp_switched_dcl, pl.ast_Stmt))));
@@ -306,7 +306,7 @@ p::Pattern ::= n::Id_t {
  p.ast_Stmt = if null (pattern_result)
                    -- n is a variable
                    then (if_then (terminal (If_t, "if"),
-                                  not (expr_lhs (p.done_expr)),
+                                  notOp (expr_lhs (p.done_expr)),
                                   stmt_block (block (stmt_seq (
 					stmt_dcl (local_var_dcl (
                                         type_typerep (p.switched_type),
@@ -316,7 +316,7 @@ p::Pattern ::= n::Id_t {
                                             p.switch_statement)))))
 
                    else if_then (terminal (If_t, "if"),
-                                 and_and (not (expr_lhs (p.done_expr)),
+                                 and_and (notOp (expr_lhs (p.done_expr)),
                                    eq_op (expr_lhs (expr_field_access (p.switched_expr, terminal (Id_t, "tag"))),
                                           expr_lhs (lhs_name (qualified_expr_name (simple_ambiguous_name (terminal (Id_t, p.switched_type.eqName)), terminal (Id_t, n.lexeme ++ "_tag")))))),
                                  stmt_block (block (p.switch_statement)));
@@ -344,7 +344,7 @@ p::Pattern ::= d::Default_t {
  p.line_no = d.line;
 
  p.ast_Stmt = if_then (terminal (If_t, "if"),
-                            not (expr_lhs (p.done_expr)),
+                            notOp (expr_lhs (p.done_expr)),
                             stmt_block (block (p.switch_statement)));
 }
 

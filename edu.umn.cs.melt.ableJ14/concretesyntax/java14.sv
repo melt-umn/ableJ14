@@ -1729,21 +1729,21 @@ concrete production mulExpression_c
 top::Expression
 	::=	e1::Expression t::Mul_t e2::Expression { 
  top.isStmtExpr = false;
- top.ast_Expr = mul (e1.ast_Expr, t, e2.ast_Expr);
+ top.ast_Expr = mulOp (e1.ast_Expr, t, e2.ast_Expr);
 }
 
 concrete production divExpression_c 
 top::Expression
 	::=	e1::Expression t::Div_t e2::Expression { 
  top.isStmtExpr = false;
- top.ast_Expr = div (e1.ast_Expr, t, e2.ast_Expr);
+ top.ast_Expr = divOp (e1.ast_Expr, t, e2.ast_Expr);
 }
 
 concrete production modExpression_c 
 top::Expression
 	::=	e1::Expression t::Mod_t e2::Expression { 
  top.isStmtExpr = false;
- top.ast_Expr = mod (e1.ast_Expr, t, e2.ast_Expr);
+ top.ast_Expr = modOp (e1.ast_Expr, t, e2.ast_Expr);
 }
 
 concrete production preIncExpression_c 
@@ -1787,7 +1787,7 @@ concrete production logicalNotExpression_c
 top::Expression
 	::=	'!' e1::Expression { 
  top.isStmtExpr = false;
- top.ast_Expr = not (e1.ast_Expr);
+ top.ast_Expr = notOp(e1.ast_Expr);
 }
 
 -- todo include this

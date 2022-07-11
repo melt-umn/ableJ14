@@ -109,7 +109,7 @@ e::Expr ::= e1::Expr e2::Expr t::TypeRep
 ----- MUL
 --------------------------------------------------------------------------
 
-abstract production mul
+abstract production mulOp
 e::Expr ::= e1::Expr t::Mul_t e2::Expr 
 {
  e.pp = "(" ++ e1.pp ++ " * " ++ e2.pp ++ ")";
@@ -142,7 +142,7 @@ e::Expr ::= e1::Expr t::Mul_t e2::Expr
 }
 
 
-aspect production mul
+aspect production mulOp
 e::Expr ::= e1::Expr t::Mul_t e2::Expr 
 {  dispatches <-      -- int * int --> int
                  if   elem_of_TypeRep ( intTypeRep(), min_common_super_types )
@@ -206,7 +206,7 @@ e::Expr ::= e1::Expr e2::Expr t::TypeRep
 --------------------------------------------------------------------------
 ----- DIVISION
 --------------------------------------------------------------------------
-abstract production div
+abstract production divOp
 e::Expr ::= e1::Expr t::Div_t e2::Expr 
 {
  e.pp = "(" ++ e1.pp ++ " / " ++ e2.pp ++ ")";
@@ -238,7 +238,7 @@ e::Expr ::= e1::Expr t::Div_t e2::Expr
                      e1.typerep.eqName ++ " and " ++ e2.typerep.eqName ++ ") on division.") ] ) ; 
 }
 
-aspect production div
+aspect production divOp
 e::Expr ::= e1::Expr t::Div_t e2::Expr 
 {  dispatches <-      -- int / int --> int
                  if   elem_of_TypeRep ( intTypeRep(), min_common_super_types )
@@ -302,7 +302,7 @@ e::Expr ::= e1::Expr e2::Expr t::TypeRep
 ----- MOD
 --------------------------------------------------------------------------
 
-abstract production mod
+abstract production modOp
 e::Expr ::= e1::Expr t::Mod_t e2::Expr {
   e.pp = "(" ++ e1.pp ++ " % " ++ e2.pp ++ ")";
 
@@ -333,7 +333,7 @@ e::Expr ::= e1::Expr t::Mod_t e2::Expr {
                      e1.typerep.eqName ++ " and " ++ e2.typerep.eqName ++ ") on mod (%).") ] ) ; 
 }
 
-aspect production mod
+aspect production modOp
 e::Expr ::= e1::Expr t::Mod_t e2::Expr 
 {  dispatches <-      -- int % int --> int
                  if   elem_of_TypeRep ( intTypeRep(), min_common_super_types )
